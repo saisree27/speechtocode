@@ -7,7 +7,13 @@ import "../css/main.css";
 export default function Main() {
   return (
     <div>
-      <h1>Main</h1>
+      <div>
+        <center>
+        <h1>Speech-To-Code</h1>
+        
+        </center>
+      </div>
+      
     </div>
   );
 }

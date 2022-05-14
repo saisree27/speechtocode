@@ -49,11 +49,9 @@ export default function Landing() {
         <h1 className='title'>Welcome to Speech-To-Code!</h1>
         <br />
         <Link to="/learn"><button id = 'startButton'> Use the Tool</button></Link>
-        <br />
-        <br />
+
         <Link to="/tutorial"><button id = 'tutorialButton'>Follow Tutorial</button></Link>
         </center>
-        <br />
         <br />
         <br />
 
@@ -65,11 +63,6 @@ export default function Landing() {
         <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
         <h2 className='title'>Creators</h2>
         <div><center><p  className='abouttext'>This project was created by Saigautam Bonam, Nicholas Cai, Kinshuk Phalke, and Dhruv Sharma.</p></center></div>
-        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
-        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
-        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
-        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
-        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
         <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
         <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
 

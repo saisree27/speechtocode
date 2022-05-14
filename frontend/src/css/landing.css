@@ -89,7 +89,7 @@ content:" and Start Coding!"; /* Adds Text to "Use the Tool..." Button */
 }
 
 #tutorialButton {
-  background-color: #5e3e8e; /* Light Green */
+  background-color: #800000; /* Light Green */
   border: none;
   color: white;
   padding: 10px 32px;
@@ -100,10 +100,11 @@ content:" and Start Coding!"; /* Adds Text to "Use the Tool..." Button */
   border-radius: 3px;
   transition-duration: 0.4s;
   position: relative;
+  margin-left: 100px;
 }
 
 #tutorialButton:hover {
-  background-color: #800000; /* Maroon */
+  background-color: #5e3e8e; /* Maroon */
   transform: translateZ(0) scale(1.2);  /* Enlarges Button */
 }
 

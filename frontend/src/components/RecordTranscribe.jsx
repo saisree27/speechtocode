@@ -84,7 +84,7 @@ export default function RecordTranscribe(props) {
 
   var submit = () => {
     var line = props.line;
-    var language = "python";
+    var language = props.language;
 
     axios
       .post(
@@ -100,7 +100,7 @@ export default function RecordTranscribe(props) {
       .then((res) => {
         console.log(res.data);
         props.addline(res.data, props.setcode);
-        setReceived(false);
+        // setReceived(false);
       });
   };
 

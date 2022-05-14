@@ -19,19 +19,46 @@ import Toggle from "react-toggle";
  */
 export default function Main() {
   const [code, setCode] = React.useState([
-    `function add(a, b) {`,
-    `\t` + `return a + b;`,
+    ``,
+    `function main() {`,
+    `\t` + `return;`,
     `}`,
   ]);
-  const [language, setLanguage] = React.useState("java");
+  const [language, setLanguage] = React.useState({
+    value: "javascript",
+    label: "javascript",
+  });
   const [activeLine, setActiveLine] = React.useState(1);
   const [editing, setEditing] = React.useState(false);
 
   const languageOptions = [
-    { value: "js", label: "JavaScript" },
-    { value: "py", label: "Python" },
-    { value: "java", label: "Java" },
+    { value: "javascript", label: "javascript" },
+    { value: "python", label: "python" },
+    { value: "java", label: "java" },
   ];
+
+  const updateLang = (v) => {
+    if (v.value === "python") {
+      setCode([
+        ``,
+        `def main():`,
+        `\t` + `return None`,
+        `if __name__ == 'main':`,
+        `\t` + `main()`,
+      ]);
+    } else if (v.value === "java") {
+      setCode([
+        ``,
+        `public class Main {`,
+        `\t` + `public static void main(String[] args) {`,
+        `\t\t` + `return;`,
+        `\t` + `}`,
+        `}`,
+      ]);
+    } else {
+      setCode([``, `function main() {`, `\t` + `return;`, `}`]);
+    }
+  };
 
   const options = {
     selectOnLineNumbers: true,
@@ -40,7 +67,45 @@ export default function Main() {
 
   var addLine = (newline, updater) => {
     var codeCopy = [...code];
-    codeCopy.splice(activeLine, 0, newline);
+    var line = newline;
+
+    var prevLineLastChar =
+      codeCopy[activeLine - 1][codeCopy[activeLine - 1].length - 1];
+
+    console.log(prevLineLastChar);
+
+    var tabCountPrevLine = codeCopy[activeLine - 1].split("\t").length - 1;
+    console.log(tabCountPrevLine);
+
+    if (prevLineLastChar == ":") {
+      for (var i = 0; i < tabCountPrevLine + 1; i++) {
+        line = "\t" + line;
+      }
+    } else if (prevLineLastChar == "{") {
+      for (var i = 0; i < tabCountPrevLine + 1; i++) {
+        line = "\t" + line;
+      }
+    } else {
+      for (var i = 0; i < tabCountPrevLine; i++) {
+        line = "\t" + line;
+      }
+    }
+
+    console.log(line);
+
+    if (line.includes("{}")) {
+      var lines = [line.substring(0, line.length - 2), `}`];
+
+      for (var i = 0; i < tabCountPrevLine + 1; i++) {
+        lines[1] = "\t" + lines[1];
+      }
+
+      codeCopy.splice(activeLine, 0, lines[0]);
+      codeCopy.splice(activeLine + 1, 0, lines[1]);
+    } else {
+      codeCopy.splice(activeLine, 0, line);
+    }
+
     updater(codeCopy);
   };
 
@@ -179,7 +244,7 @@ export default function Main() {
       <div id="recording">
         <TranscriptionHolder
           line={activeLine}
-          language={language}
+          language={language.value}
           setcode={setCode}
           addline={addLine}
         />
@@ -188,7 +253,10 @@ export default function Main() {
       <div id="select">
         <Select
           value={language}
-          onChange={setLanguage}
+          onChange={(v) => {
+            setLanguage(v);
+            updateLang(v);
+          }}
           options={languageOptions}
           theme={(theme) => ({
             ...theme,
@@ -202,17 +270,18 @@ export default function Main() {
       <div className="editor">
         {editing ? (
           <MonacoEditor
-            language={language}
+            language={language.value}
             theme="vs-dark"
             onChange={(evn) => {
               setCode(evn.split("\n"));
+              console.log(language);
             }}
-            value={code.join("\r\n")}
+            value={code.join("\n")}
             options={options}
           />
         ) : (
           <SyntaxHighlighter
-            language="javascript"
+            language={language.value}
             style={a11yDark}
             wrapLines={true}
             showLineNumbers={true}
@@ -233,8 +302,6 @@ export default function Main() {
                     width: 810,
                   },
                   onClick() {
-                    console.log("HERE");
-                    // alert(`Line Number Clicked: ${lineNumber}`);
                     setActiveLine(lineNumber);
                   },
                 };

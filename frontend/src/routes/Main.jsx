@@ -38,6 +38,12 @@ export default function Main() {
     semanticHighlighting: true,
   };
 
+  var addLine = (newline, updater) => {
+    var codeCopy = [...code];
+    codeCopy.splice(activeLine, 0, newline);
+    updater(codeCopy);
+  };
+
   const colors = {
     /*
      * multiValue(remove)/color:hover
@@ -175,6 +181,7 @@ export default function Main() {
           line={activeLine}
           language={language}
           setcode={setCode}
+          addline={addLine}
         />
       </div>
 

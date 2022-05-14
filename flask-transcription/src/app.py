@@ -28,6 +28,7 @@ def form():
 
 @app.route('/check', methods=['post'])
 def check():
+  global TEXT
   if request.method == 'POST':
     ID = request.json["id"]
     endpoint = "https://api.assemblyai.com/v2/transcript/" + ID
@@ -70,20 +71,50 @@ def submit_for_transcription():
 
   return response.json()["id"]
 
-@app.route('/code', methods=['get'])
+@app.route('/code', methods=['post'])
 def getCode():
-  if request.method == 'GET':
+  global TEXT
+  process_ints()
+  
+  print(TEXT)
+
+  if request.method == 'POST':
     textSet = False
-    TEXT = request.form["text"]
-    language = request.form["language"]
+    language = request.json["language"]
     scanned = Scanner.Scanner(TEXT, language).scanTokens()
     parsed = Parser.Parser(scanned, language).parse()
-    if not textSet:
-      TEXT = Interpreter.Interpreter(language).interpret(parsed)
-      textSet = True
-    print(TEXT)
-    return jsonify(TEXT)
 
+    if not textSet:
+      output = Interpreter.Interpreter(language).interpret(parsed)
+      textSet = True
+
+    print(output)
+    return output
+
+
+def process_ints():
+  global TEXT
+  words = TEXT.split(" ")
+  numbers = {
+    "one": "1",
+    "two": "2",
+    "three": "3",
+    "four": "4",
+    "five": "5",
+    "six": "6",
+    "seven": "7",
+    "eight": "8",
+    "nine": "9",
+    "ten": "10",
+    "eleven": "11",
+    "twelve": "12"
+  }
+
+  for i in range(len(words)):
+    if words[i] in numbers:
+      words[i] = numbers[words[i]]
+
+  TEXT = " ".join(words)
 
 
 if __name__ == '__main__':

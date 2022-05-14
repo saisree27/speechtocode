@@ -30,6 +30,7 @@ class Interpreter:
 
 
     def visitFor(self, stmt):
+        string = "default"
         if self.lang == "python":
             string = 'for i in range({}, {}, {}): '.format(stmt.setup.statements[0].value, stmt.setup.statements[1].right, stmt.setup.statements[2].value.right)
         elif self.lang == "java":

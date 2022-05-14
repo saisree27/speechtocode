@@ -12,6 +12,7 @@ export default function Landing() {
       <h1>Landing Page</h1>
       <Link to="/learn">Use the Tool</Link>
       <br />
+      <br />
       <Link to="/tutorial">Follow Tutorial</Link>
       </center>
     </div>

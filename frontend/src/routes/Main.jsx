@@ -7,13 +7,22 @@ import "../css/main.css";
 export default function Main() {
   return (
     <div>
-      <div>
-        <center>
-        <h1>Speech-To-Code</h1>
-        
-        </center>
+      <div id='bg'>
+        <img src='bgimg.jpeg'></img>
       </div>
       
+      <div>
+        <h1 className='title'>Speech-To-Code</h1>
+        <p className='subtitle'>Start speaking to start coding!</p>
+        
+      </div> 
+      <div> {/*div for embedded text editor*/}
+        
+        
+      </div>
+      <div>
+
+      </div>
     </div>
   );
 }

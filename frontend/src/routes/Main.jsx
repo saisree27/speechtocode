@@ -12,6 +12,8 @@ import CodeEditor from "@uiw/react-textarea-code-editor";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { a11yDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import Toggle from "react-toggle";
+import Axios from 'axios';
+// import spinner from './spinner.svg';
 
 /**
  * Main page (where our record button and text editor will show up)
@@ -26,6 +28,34 @@ export default function Main() {
   const [language, setLanguage] = React.useState("");
   const [activeLine, setActiveLine] = React.useState(1);
   const [editing, setEditing] = React.useState(false);
+  // State variable to set users input
+  const [userInput, setUserInput] = React.useState("");
+  // State variable to set users output
+  const [userOutput, setUserOutput] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
+
+  // Function to call the compile endpoint
+  function compile() {
+    setLoading(true);
+    if (code === ``) {
+      return
+    }
+ 
+    // Post request to compile endpoint
+    Axios.post(`http://localhost:8000/compile`, {
+      code: code,
+      language: language,
+      input: userInput }).then((res) => {
+      setUserOutput(res.data.output);
+    }).then(() => {
+      setLoading(false);
+    })
+  }
+
+  // Function to clear the output screen
+  function clearOutput() {
+    setUserOutput("");
+  }
 
   const languageOptions = [
     { value: "js", label: "JavaScript" },
@@ -248,7 +278,7 @@ export default function Main() {
         )}
       </div>
 
-      <div id="toggle">
+    <div id="toggle">
         <h3>Edit Code</h3>
         <Toggle
           id="editing"
@@ -257,6 +287,24 @@ export default function Main() {
             setEditing(!editing);
           }}
         />
+    </div>
+
+    <button className='runBtn' onClick={() => compile()}>Run</button>
+    <div className="output-container">
+          <h4>Output:</h4>
+          {loading ? (
+            <div className="spinner-box">
+              <img /*src={spinner}*/ alt="Loading..." />
+            </div>
+          ) : (
+            <div className="output-box">
+              <pre>{userOutput}</pre>
+              <button onClick={() => { clearOutput() }}
+                 className="clear-btn">
+                 Clear
+              </button>
+            </div>
+          )}
       </div>
     </div>
   );

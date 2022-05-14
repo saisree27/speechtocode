@@ -153,3 +153,69 @@
   /* background-color: #322c2c; */
   color: #f0a3a3;
 }
+
+.runBtn {
+    background-color: green; /* Light Green */
+    border: none;
+    color: white;
+    padding: 10px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    border-radius: 3px;
+    transition-duration: 0.3s;
+    position: relative;
+    margin-left: 47.5%;
+}
+  
+.runBtn:hover {
+    background-color: #78c776; /* */
+    transform: translateZ(0) scale(1.2);  /* Enlarges Button */
+}
+
+.clear-btn{
+    position: absolute;
+    bottom: 14px;
+    right: 18px;
+    width: 80px;
+    height: 40px;
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+    background-color: #1f65e6;
+    border: none;
+    border-radius: 4px;
+    transition: 0.3s;
+    cursor: pointer;
+  }
+
+.right-container{
+    flex: 40%;
+    height: calc(100vh - 50px);
+    display: flex;
+    flex-direction: column;
+    background-color: #242424;
+    border-left: 3px solid #1f65e6;
+    padding: 5px;
+  }
+
+.spinner-box{
+    flex: 50%;
+    background-color: #242424;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+.spinner-box img{
+    width: 200px;
+}
+
+.output-box{
+    flex: 50%;
+    background-color: #242424;
+    overflow-y: auto;
+    color: white;
+    position: relative;
+}

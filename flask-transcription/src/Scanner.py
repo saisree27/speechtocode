@@ -59,7 +59,7 @@ class Scanner:
             'integer': lambda c: TokenType.INT,
             'boolean': lambda c: TokenType.BOOLEAN
         }
-        self.ignore = {"to", "from", "create", "a", "loop", "with", 'than', 'condition', 'of', 'returning', 'parameters', 'parameter', 'named', 'type', 'called', 'an', 'by', 'that', 'is', 'always', 'value'}
+        self.ignore = {"to", "from", "create", "a", "loop", "with", 'than', 'condition', 'of', 'returning', 'parameters', 'parameter', 'named', 'type', 'called', 'an', 'by', 'that', 'is', 'always', 'value', "line"}
         self.remap = {
             "decrement": '-',
             'increment': '+',

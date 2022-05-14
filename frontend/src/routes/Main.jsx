@@ -26,15 +26,15 @@ export default function Main() {
   ]);
   const [language, setLanguage] = React.useState({
     value: "javascript",
-    label: "javascript",
+    label: "Javascript",
   });
   const [activeLine, setActiveLine] = React.useState(1);
   const [editing, setEditing] = React.useState(false);
 
   const languageOptions = [
-    { value: "javascript", label: "javascript" },
-    { value: "python", label: "python" },
-    { value: "java", label: "java" },
+    { value: "javascript", label: "Javascript" },
+    { value: "python", label: "Python" },
+    { value: "java", label: "Java" },
   ];
 
   const updateLang = (v) => {

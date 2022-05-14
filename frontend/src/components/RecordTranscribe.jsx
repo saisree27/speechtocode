@@ -2,10 +2,16 @@ import Recorder from "react-mp3-recorder";
 import React, { useState } from "react";
 import axios from "axios";
 import Spinner from "react-bootstrap/Spinner";
+import MicRecorder from "mic-recorder-to-mp3";
+import { Button } from "react-bootstrap";
+
+const Mp3Recorder = new MicRecorder({
+  bitRate: 64,
+  prefix: "data:audio/wav;base64,",
+});
 
 export default function RecordTranscribe() {
-  var [recorded, setRecorded] = useState(false);
-  var [recording, setRecording] = useState(null);
+  var [recording, setRecording] = useState(false);
   var [transcription, setTranscription] = useState("");
   var [processing, setProcessing] = useState(false);
 
@@ -32,17 +38,31 @@ export default function RecordTranscribe() {
     }, 20000);
   };
 
+  var start = () => {
+    Mp3Recorder.start()
+      .then(() => {
+        setRecording(true);
+      })
+      .catch((e) => console.error(e));
+  };
+
+  var stop = () => {
+    Mp3Recorder.stop()
+      .getMp3()
+      .then(([buffer, blob]) => {
+        const audioURL = URL.createObjectURL(blob);
+        setRecording(false);
+        const player = new Audio(audioURL);
+        player.play();
+
+        _onComplete(blob);
+      })
+      .catch((e) => console.log(e));
+  };
+
   var _onComplete = (blob) => {
     setProcessing(true);
     console.log("Recording", blob);
-    setRecorded(true);
-    setRecording(blob);
-
-    var audioURL = URL.createObjectURL(blob);
-
-    const player = new Audio(audioURL);
-    player.play();
-
     let data = new FormData();
     data.append("file", blob);
     return axios
@@ -59,29 +79,25 @@ export default function RecordTranscribe() {
       });
   };
 
-  var _onError = (error) => {
-    console.log("Error", error);
-    setRecorded(false);
-    setRecording(null);
-  };
-
   return (
     <div>
       {!processing ? (
         <div>
-          <Recorder
-            onRecordingComplete={_onComplete}
-            onRecordingError={_onError}
-          />
+          {!recording ? (
+            <Button onClick={start}>Start Recording</Button>
+          ) : (
+            <Button onClick={stop}>Stop Recording</Button>
+          )}
+
           <p>{transcription}</p>
         </div>
       ) : (
-        <div>          
+        <div>
           <Spinner
-          as="span"
-          animation="border"
-          role="status"
-          aria-hidden="true"
+            as="span"
+            animation="border"
+            role="status"
+            aria-hidden="true"
           />
         </div>
       )}

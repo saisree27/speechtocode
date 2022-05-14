@@ -81,17 +81,18 @@ export default function Main() {
     if (code === ``) {
       return
     }
- 
+    const temp_code = code.join("\r\n")
     // Post request to compile endpoint
     Axios.post(`http://localhost:8000/compile`, {
-      code: code,
+      code: temp_code,
       language: language,
       input: userInput }).then((res) => {
+      console.log("Res:", res);
       setUserOutput(res.data.output);
     }).then(() => {
       setLoading(false);
     })
-    console.log("Code: %s", code);
+    console.log("Code: %s", temp_code);
     console.log("Language: ", language);
   }
 

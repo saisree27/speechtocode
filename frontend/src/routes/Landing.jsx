@@ -42,6 +42,7 @@ export default function Landing() {
         <Link to="/tutorial"><button id = 'startButton'>Follow Tutorial</button></Link>
         </center>
         <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
+
       </div>
   );
 }

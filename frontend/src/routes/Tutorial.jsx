@@ -1,7 +1,6 @@
 import "../css/tutorial.css";
 
-import MonacoEditor from 'react-monaco-editor';
-import { monaco } from 'react-monaco-editor';
+import CodeEditor from "@uiw/react-textarea-code-editor";
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import TranscriptionHolder from "./TranscriptionHolder";
@@ -16,7 +15,8 @@ export default function Main() {
   )
 
   const options = {
-    selectOnLineNumbers: true
+    selectOnLineNumbers: true,
+    semanticHighlighting: true,
   };
 
   useEffect(() => {
@@ -78,17 +78,19 @@ export default function Main() {
         <TranscriptionHolder />
         </div>
 
-        <div className='editor'>
-          <MonacoEditor
-            width="500"
-            height="100"
-            language="python"
-            theme="vs-dark"
-            onChange={(evn) => setCode(evn.target.value)}
-            value={code}
-            options={options}
-          />
-        </div>
+        <CodeEditor
+          value={code}
+          language="js"
+          placeholder="Please enter JS code."
+          onChange={(evn) => setCode(evn.target.value)}
+          padding={15}
+          style={{
+            fontSize: 12,
+            backgroundColor: "black",
+            fontFamily:
+              "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
+          }}
+        />
       </div>
       
       <div className='tutorialblock'>
@@ -100,17 +102,19 @@ export default function Main() {
         <TranscriptionHolder />
         </div>
 
-        <div className='editor'>
-          <MonacoEditor
-            width="500"
-            height="100"
-            language="python"
-            theme="vs-dark"
-            onChange={(evn) => setCode(evn.target.value)}
-            value={code}
-            options={options}
-          />
-        </div>
+        <CodeEditor
+          value={code}
+          language="js"
+          placeholder="Please enter JS code."
+          onChange={(evn) => setCode(evn.target.value)}
+          padding={15}
+          style={{
+            fontSize: 12,
+            backgroundColor: "black",
+            fontFamily:
+              "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
+          }}
+        />
       </div>
 
       <div className='tutorialblock'>
@@ -123,17 +127,19 @@ export default function Main() {
         <TranscriptionHolder />
         </div>
 
-        <div className='editor'>
-          <MonacoEditor
-            width="500"
-            height="100"
-            language="python"
-            theme="vs-dark"
-            onChange={(evn) => setCode(evn.target.value)}
-            value={code}
-            options={options}
-          />
-        </div>
+        <CodeEditor
+          value={code}
+          language="py"
+          placeholder="Please enter Python code."
+          onChange={(evn) => setCode(evn.target.value)}
+          padding={15}
+          style={{
+            fontSize: 12,
+            backgroundColor: "black",
+            fontFamily:
+              "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
+          }}
+        />
       </div>
 
     </div>

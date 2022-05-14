@@ -1,11 +1,16 @@
 import "../css/landing.css";
 import { Link } from "react-router-dom";
+import React, { useEffect } from 'react'
 
 /**
  * Landing page of application
  * Associated with route "/"
  */
 export default function Landing() {
+  useEffect(() => {
+    document.title = "This is a title"
+  }, [])
+  
   return (
     <div style={{
       backgroundImage: "url(/bgimg.jpeg)",

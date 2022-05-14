@@ -283,7 +283,7 @@ export default function Main() {
         </a>
       </div>
       <div>
-        <h1 className="title">Speech2Code</h1>
+        <h1 id="title">Speech2Code</h1>
         <p id="subtitle">Start speaking to start coding!</p>
       </div>
 

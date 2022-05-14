@@ -54,7 +54,7 @@ export default function Landing() {
 
       <center>
         <p className="position-relative fs-1 text-white fw-light font-monospace title mt-5 mb-5">
-          Welcome to Speech-To-Code!
+          Welcome to Speech2Code!
         </p>
       </center>
 

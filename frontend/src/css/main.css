@@ -37,7 +37,7 @@
     "Lucida Grande", "Lucida Sans", Arial, sans-serif;
 }
 
-.title {
+#title {
   position: relative;
   text-align: center;
   height: 75px;

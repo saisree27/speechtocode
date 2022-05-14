@@ -80,7 +80,7 @@
 
 #startButton:hover {
   background-color: #800000; /* Maroon */
-  transform: translateZ(0) scale(1.7);  /* Enlarges Button */
+  transform: translateZ(0) scale(1.2);  /* Enlarges Button */
 }
 
 #startButton:hover::after {
@@ -103,7 +103,7 @@ content:" and Start Coding!"; /* Adds Text to "Use the Tool..." Button */
 
 #tutorialButton:hover {
   background-color: #800000; /* Maroon */
-  transform: translateZ(0) scale(1.7);  /* Enlarges Button */
+  transform: translateZ(0) scale(1.2);  /* Enlarges Button */
 }
 
 #tutorialButton:hover::after {

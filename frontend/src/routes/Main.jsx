@@ -137,7 +137,7 @@ export default function Main() {
   };
 
   useEffect(() => {
-    document.title = "This is a title";
+    document.title = "Main";
   }, []);
 
   return (
@@ -189,7 +189,6 @@ export default function Main() {
       <div className="editor">
         {editing ? (
           <MonacoEditor
-            height={240}
             language={language}
             theme="vs-dark"
             onChange={(evn) => {
@@ -218,6 +217,7 @@ export default function Main() {
                     display: "block",
                     cursor: "pointer",
                     backgroundColor: "#877574",
+                    width: 810,
                   },
                   onClick() {
                     console.log("HERE");
@@ -227,7 +227,7 @@ export default function Main() {
                 };
               } else {
                 return {
-                  style: { display: "block", cursor: "pointer" },
+                  style: { display: "block", cursor: "pointer", width: 810 },
                   onClick() {
                     console.log("HERE");
                     // alert(`Line Number Clicked: ${lineNumber}`);
@@ -240,19 +240,6 @@ export default function Main() {
             {code}
           </SyntaxHighlighter>
         )}
-        {/* <CodeEditor
-          value={code}
-          language="js"
-          placeholder="Please enter JS code."
-          onChange={(evn) => setCode(evn.target.value)}
-          padding={15}
-          style={{
-            fontSize: 12,
-            backgroundColor: "black",
-            fontFamily:
-              "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
-          }}
-        /> */}
       </div>
 
       <div id="toggle">

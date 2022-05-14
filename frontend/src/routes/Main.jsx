@@ -167,7 +167,7 @@ export default function Main() {
           </Link>
         </div>
         <h1 className="title">Speech-To-Code</h1>
-        <p className="subtitle">Start speaking to start coding!</p>
+        <p id="subtitle">Start speaking to start coding!</p>
       </div>
 
       <div id="recording">

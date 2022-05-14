@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import TranscriptionHolder from "./TranscriptionHolder";
 import { Form } from "react-bootstrap";
 import Select from "react-select";
+import CodeEditor from "@uiw/react-textarea-code-editor";
 
 /**
  * Main page (where our record button and text editor will show up)
@@ -24,6 +25,7 @@ export default function Main() {
 
   const options = {
     selectOnLineNumbers: true,
+    semanticHighlighting: true,
   };
 
   const colors = {
@@ -177,14 +179,27 @@ export default function Main() {
       </div>
 
       <div className="editor">
-        <MonacoEditor
+        {/* <MonacoEditor
           width="650"
           height="450"
-          language="javascript"
+          language={language}
           theme="vs-dark"
           onChange={(evn) => setCode(evn.target.value)}
           value={code}
           options={options}
+        /> */}
+        <CodeEditor
+          value={code}
+          language="js"
+          placeholder="Please enter JS code."
+          onChange={(evn) => setCode(evn.target.value)}
+          padding={15}
+          style={{
+            fontSize: 12,
+            backgroundColor: "black",
+            fontFamily:
+              "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
+          }}
         />
       </div>
     </div>

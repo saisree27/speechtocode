@@ -9,7 +9,7 @@ import ReactDOM from 'react-dom'
  */
 export default function Landing() {
   useEffect(() => {
-    document.title = "This is a title"
+    document.title = "Welcome!"
   }, [])
   return (
     <div style={{
@@ -21,12 +21,14 @@ export default function Landing() {
       height: '100vh'
       }}>
 
+        <div className="topnav">
+          <a className="active" href="">Home</a>
+          <a className="active" href="/learn">Speech-To-Text</a>
+          <a className="active" href="/tutorial">Tutorial</a>
+        </div>
+
 
         <div>
-
-
-
-
             <Link to="/" id='tohome'>
             <h4 id='icontext'>Speech2Code</h4>
             <img src='mic.png'></img>

@@ -67,12 +67,6 @@
   display: inline-block;
   position: relative;
   color: rgb(213, 253, 251);
-  margin-left: 400px;
-}
-
-.editor {
-  margin: auto;
-  width: 55%;
-  padding: 10px;
-  height: 40px;
+  margin-left: 17%;
+  width: 70%;
 }

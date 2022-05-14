@@ -80,8 +80,8 @@ export default function Main() {
 
         <CodeEditor
           value={code}
-          language="js"
-          placeholder="Please enter JS code."
+          language="py"
+          placeholder="Please enter Python code."
           onChange={(evn) => setCode(evn.target.value)}
           padding={15}
           style={{
@@ -104,8 +104,8 @@ export default function Main() {
 
         <CodeEditor
           value={code}
-          language="js"
-          placeholder="Please enter JS code."
+          language="py"
+          placeholder="Please enter Python code."
           onChange={(evn) => setCode(evn.target.value)}
           padding={15}
           style={{
@@ -116,6 +116,9 @@ export default function Main() {
           }}
         />
       </div>
+      
+
+
 
       <div className='tutorialblock'>
         <h4>Control Flow</h4>

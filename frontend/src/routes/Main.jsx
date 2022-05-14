@@ -46,6 +46,7 @@ export default function Main() {
         `if __name__ == 'main':`,
         `\t` + `main()`,
       ]);
+      setActiveLine(2);
     } else if (v.value === "java") {
       setCode([
         ``,
@@ -55,8 +56,10 @@ export default function Main() {
         `\t` + `}`,
         `}`,
       ]);
+      setActiveLine(3);
     } else {
       setCode([``, `function main() {`, `\t` + `return;`, `}`]);
+      setActiveLine(2);
     }
   };
 
@@ -68,6 +71,7 @@ export default function Main() {
   var addLine = (newline, updater) => {
     var codeCopy = [...code];
     var line = newline;
+    var moreTabs = false;
 
     var prevLineLastChar =
       codeCopy[activeLine - 1][codeCopy[activeLine - 1].length - 1];
@@ -78,10 +82,12 @@ export default function Main() {
     console.log(tabCountPrevLine);
 
     if (prevLineLastChar == ":") {
+      moreTabs = true;
       for (var i = 0; i < tabCountPrevLine + 1; i++) {
         line = "\t" + line;
       }
     } else if (prevLineLastChar == "{") {
+      moreTabs = true;
       for (var i = 0; i < tabCountPrevLine + 1; i++) {
         line = "\t" + line;
       }
@@ -94,10 +100,16 @@ export default function Main() {
     console.log(line);
 
     if (line.includes("{}")) {
-      var lines = [line.substring(0, line.length - 2), `}`];
+      var lines = [line.substring(0, line.length - 1), `}`];
 
-      for (var i = 0; i < tabCountPrevLine + 1; i++) {
-        lines[1] = "\t" + lines[1];
+      if (moreTabs) {
+        for (var i = 0; i < tabCountPrevLine + 1; i++) {
+          lines[1] = "\t" + lines[1];
+        }
+      } else {
+        for (var i = 0; i < tabCountPrevLine; i++) {
+          lines[1] = "\t" + lines[1];
+        }
       }
 
       codeCopy.splice(activeLine, 0, lines[0]);

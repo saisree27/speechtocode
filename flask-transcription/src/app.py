@@ -82,7 +82,7 @@ def getCode():
 
   if request.method == 'POST':
     textSet = False
-    language = request.form["language"]
+    language = request.json["language"]
     scanned = Scanner.Scanner(TEXT, language).scanTokens()
     parsed = Parser.Parser(scanned, language).parse()
 

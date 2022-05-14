@@ -1,11 +1,13 @@
 import Recorder from "react-mp3-recorder";
 import React, { useState } from "react";
 import axios from "axios";
+import Spinner from "react-bootstrap/Spinner";
 
 export default function RecordTranscribe() {
   var [recorded, setRecorded] = useState(false);
   var [recording, setRecording] = useState(null);
   var [transcription, setTranscription] = useState("");
+  var [processing, setProcessing] = useState(false);
 
   var id = "";
 
@@ -25,11 +27,13 @@ export default function RecordTranscribe() {
         .then((res) => {
           console.log(res);
           setTranscription(res.data);
+          setProcessing(false);
         });
     }, 20000);
   };
 
   var _onComplete = (blob) => {
+    setProcessing(true);
     console.log("Recording", blob);
     setRecorded(true);
     setRecording(blob);
@@ -63,8 +67,24 @@ export default function RecordTranscribe() {
 
   return (
     <div>
-      <Recorder onRecordingComplete={_onComplete} onRecordingError={_onError} />
-      <p>{transcription}</p>
+      {!processing ? (
+        <div>
+          <Recorder
+            onRecordingComplete={_onComplete}
+            onRecordingError={_onError}
+          />
+          <p>{transcription}</p>
+        </div>
+      ) : (
+        <div>          
+          <Spinner
+          as="span"
+          animation="border"
+          role="status"
+          aria-hidden="true"
+          />
+        </div>
+      )}
     </div>
   );
 }

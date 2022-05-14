@@ -33,14 +33,19 @@ class Expression(Stmt):
 
 
 class Function(Stmt):
-    def __init__(self, name, params, body):
+    def __init__(self, name, params, body, retn, visibility):
         assert isinstance(name, Token.Token)
         assert isinstance(params, list)
         assert isinstance(body, list)
+        assert isinstance(retn, object)
+        assert isinstance(visibility, Token.Token)
 
         self.name = name
         self.params = params
         self.body = body
+        self.retn = retn
+        self.visibility = visibility
+
 
     def accept(self, visitor):
         return visitor.visitFunction(self)

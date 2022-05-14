@@ -4,11 +4,14 @@ from TokenTypes import TokenType
 from Token import Token
 import traceback
 import sys
+
 class Parser:
-    def __init__(self, tokenList):
+    def __init__(self, tokenList, language):
         self.current = 0
         self.tokenList = tokenList
         self.typedef = {TokenType.INT, TokenType.FLOAT, TokenType.DOUBLE, TokenType.SHORT, TokenType.LONG, TokenType.BYTE, TokenType.CHAR, TokenType.STRING, TokenType.ARRAY, TokenType.VOID, TokenType.PUBLIC, TokenType.STATIC, TokenType.PRIVATE, TokenType.BOOLEAN}
+        self.error = ""
+        self.lang = language
 
     def expression(self):
         return self.assignment()
@@ -24,11 +27,45 @@ class Parser:
             if self.match(TokenType.CLASS): return self.classDeclaration()
             if self.match(TokenType.FUN): return self.function("function")
             if self.match(TokenType.VAR): return self.varDeclaration()
+            if self.match(TokenType.CALL): return self.callFunc()
             return self.statement()
         except Exception as e:
-            traceback.print_exc()
+            # traceback.print_exc()
             self.synchronize()
             return None
+
+
+    def function(self, kind):
+        if self.previous().type == TokenType.CALL:
+            return self.callFunc()
+        visibility = self.tokenList[self.current - 2]
+        name = self.advance()
+        retn = self.advance()
+        numParam = int(self.advance().literal)
+        parameters = []
+        for i in range(numParam):
+            typeVar = self.advance()
+            parameters.append(Expr.Variable(self.advance(), typeVar))
+        body = []
+        return Stmt.Function(name, parameters, body, retn, visibility)
+
+    def callFunc(self):
+        while not self.check(TokenType.FUN):
+            self.advance()
+        self.advance()
+        name = self.advance()
+        arguments = []
+        while not self.isAtEnd():
+            arguments.append(self.expression())
+        return Expr.Call(name, arguments)
+
+
+    def returnStatement(self):
+        keyword = self.previous()
+        value = None
+        if not self.check(TokenType.EOF):
+            value = self.expression()
+        return Stmt.Return(keyword, value)
 
 
     def classDeclaration(self):
@@ -51,7 +88,7 @@ class Parser:
             temp = self.ifStatement()
             return temp
         if self.match(TokenType.PRINT):
-            return self. printStatement()
+            return self.printStatement()
         if self.match(TokenType.RETURN):
             return self.returnStatement()
         if self.match(TokenType.WHILE):
@@ -97,6 +134,12 @@ class Parser:
         forLoop = Stmt.For(block, body)
         return forLoop
 
+    def printStatement(self):
+        if self.tokenList[self.current].type != TokenType.CALL:
+            value = self.expression()
+        else:
+            value = self.callFunc()
+        return Stmt.Print(value)
 
     def whileStatement(self):
         condition = self.expression()
@@ -139,7 +182,6 @@ class Parser:
 
     def factor(self):
         expr = self.unary()
-
         while self.match(TokenType.SLASH, TokenType.STAR):
             operator = self.previous()
             right = self.unary()
@@ -166,15 +208,21 @@ class Parser:
                 break
         return expr
 
+
     def primary(self):
         if self.match(TokenType.FALSE):
-            return Expr.Literal(False)
+            if self.lang == "java":
+                return Expr.Literal("false")
+            if self.lang == "python":
+                return Expr.Literal("False")
         if self.match(TokenType.TRUE):
-            return Expr.Literal(True)
+            if self.lang == "java":
+                return Expr.Literal("true")
+            if self.lang == "python":
+                return Expr.Literal("True")
         if self.match(TokenType.NULL):
             return Expr.Literal(None)
         if self.match(TokenType.NUM, TokenType.STR):
-            print()
             return Expr.Literal(self.previous().literal)
 
         if self.match(TokenType.SUPER):
@@ -191,10 +239,9 @@ class Parser:
 
         if self.match(TokenType.LEFT_PAREN):
             expr = self.expression()
-            self.consume(TokenType.RIGHT_PAREN, "Expect ')' after expression.")
+            self.consume(TokenType.RIGHT_PAREN)
             return Expr.Grouping(expr)
-
-        raise self.error(self.peek(), "Expect expression.")
+        self.error = self.peek()
 
     def consume(self, tokenType, message):
         if self.check(tokenType):

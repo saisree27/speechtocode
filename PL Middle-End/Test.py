@@ -2,15 +2,17 @@ import Scanner
 import Parser
 import Expr
 import Interpreter
-language = 'java'
-# statements = ["assign int x to 10", "assign boolean y to true", "create a for loop from 1 to x with increment 1", "if i mod x equals to 0", "assign y to false", "if x mod 2 equals 0 and y equals true", "create a while loop with condition x lesser than 2", "create a public function of int return with 2 params int x, int y"]
-statements = ["create a public function of returning int with 2 params int x int z "]
+language = 'python'
+# statements = ["create a public function prime returning int with 1 parameter int x", "create a for loop from 1 to x with increment 1", "if x mod i equals to 0", "return false", "return true", "print call function prime with parameter 10"]
+# statements = ["create a public function factorial returning int with 1 parameter int x", "assign y to 1", "create a for loop from 1 to x with increment 1", "assign y to y times i", "return y"]
+# statements = ["create a public function death returning int with 0 parameters", "create a while loop with condition true", "print 1"]
+# statements = ["create a public function multiple returning int with 2 parameters int x int y", "return x times y"]
 for i in statements:
     scanned = Scanner.Scanner(i, language).scanTokens()
-    for i in scanned:
-        print(i)
+    # for i in scanned:
+    #     print(i)
 
-    parsed = Parser.Parser(scanned).parse()
+    parsed = Parser.Parser(scanned, language).parse()
     # for j in parsed:
     #     print(j)
 

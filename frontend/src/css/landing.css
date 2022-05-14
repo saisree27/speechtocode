@@ -44,6 +44,7 @@
   position: relative;
   text-align: center;
   height: 200px;
+  width: 90%;
   color:rgb(213, 253, 251);
   font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }

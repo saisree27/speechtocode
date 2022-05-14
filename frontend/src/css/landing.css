@@ -41,20 +41,24 @@
 }
 
 .abouttext {
-  position: relative;
-  text-align: center;
-  height: 200px;
-  width: 90%;
-  color:rgb(213, 253, 251);
-  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  /*position: relative;*/
+  /*text-align: center;*/
+/*  height: 200px;*/
+  /*width: 90%;*/
+  /*color:rgb(213, 253, 251);*/
+  padding-top:  5vh;
+  padding-left:  50vh;
+  padding-right:  50vh;
+  /*font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;*/
 }
 
 .title {
-  position: relative;
-  text-align: center;
-  height: 100px;
-  color:rgb(213, 253, 251);
-  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  /*position: relative;*/
+  /*text-align: center;*/
+  /*height: 100px;*/
+  /*color:rgb(213, 253, 251);*/
+  /*font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;*/
+  padding-top:  20vh;
 }
 
 .subtitle {
@@ -66,47 +70,48 @@
 }
 
 #startButton {
-  background-color: #5e3e8e; /* Light Green */
+  background-color:rgb(213, 253, 251);
   border: none;
-  color: white;
+  /*color: white;*/
   padding: 10px 32px;
   text-align: center;
-  text-decoration: none;
-  display: inline-block;
+  /*text-decoration: none;*/
+  /*display: inline-block;*/
   font-size: 20px;
-  border-radius: 3px;
+  border-radius: 0px;
   transition-duration: 0.4s;
   position: relative;
 }
 
-#startButton:hover {
+/*#startButton:hover {
   background-color: #800000; /* Maroon */
-  transform: translateZ(0) scale(1.2);  /* Enlarges Button */
-}
+  /*transform: translateZ(0) scale(1.2);  /* Enlarges Button
+}*/
 
 #startButton:hover::after {
 content:" and Start Coding!"; /* Adds Text to "Use the Tool..." Button */
 }
 
 #tutorialButton {
-  background-color: #800000; /* Light Green */
-  border: none;
-  color: white;
+  /*background-color: #5e3e8e; /* Light Green */
+  /*border: none;*/
+  /*color: white;*/
   padding: 10px 32px;
   text-align: center;
-  text-decoration: none;
-  display: inline-block;
+  /*text-decoration: none;*/
+  /*display: inline-block;*/
   font-size: 20px;
-  border-radius: 3px;
+  border-radius: 0px;
   transition-duration: 0.4s;
   position: relative;
   margin-left: 100px;
 }
 
-#tutorialButton:hover {
-  background-color: #5e3e8e; /* Maroon */
-  transform: translateZ(0) scale(1.2);  /* Enlarges Button */
-}
+/*#tutorialButton:hover {
+  background-color: #800000; /* Maroon
+  transform: translateZ(0) scale(1.2);  /* Enlarges Button
+}*/
+
 
 #tutorialButton:hover::after {
 content:" for a Demo!"; /* Adds Text to "Follow Tutorial..." Button */
@@ -140,5 +145,6 @@ content:" for a Demo!"; /* Adds Text to "Follow Tutorial..." Button */
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
+
 
 

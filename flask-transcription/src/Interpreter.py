@@ -32,20 +32,20 @@ class Interpreter:
     def visitFor(self, stmt):
         string = "default"
         if self.lang == "python":
-            string = 'for i in range({}, {}, {}): '.format(stmt.setup.statements[0].value, stmt.setup.statements[1].right, stmt.setup.statements[2].value.right)
+            string = 'for i in range({}, {}, {}):'.format(stmt.setup.statements[0].value, stmt.setup.statements[1].right, stmt.setup.statements[2].value.right)
         elif self.lang == "java":
-            string = 'for (int i = {}; {}; {}) {{}} '.format(stmt.setup.statements[0].value, stmt.setup.statements[1], stmt.setup.statements[2])
+            string = 'for (int i = {}; {}; {}) {{}}'.format(stmt.setup.statements[0].value, stmt.setup.statements[1], stmt.setup.statements[2])
         self.done = True
         print(string)
         return string
 
     def visitIf(self, stmt):
         if self.lang == "python":
-            string = "if " + stmt.__str__() + ": "
+            string = "if " + stmt.__str__() + ":"
             print(string)
             return string
         else:
-            string = "if (" + stmt.__str__() + ") {} "
+            string = "if (" + stmt.__str__() + ") {}"
             print(string)
             return string
 
@@ -53,7 +53,7 @@ class Interpreter:
         if self.lang == "python":
             return expr.variable.name.__str__() + " = " + str(expr.value)
         elif self.lang == "java":
-            return expr.__str__() + "; "
+            return expr.__str__() + ";"
 
     def visitVariable(self, expr):
         string = expr.__str__()
@@ -66,9 +66,9 @@ class Interpreter:
     def visitWhile(self, stmt):
         string = None
         if self.lang == "java":
-            string ="while (" + stmt.__str__() + ") {} "
+            string ="while (" + stmt.__str__() + ") {}"
         if self.lang == "python":
-            string = "while " + stmt.__str__() + ": "
+            string = "while " + stmt.__str__() + ":"
         print(string)
         return string
 
@@ -94,8 +94,8 @@ class Interpreter:
 
     def visitReturn(self,expr):
         if self.lang == "java":
-            print(expr.__str__() + "; ")
-            return expr.__str__() + "; "
+            print(expr.__str__() + ";")
+            return expr.__str__() + ";"
         elif self.lang == "python":
             print(expr.__str__())
             return expr.__str__()

@@ -97,8 +97,13 @@ class Scanner:
                 self.addToken(TokenType.NUM, int(self.source[self.current-1]))
 
     def identifier(self):
-        if self.peek().isalpha():
+        if self.source[self.current-1].isalpha():
             self.addToken(TokenType.IDENTIFIER)
+
+    def peekPrevious(self):
+        if self.isAtEnd():
+            return '\0'
+        return self.source[self.current-1]
 
     def peek(self):
         if self.isAtEnd():

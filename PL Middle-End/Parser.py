@@ -31,6 +31,22 @@ class Parser:
             return None
 
 
+    def function(self, kind):
+        name = self.consume(TokenType.IDENTIFIER, "Expect " + kind + " name.")
+        self.consume(TokenType.LEFT_PAREN, "Expect '(' after " + kind + " name.")
+        parameters = []
+        if not self.check(TokenType.RIGHT_PAREN):
+            start = True
+            while start or self.match(TokenType.COMMA):
+                start = False
+                if len(parameters) >= 255:
+                    self.error(self.peek(), "Can't have more than 255 parameters")
+                parameters.append(self.consume(TokenType.IDENTIFIER, "Expect parameter name."))
+        self.consume(TokenType.RIGHT_PAREN, "Expect ')' after parameters.")
+        self.consume(TokenType.LEFT_BRACE, "Expect '{' before " + kind + " body.")
+        body = self.block()
+        return Stmt.Function(name, parameters, body)
+
     def classDeclaration(self):
         name = self.consume(TokenType.IDENTIFIER, "Expect class name.")
         superclass = None

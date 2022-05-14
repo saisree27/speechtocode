@@ -24,7 +24,7 @@ export default function Main() {
       
       <div className="topnav">
           <a className="active" href="/">Home</a>
-          <a className="active" href="/learn">Speech-To-Text</a>
+          <a className="active" href="/learn">Speech-To-Code</a>
           <a className="active" href="/tutorial">Tutorial</a>
       </div>
       <div>
@@ -54,7 +54,7 @@ export default function Main() {
           </option>
         </select>
       </div>
-           
+
     </div>
   );
 }

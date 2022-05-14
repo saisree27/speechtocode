@@ -30,7 +30,7 @@
 }
 
 #tohome {
-  position: relative;
+  /*position: relative;*/
   text-align: center;
   color: rgb(213, 253, 251);
   font-family: "Poppins-Regular", "Trebuchet MS", "Lucida Sans Unicode",
@@ -129,18 +129,26 @@
 /* Add a black background color to the top navigation */
 .topnav {
   position: relative;
-  background-color: #333;
+  /*background-color: #333;*/
+  /*opacity:  0.0;*/
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   overflow: hidden;
+  margin-top: 10px;
   font-family: "Poppins-SemiBold", "Trebuchet MS", "Lucida Sans Unicode",
     "Lucida Grande", "Lucida Sans";
 }
 
 /* Style the links inside the navigation bar */
 .topnav a {
-  float: left;
+  /*float: left;*/
   color: #f2f2f2;
   text-align: center;
   text-decoration: none;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   padding: 14px 16px;
   font-size: 17px;
   font-family: "Poppins-SemiBold", "Trebuchet MS", "Lucida Sans Unicode",
@@ -174,20 +182,16 @@
     transform: translateZ(0) scale(1.2);  /* Enlarges Button */
 }
 
-.clear-btn{
+footer{
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #000;
+    height: auto;
+    width: 100vw;
+    padding-top: 10px;
+    color: #fff;
     position: absolute;
-    bottom: 14px;
-    right: 18px;
-    width: 80px;
-    height: 40px;
-    font-size: 22px;
-    font-weight: bold;
-    color: white;
-    background-color: #1f65e6;
-    border: none;
-    border-radius: 4px;
-    transition: 0.3s;
-    cursor: pointer;
   }
 
 .output-container{
@@ -234,3 +238,23 @@ h4 {
     font-family: "Poppins-SemiBold", "Trebuchet MS", "Lucida Sans Unicode",
     "Lucida Grande", "Lucida Sans";
 }
+
+
+/*.creators {
+  position: fixed;
+  z-index: 100;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #2c1d82;
+  overflow: hidden;
+  opacity: 70%;
+  font-family: "Poppins-SemiBold", "Trebuchet MS", "Lucida Sans Unicode",
+    "Lucida Grande", "Lucida Sans";
+}
+.creatortext {
+  color: rgb(213, 253, 251);
+  position: relative;
+  text-align: center;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}*/

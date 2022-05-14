@@ -129,18 +129,26 @@
 /* Add a black background color to the top navigation */
 .topnav {
   position: relative;
-  background-color: #333;
+  /*background-color: #333;*/
+  /*opacity:  0.0;*/
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   overflow: hidden;
+  margin-top: 10px;
   font-family: "Poppins-SemiBold", "Trebuchet MS", "Lucida Sans Unicode",
     "Lucida Grande", "Lucida Sans";
 }
 
 /* Style the links inside the navigation bar */
 .topnav a {
-  float: left;
+  /*float: left;*/
   color: #f2f2f2;
   text-align: center;
   text-decoration: none;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   padding: 14px 16px;
   font-size: 17px;
   font-family: "Poppins-SemiBold", "Trebuchet MS", "Lucida Sans Unicode",
@@ -152,4 +160,17 @@
 .topnav a:hover {
   /* background-color: #322c2c; */
   color: #f0a3a3;
+}
+
+
+footer{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #000;
+    height: auto;
+    width: 100vw;
+    padding-top: 10px;
+    color: #fff;
 }

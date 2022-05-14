@@ -236,7 +236,7 @@ export default function Main() {
           Home
         </a>
         <a className="active" href="/learn">
-          Speech-To-Code
+          Speech2Code
         </a>
         <a className="active" href="/tutorial">
           Tutorial

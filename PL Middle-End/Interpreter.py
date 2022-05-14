@@ -22,11 +22,35 @@ class Interpreter:
         if stmt != None:
             return stmt.accept(self)
 
+    def visitExpression(self, stmt):
+        return self.evaluate(stmt.expression)
+
+    def visitLiteral(self, expr):
+        return expr.value
+
     def visitFor(self, stmt):
         if self.lang == "python":
             print('for i in range({}, {}, {})'.format(stmt.setup.statements[0].value, stmt.setup.statements[1].right, stmt.setup.statements[2].value.right))
-        if self.lang == "java":
-            print('for(int i = {}; {}; {}) {{}}'.format(stmt.setup.statements[0].value, stmt.setup.statements[1], stmt.setup.statements[2]))
+        elif self.lang == "java":
+            print('for (int i = {}; {}; {}) {{}}'.format(stmt.setup.statements[0].value, stmt.setup.statements[1], stmt.setup.statements[2]))
+
+    def visitIf(self, stmt):
+        if self.lang == "python":
+            print(stmt)
+
+    def visitAssign(self, expr):
+        if self.lang == "python":
+            print(expr)
+        elif self.lang == "java":
+            print(expr, ";", sep = "")
+
+    def visitVariable(self, expr):
+        print(expr, end = "")
+
+    def visitBinary(self, expr):
+        print(expr)
+
+
 
 
 

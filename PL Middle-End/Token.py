@@ -6,4 +6,5 @@ class Token:
 
     def __str__(self):
         return str(self.lexeme)
+        # return str(self.type) + " " + str(self.lexeme) + " " + str(self.literal)
 

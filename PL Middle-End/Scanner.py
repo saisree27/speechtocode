@@ -50,12 +50,17 @@ class Scanner:
             'public': TokenType.PUBLIC,
             'private': TokenType.PRIVATE,
             'increment': TokenType.PLUS,
-            'decrement': TokenType.MINUS
+            'decrement': TokenType.MINUS,
+            'plus': TokenType.PLUS,
         }
-        self.ignore = {"to", "from", "create", "a", "loop", "with"}
+        self.ignore = {"to", "from", "create", "a", "loop", "with", 'than'}
         self.remap = {
             "decrement": '-',
-            'increment': '+'
+            'increment': '+',
+            "lesser": "<",
+            "greater": ">",
+            "greater equals": ">=",
+            "lesser equals": "<="
         }
 
     def scanTokens(self):

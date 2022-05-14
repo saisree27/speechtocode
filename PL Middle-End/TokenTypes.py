@@ -1,7 +1,7 @@
 from enum import Enum
 TokenType = Enum('TokenType', [
     # Single-character tokens.
-    "MINUS","PLUS", "SEMICOLON","SLASH", "STAR",
+    "MINUS","PLUS", "SEMICOLON","SLASH", "STAR", "DOT" , "LEFT_PAREN", "RIGHT_PAREN",
     # One or two character tokens.
     "BANG","BANG_EQUAL","EQUAL","EQUAL_EQUAL","GREATER","GREATER_EQUAL","LESS","LESS_EQUAL",
     # Literals

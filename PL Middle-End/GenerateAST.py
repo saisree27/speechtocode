@@ -3,14 +3,14 @@ import sys
 tab = "    " # Tab is four spaces
 base_desc = {
     "Expr": {
-        "Assign" : [["Token.Token", "name"], ["Expr", "value"]],
+        "Assign" : [["Expr", "variable"], ["Expr", "value"]],
         "Chain": [["Expr", "left"], ["Expr", "right"]],
         "Unary": [["Token.Token", "operator"], ["Expr", "right"]],
         "Binary": [["Expr", "left"], ["Token.Token", "operator"], ["Expr", "right"]],
         "Logical": [["Expr", "left"], ["Token.Token", "operator"], ["Expr", "right"]],
         "Grouping" : [["Expr", "expression"]],
         "Literal" : [["object", "value"]],
-        "Variable" : [["Token.Token", "name"]],
+        "Variable" : [["Token.Token", "name"], ["Token.Token", "type"]],
         "Call" : [["Expr","callee"], ["Token.Token", "parent"], ["list","arguments"]]
     },
     "Stmt": {
@@ -42,7 +42,9 @@ def defineStmt(file, baseName, types):
 def defineType(file, baseName, className, fields):
     types, names = zip(*fields)
     field_str = ", ".join(names)
-    asserts = [tab + tab + "assert isinstance(" + field[1] + ", " + field[0] + ")\n" for field in fields]
+    asserts = []
+    if className != "Variable":
+        asserts = [tab + tab + "assert isinstance(" + field[1] + ", " + field[0] + ")\n" for field in fields]
     instances = [tab + tab + "self." + name + " = " + name + "\n" for name in names]
     printString = ""
     for name in names:

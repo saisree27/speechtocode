@@ -87,10 +87,10 @@
   position: relative;
 }
 
-/*#startButton:hover {
-  background-color: #800000; /* Maroon */
-/*transform: translateZ(0) scale(1.2);  /* Enlarges Button
-}*/
+#startButton:hover {
+  background-color: #85f272; /* Maroon */
+  /*transform: translateZ(0) scale(1.2);  /* Enlarges Button */
+}
 
 #startButton:hover::after {
   content: " and Start Coding!"; /* Adds Text to "Use the Tool..." Button */
@@ -111,10 +111,9 @@
   margin-left: 100px;
 }
 
-/*#tutorialButton:hover {
-  background-color: #800000; /* Maroon
-  transform: translateZ(0) scale(1.2);  /* Enlarges Button
-}*/
+#tutorialButton:hover {
+  background-color: #ee6d6d; /* Maroon */
+}
 
 #tutorialButton:hover::after {
   content: " for a Demo!"; /* Adds Text to "Follow Tutorial..." Button */

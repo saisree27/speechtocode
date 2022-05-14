@@ -263,7 +263,7 @@ export default function Main() {
   return (
     <div>
       <div id="bg">
-        <img src="bgimg.jpeg"></img>
+        <img src="newbgimg.jpg"></img>
       </div>
       <div>
         <Link to="/" id="tohome">

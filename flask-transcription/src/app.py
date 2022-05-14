@@ -11,6 +11,7 @@ app = Flask(__name__)
 KEY = config.API_KEY
 TEXT = ""
 
+
 @app.route('/')
 def home():
   return "Yeah, the app works."
@@ -37,9 +38,6 @@ def check():
     print(response.json())
 
     TEXT = re.sub(r'[^\w\s]', '', response.json()["text"]).lower()
-    scanned = Scanner.Scanner(TEXT, language).scanTokens()
-    parsed = Parser.Parser(scanned, language).parse()
-    TEXT = Interpreter.Interpreter(language).interpret(parsed)
     return response.json()["text"]
 
 
@@ -71,6 +69,22 @@ def submit_for_transcription():
   response = requests.post(endpoint, json=json, headers=headers)
 
   return response.json()["id"]
+
+@app.route('/code', methods=['get'])
+def getCode():
+  if request.method == 'GET':
+    textSet = False
+    TEXT = request.form["text"]
+    language = request.form["language"]
+    scanned = Scanner.Scanner(TEXT, language).scanTokens()
+    parsed = Parser.Parser(scanned, language).parse()
+    if not textSet:
+      TEXT = Interpreter.Interpreter(language).interpret(parsed)
+      textSet = True
+    print(TEXT)
+    return jsonify(TEXT)
+
+
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0")

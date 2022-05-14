@@ -65,7 +65,7 @@ export default function Landing() {
         <footer className="footer">
             <div className="text-center">
               <p className="fw-light font-monospace">
-                <strong>Speech2Code</strong> by Saigautam Bonam, Nicholas Cai, Kinshuk Phalke, and Dhruv Sharma.
+                <strong>Speech2Code</strong> by Saigautam Bonam, Nicolas Cai, Kinshuk Phalke, and Dhruv Sharma.
                </p>
             </div>
           </footer>

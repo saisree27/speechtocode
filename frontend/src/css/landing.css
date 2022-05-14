@@ -100,6 +100,7 @@ content:" and Start Coding!"; /* Adds Text to "Use the Tool..." Button */
   border-radius: 3px;
   transition-duration: 0.4s;
   position: relative;
+  margin-left: 100px;
 }
 
 #tutorialButton:hover {

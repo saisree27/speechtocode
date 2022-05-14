@@ -43,7 +43,7 @@ export default function Main() {
           Home
         </a>
         <a className="active" href="/learn">
-          Speech-To-Code
+          Speech2Code
         </a>
         <a className="active" href="/tutorial">
           Tutorial
@@ -58,7 +58,7 @@ export default function Main() {
         </div>
         <div className="header">
           <h1 id="title">Tutorial</h1>
-          <p>Get started with speech2code!</p>
+          <p>Get started with Speech2code!</p>
           <p>Note: this is all written in Python</p>
         </div>
       </div>

@@ -42,12 +42,7 @@
   font-size: large;
   font-family: "Poppins-SemiBold", "Trebuchet MS", "Lucida Sans Unicode",
     "Lucida Grande", "Lucida Sans", Arial, sans-serif;
-  height: 250px;
   margin-top: 30px;
-}
-
-#title {
-  margin-bottom: 50px;
 }
 
 .subtitle {

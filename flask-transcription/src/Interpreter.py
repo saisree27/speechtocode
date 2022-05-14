@@ -49,16 +49,16 @@ class Interpreter:
 
     def visitAssign(self, expr):
         if self.lang == "python":
-            return expr.__str__() + ""
+            return expr.__str__()
         elif self.lang == "java":
             return expr.__str__() + "; "
 
     def visitVariable(self, expr):
-        string = expr.__str__() + ""
+        string = expr.__str__()
         return string
 
     def visitBinary(self, expr):
-        string = expr.__str__() + ""
+        string = expr.__str__()
         return string
 
     def visitWhile(self, expr):
@@ -90,8 +90,8 @@ class Interpreter:
             print(expr.__str__() + "; ")
             return expr.__str__() + "; "
         elif self.lang == "python":
-            print(expr.__str__() + "")
-            return expr.__str__() + ""
+            print(expr.__str__())
+            return expr.__str__()
 
     def visitCall(self, expr):
         string = expr.name.__str__() + "("
@@ -108,9 +108,10 @@ class Interpreter:
         if self.lang == "java":
             if str(value)[-1] == ";":
                 value = str(value)[:-1]
-            return "System.out.Println({})".format(value) + ""
+            print("System.out.Println({})".format(value) + ";")
+            return "System.out.Println({})".format(value) + ";"
         else:
-            return "print({})".format(value) + ""
+            return "print({})".format(value)
 
 
 

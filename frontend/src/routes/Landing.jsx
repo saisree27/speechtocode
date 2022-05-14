@@ -26,7 +26,7 @@ export default function Landing() {
     <div>
       <div id='bg'>
         {/*<img src='bgimg.jpeg'></img>*/}
-        <ParticlesBg type="circle" bg={true} />
+        <ParticlesBg type="lines" bg={true} />
       </div>
 
         <div className="topnav">
@@ -46,7 +46,7 @@ export default function Landing() {
           </Link>
         </div>
         <center>
-        <h1 className='title'>Welcome to Speech2Code!</h1>
+        <h1 className='title'>Welcome to Speech-To-Code!</h1>
         <br />
         <Link to="/learn"><button id = 'startButton'> Use the Tool</button></Link>
 
@@ -59,12 +59,11 @@ export default function Landing() {
         <div><center><p  className='abouttext'>This website is intended to help beginner coders learn the fundemental syntax 
         of programming languages. It translated English phrases spoken by the user into functional code. The user has the option 
         to translate their English phrases into Java, Python, or JavaScript.</p></center></div>
-        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
-        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
-        <h2 className='title'>Creators</h2>
-        <div><center><p  className='abouttext'>This project was created by Saigautam Bonam, Nicholas Cai, Kinshuk Phalke, and Dhruv Sharma.</p></center></div>
-        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
-        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
+
+
+        <div className="creators">
+          <p className='creatortext'>Speech2Code by Kinshuk Phalke, Saigautam Bonam, Nicholas Cai, and Dhruv Sharma.</p>
+        </div>
 
       </div>
   );

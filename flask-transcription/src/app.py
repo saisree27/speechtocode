@@ -4,11 +4,13 @@ import os
 import requests
 import config
 import re
-
+import sys
+import Scanner, Interpreter, Parser
 
 app = Flask(__name__)
 KEY = config.API_KEY
 TEXT = ""
+
 
 @app.route('/')
 def home():
@@ -26,6 +28,7 @@ def form():
 
 @app.route('/check', methods=['post'])
 def check():
+  global TEXT
   if request.method == 'POST':
     ID = request.json["id"]
     endpoint = "https://api.assemblyai.com/v2/transcript/" + ID
@@ -36,8 +39,6 @@ def check():
     print(response.json())
 
     TEXT = re.sub(r'[^\w\s]', '', response.json()["text"]).lower()
-    print(TEXT)
-
     return response.json()["text"]
 
 
@@ -69,6 +70,55 @@ def submit_for_transcription():
   response = requests.post(endpoint, json=json, headers=headers)
 
   return response.json()["id"]
+
+@app.route('/code', methods=['post'])
+def getCode():
+  global TEXT
+  # process_ints()
+
+  TEXT = "if x mod i equals to 0"
+  
+  print(TEXT)
+
+  if request.method == 'POST':
+    textSet = False
+    language = request.json["language"]
+    scanned = Scanner.Scanner(TEXT, language).scanTokens()
+    parsed = Parser.Parser(scanned, language).parse()
+
+    if not textSet:
+      output = Interpreter.Interpreter(language).interpret(parsed)
+      textSet = True
+
+    print(output)
+    return output
+
+
+def process_ints():
+  global TEXT
+  words = TEXT.split(" ")
+  numbers = {
+    "zero": "0",
+    "one": "1",
+    "two": "2",
+    "three": "3",
+    "four": "4",
+    "five": "5",
+    "six": "6",
+    "seven": "7",
+    "eight": "8",
+    "nine": "9",
+    "ten": "10",
+    "eleven": "11",
+    "twelve": "12"
+  }
+
+  for i in range(len(words)):
+    if words[i] in numbers:
+      words[i] = numbers[words[i]]
+
+  TEXT = " ".join(words)
+
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0")

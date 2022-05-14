@@ -12,6 +12,7 @@ export default function TranscriptionHolder(props) {
         line={props.line}
         language={props.language}
         setcode={props.setcode}
+        addline={props.addline}
       />
     </div>
   );

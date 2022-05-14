@@ -4,16 +4,18 @@ import axios from "axios";
 import Spinner from "react-bootstrap/Spinner";
 import MicRecorder from "mic-recorder-to-mp3";
 import { Button } from "react-bootstrap";
+import MicIcon from "@material-ui/icons/Mic";
 
 const Mp3Recorder = new MicRecorder({
   bitRate: 64,
   prefix: "data:audio/wav;base64,",
 });
 
-export default function RecordTranscribe() {
+export default function RecordTranscribe(props) {
   var [recording, setRecording] = useState(false);
   var [transcription, setTranscription] = useState("");
   var [processing, setProcessing] = useState(false);
+  var [received, setReceived] = useState(false);
 
   var id = "";
 
@@ -33,6 +35,7 @@ export default function RecordTranscribe() {
         .then((res) => {
           console.log(res);
           setTranscription(res.data);
+          setReceived(true);
           setProcessing(false);
         });
     }, 20000);
@@ -79,20 +82,58 @@ export default function RecordTranscribe() {
       });
   };
 
+  var submit = () => {
+    var line = props.line;
+    var language = props.language;
+
+    axios
+      .post(
+        `http://localhost:5000/code`,
+        { line, language },
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((res) => {
+        props.setcode(res.data);
+        setReceived(false);
+      });
+  };
+
   return (
     <div>
       {!processing ? (
         <div>
-          {!recording ? (
-            <Button onClick={start}>Start Recording</Button>
-          ) : (
-            <Button onClick={stop}>Stop Recording</Button>
-          )}
+          <div id="buttonHolder">
+            {!recording ? (
+              <Button onClick={start} variant="success">
+                <MicIcon />
+                Press to Record
+              </Button>
+            ) : (
+              <Button onClick={stop} variant="danger">
+                <MicIcon />
+                Stop Recording
+              </Button>
+            )}
+          </div>
 
-          <p>{transcription}</p>
+          {received ? (
+            <div id="transcription">
+              <p>Transcribed text: {transcription}</p>
+              <Button onClick={submit} variant="secondary">
+                Generate Code
+              </Button>
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
       ) : (
-        <div>
+        <div id="spinner">
           <Spinner
             as="span"
             animation="border"

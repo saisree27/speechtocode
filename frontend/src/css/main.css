@@ -71,6 +71,12 @@
     "Lucida Grande", "Lucida Sans", Arial, sans-serif;
 }
 
+#buttonHolder {
+  margin-bottom: 10px;
+  font-family: "Poppins-Regular", "Trebuchet MS", "Lucida Sans Unicode",
+    "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+}
+
 .langs {
   margin-top: 5x;
   position: relative;
@@ -107,6 +113,17 @@
   margin-bottom: 20px;
   font-family: "Poppins-SemiBold", "Trebuchet MS", "Lucida Sans Unicode",
     "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+}
+
+#spinner {
+  margin-bottom: 5px;
+}
+
+#transcription {
+  font-family: "Poppins-Regular", "Trebuchet MS", "Lucida Sans Unicode",
+    "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 /* Add a black background color to the top navigation */

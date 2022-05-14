@@ -23,8 +23,8 @@ export default function Main() {
     `\t` + `return a + b;`,
     `}`,
   ]);
-  const [language, setLanguage] = React.useState(null);
-  const [activeLine, setActiveLine] = React.useState(-1);
+  const [language, setLanguage] = React.useState("");
+  const [activeLine, setActiveLine] = React.useState(1);
   const [editing, setEditing] = React.useState(false);
 
   const languageOptions = [
@@ -171,7 +171,11 @@ export default function Main() {
       </div>
 
       <div id="recording">
-        <TranscriptionHolder />
+        <TranscriptionHolder
+          line={activeLine}
+          language={language}
+          setcode={setCode}
+        />
       </div>
 
       <div id="select">

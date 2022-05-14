@@ -8,18 +8,22 @@ import ReactDOM from 'react-dom'
  * Associated with route "/"
  */
 export default function Landing() {
+  const [code, setCode] = React.useState(
+    `function add(a, b) {\n  return a + b;\n}`
+  )
+
+  const options = {
+    selectOnLineNumbers: true
+  };
+  
   useEffect(() => {
     document.title = "Welcome!"
   }, [])
   return (
-    <div style={{
-      backgroundImage: "url(/bgimg.jpeg)",
-      backgroundPosition: 'center',
-      backgroundSize: 'cover',
-      backgroundRepeat: 'no-repeat',
-      width: '100vw',
-      height: '100vh'
-      }}>
+    <div>
+      <div id='bg'>
+        <img src='bgimg.jpeg'></img>
+      </div>
 
         <div className="topnav">
           <a className="active" href="/">Home</a>
@@ -39,8 +43,32 @@ export default function Landing() {
         <Link to="/learn"><button id = 'startButton'> Use the Tool</button></Link>
         <br />
         <br />
-        <Link to="/tutorial"><button id = 'startButton'>Follow Tutorial</button></Link>
+        <Link to="/tutorial"><button id = 'tutorialButton'>Follow Tutorial</button></Link>
         </center>
+        
+        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
+        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
+        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
+        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
+        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
+        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
+        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
+        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
+        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
+        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
+        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
+        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
+        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
+        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
+        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
+        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
+        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
+        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
+        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
+        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
+        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
+        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
+        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
         <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
 
       </div>

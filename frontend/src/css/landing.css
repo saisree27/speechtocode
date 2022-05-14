@@ -84,7 +84,30 @@
 }
 
 #startButton:hover::after {
-content:" and die!"; /* Adds Text to "Start Game..." Button */
+content:" and Start Coding!"; /* Adds Text to "Use the Tool..." Button */
+}
+
+#tutorialButton {
+  background-color: #5e3e8e; /* Light Green */
+  border: none;
+  color: white;
+  padding: 10px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  border-radius: 3px;
+  transition-duration: 0.4s;
+  position: relative;
+}
+
+#tutorialButton:hover {
+  background-color: #800000; /* Maroon */
+  transform: translateZ(0) scale(1.7);  /* Enlarges Button */
+}
+
+#tutorialButton:hover::after {
+content:" for a Demo!"; /* Adds Text to "Follow Tutorial..." Button */
 }
 
 #optionButton {

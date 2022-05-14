@@ -58,7 +58,7 @@ export default function Main() {
         </div>
         <div className="header">
           <h1 id="title">Tutorial</h1>
-          <p>Get started with Speech2code!</p>
+          <p>Get started with Speech2Code!</p>
           <p>Note: this is all written in Python</p>
         </div>
       </div>

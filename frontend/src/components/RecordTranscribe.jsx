@@ -15,7 +15,7 @@ export default function RecordTranscribe(props) {
   var [recording, setRecording] = useState(false);
   var [transcription, setTranscription] = useState("");
   var [processing, setProcessing] = useState(false);
-  var [received, setReceived] = useState(false);
+  var [received, setReceived] = useState(true);
 
   var id = "";
 
@@ -98,8 +98,9 @@ export default function RecordTranscribe(props) {
         }
       )
       .then((res) => {
-        props.setcode(res.data);
-        setReceived(false);
+        console.log(res.data);
+        props.addline(res.data, props.setcode);
+        // setReceived(false);
       });
   };
 

@@ -63,7 +63,7 @@ class If(Stmt):
         return visitor.visitIf(self)
 
     def __str__(self):
-        return str(self.condition) + " " + str(self.thenBranch) + " " + str(self.elseBranch)
+        return "if (" + str(self.condition) + ")"
 
 
 class Print(Stmt):

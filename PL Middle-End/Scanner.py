@@ -43,6 +43,7 @@ class Scanner:
             'short': TokenType.SHORT,
             'long': TokenType.LONG,
             'byte': TokenType.BYTE,
+            'bool': TokenType.BOOL,
             'char': TokenType.CHAR,
             'string': TokenType.STRING,
             'array': TokenType.ARRAY,
@@ -52,6 +53,7 @@ class Scanner:
             'increment': TokenType.PLUS,
             'decrement': TokenType.MINUS,
             'plus': TokenType.PLUS,
+            'mod': TokenType.MOD
         }
         self.ignore = {"to", "from", "create", "a", "loop", "with", 'than'}
         self.remap = {
@@ -60,7 +62,9 @@ class Scanner:
             "lesser": "<",
             "greater": ">",
             "greater equals": ">=",
-            "lesser equals": "<="
+            "lesser equals": "<=",
+            "mod": "%",
+            "equals": "=="
         }
 
     def scanTokens(self):

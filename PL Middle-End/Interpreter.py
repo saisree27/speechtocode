@@ -36,7 +36,9 @@ class Interpreter:
 
     def visitIf(self, stmt):
         if self.lang == "python":
-            print(stmt)
+            print(stmt, ":", sep="")
+        else:
+            print(stmt, "{}", sep="")
 
     def visitAssign(self, expr):
         if self.lang == "python":

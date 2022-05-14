@@ -8,7 +8,7 @@ class Parser:
     def __init__(self, tokenList):
         self.current = 0
         self.tokenList = tokenList
-        self.typedef = {TokenType.INT, TokenType.FLOAT, TokenType.DOUBLE, TokenType.SHORT, TokenType.LONG, TokenType.BYTE, TokenType.CHAR, TokenType.STRING, TokenType.ARRAY, TokenType.VOID, TokenType.PUBLIC, TokenType.STATIC, TokenType.PRIVATE}
+        self.typedef = {TokenType.INT, TokenType.FLOAT, TokenType.DOUBLE, TokenType.SHORT, TokenType.LONG, TokenType.BYTE, TokenType.CHAR, TokenType.STRING, TokenType.ARRAY, TokenType.VOID, TokenType.PUBLIC, TokenType.STATIC, TokenType.PRIVATE, TokenType.BOOL}
 
     def expression(self):
         return self.assignment()
@@ -17,7 +17,6 @@ class Parser:
         statements = []
         while not self.isAtEnd():
             statements.append(self.declaration())
-        print(statements)
         return statements
 
     def declaration(self):
@@ -61,18 +60,19 @@ class Parser:
 
     def expressionStatement(self):
         expr = self.expression()
-        print("Expr: ", expr)
         return Stmt.Expression(expr)
 
     def ifStatement(self):
         condition = self.expression()
-        thenBranch = None
-        elseBranch = None
+        thenBranch = Stmt.Block([])
+        elseBranch = Stmt.Block([])
         return Stmt.If(condition, thenBranch, elseBranch)
 
     def assignment(self):
         if self.match(TokenType.EQUAL):
-            type = self.advance()
+            type = None
+            if (self.peek().type in self.typedef):
+                type = self.advance()
             name = self.advance()
             variable = Expr.Variable(name, type)
             right = self.andOperator()
@@ -81,10 +81,16 @@ class Parser:
             return self.andOperator()
 
     def forStatement(self):
-        self.consume(TokenType.NUM, "Expected Range!")
-        initializer = Expr.Assign(Expr.Variable(Token(TokenType.IDENTIFIER, 'i', 'i'), "int"), Expr.Literal(self.previous().literal))
-        self.consume(TokenType.NUM, "Expected Range!")
-        condition = Expr.Binary(Expr.Variable(Token(TokenType.IDENTIFIER, 'i', 'i')), Token(TokenType.LESS, '<', '<'), Expr.Literal(self.previous().literal))
+        if self.check(TokenType.NUM):
+            initializer = Expr.Assign(Expr.Variable(Token(TokenType.IDENTIFIER, 'i', 'i'), "int"), Expr.Literal(self.peek().literal))
+        elif self.check(TokenType.IDENTIFIER):
+            initializer = Expr.Assign(Expr.Variable(Token(TokenType.IDENTIFIER, 'i', 'i'), "int"), Expr.Variable(self.peek()))
+        self.advance()
+        if self.check(TokenType.NUM):
+            condition = Expr.Binary(Expr.Variable(Token(TokenType.IDENTIFIER, 'i', 'i')), Token(TokenType.LESS, '<', '<'), Expr.Literal(self.peek().literal))
+        if self.check(TokenType.IDENTIFIER):
+            condition = Expr.Binary(Expr.Variable(Token(TokenType.IDENTIFIER, 'i', 'i')), Token(TokenType.LESS, '<', '<'), Expr.Variable(self.peek()))
+        self.advance()
         update = Expr.Assign(Expr.Variable(Token(TokenType.IDENTIFIER, 'i', 'i')), Expr.Binary(Expr.Variable(Token(TokenType.IDENTIFIER, 'i', 'i')), self.advance(), Expr.Literal(self.peek().literal)))
         block = Stmt.Block([initializer, condition, update])
         body = Stmt.Block([])
@@ -119,7 +125,7 @@ class Parser:
     def term(self):
         expr = self.factor()
 
-        while self.match(TokenType.MINUS, TokenType.PLUS):
+        while self.match(TokenType.MINUS, TokenType.PLUS, TokenType.MOD):
             operator = self.previous()
             right = self.factor()
             expr = Expr.Binary(expr, operator, right)
@@ -162,6 +168,7 @@ class Parser:
         if self.match(TokenType.NULL):
             return Expr.Literal(None)
         if self.match(TokenType.NUM, TokenType.STR):
+            print()
             return Expr.Literal(self.previous().literal)
 
         if self.match(TokenType.SUPER):

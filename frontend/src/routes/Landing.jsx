@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import GithubCorner from 'react-github-corner';
+import ParticlesBg from 'particles-bg'
 
 
 /**
@@ -24,7 +25,8 @@ export default function Landing() {
   return (
     <div>
       <div id='bg'>
-        <img src='bgimg.jpeg'></img>
+        {/*<img src='bgimg.jpeg'></img>*/}
+        <ParticlesBg type="circle" bg={true} />
       </div>
 
         <div className="topnav">

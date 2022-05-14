@@ -2,6 +2,7 @@ import "../css/main.css";
 import CodeEditor from '@uiw/react-textarea-code-editor';
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import TranscriptionHolder from "./TranscriptionHolder";
 
 /**
  * Main page (where our record button and text editor will show up)
@@ -31,8 +32,12 @@ export default function Main() {
         </div>
         <h1 className='title'>Speech-To-Code</h1>
         <p className='subtitle'>Start speaking to start coding!</p>
-        
       </div>
+      
+      <div id='recording'>
+        <TranscriptionHolder />
+      </div>
+
       <div className="langs">
         <select>
           {/* <option>

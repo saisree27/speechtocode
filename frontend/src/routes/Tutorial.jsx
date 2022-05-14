@@ -7,7 +7,11 @@ import "../css/tutorial.css";
 export default function Tutorial() {
   return (
     <div>
-      <h1>Tutorial</h1>
+      <div>
+        <h1><center>Tutorial</center></h1>
+        
+      </div>
+      
     </div>
   );
 }

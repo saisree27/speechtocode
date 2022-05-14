@@ -38,6 +38,12 @@ export default function Main() {
         <img src="bgimg.jpeg"></img>
       </div>
 
+      <div>
+        <Link to="/" id="tohome">
+          <img src="logo.png"></img>
+        </Link>
+      </div>
+
       <div className="topnav">
         <a className="active" href="/">
           Home
@@ -50,12 +56,6 @@ export default function Main() {
         </a>
       </div>
       <div>
-        <div>
-          <Link to="/" id="tohome">
-            <h4 id="icontext">Speech2Code</h4>
-            <img src="mic.png"></img>
-          </Link>
-        </div>
         <div className="header">
           <h1 id="title">Tutorial</h1>
           <p>Get started with Speech2Code!</p>

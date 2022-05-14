@@ -4,6 +4,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "./routes/Landing";
 import Main from "./routes/Main";
 import Tutorial from "./routes/Tutorial";
+import TranscriptionHolder from "./routes/TranscriptionHolder";
+
 import reportWebVitals from "./reportWebVitals";
 
 import "./css/index.css";
@@ -16,6 +18,7 @@ root.render(
         <Route path="/" element={<Landing />} />
         <Route path="/learn" element={<Main />} />
         <Route path="/tutorial" element={<Tutorial />} />
+        <Route path="/record" element={<TranscriptionHolder />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

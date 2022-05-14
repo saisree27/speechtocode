@@ -18,11 +18,13 @@ import Toggle from "react-toggle";
  * Associated with route "/learn" (change in index.js)
  */
 export default function Main() {
-  const [code, setCode] = React.useState(
-    `function add(a, b) {\n  return a + b;\n}`
-  );
-  const [language, setLanguage] = React.useState(null);
-  const [activeLine, setActiveLine] = React.useState(-1);
+  const [code, setCode] = React.useState([
+    `function add(a, b) {`,
+    `\t` + `return a + b;`,
+    `}`,
+  ]);
+  const [language, setLanguage] = React.useState("");
+  const [activeLine, setActiveLine] = React.useState(1);
   const [editing, setEditing] = React.useState(false);
 
   const languageOptions = [
@@ -137,7 +139,7 @@ export default function Main() {
   };
 
   useEffect(() => {
-    document.title = "This is a title";
+    document.title = "Main";
   }, []);
 
   return (
@@ -165,11 +167,15 @@ export default function Main() {
           </Link>
         </div>
         <h1 className="title">Speech-To-Code</h1>
-        <p className="subtitle">Start speaking to start coding!</p>
+        <p id="subtitle">Start speaking to start coding!</p>
       </div>
 
       <div id="recording">
-        <TranscriptionHolder />
+        <TranscriptionHolder
+          line={activeLine}
+          language={language}
+          setcode={setCode}
+        />
       </div>
 
       <div id="select">
@@ -189,13 +195,12 @@ export default function Main() {
       <div className="editor">
         {editing ? (
           <MonacoEditor
-            height={240}
             language={language}
             theme="vs-dark"
             onChange={(evn) => {
-              setCode(evn);
+              setCode(evn.split("\n"));
             }}
-            value={code}
+            value={code.join("\r\n")}
             options={options}
           />
         ) : (
@@ -218,6 +223,7 @@ export default function Main() {
                     display: "block",
                     cursor: "pointer",
                     backgroundColor: "#877574",
+                    width: 810,
                   },
                   onClick() {
                     console.log("HERE");
@@ -227,7 +233,7 @@ export default function Main() {
                 };
               } else {
                 return {
-                  style: { display: "block", cursor: "pointer" },
+                  style: { display: "block", cursor: "pointer", width: 810 },
                   onClick() {
                     console.log("HERE");
                     // alert(`Line Number Clicked: ${lineNumber}`);
@@ -237,22 +243,9 @@ export default function Main() {
               }
             }}
           >
-            {code}
+            {code.join("\r\n")}
           </SyntaxHighlighter>
         )}
-        {/* <CodeEditor
-          value={code}
-          language="js"
-          placeholder="Please enter JS code."
-          onChange={(evn) => setCode(evn.target.value)}
-          padding={15}
-          style={{
-            fontSize: 12,
-            backgroundColor: "black",
-            fontFamily:
-              "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
-          }}
-        /> */}
       </div>
 
       <div id="toggle">

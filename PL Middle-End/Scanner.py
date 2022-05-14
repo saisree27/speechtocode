@@ -1,8 +1,9 @@
 from TokenTypes import TokenType
+from Token import Token
 
 class Scanner:
     def __init__(self, source):
-        self.source = source
+        self.source = source.split(" ")
         self.tokens = []
         self.start = 0
         self.current = 0
@@ -24,7 +25,7 @@ class Scanner:
             'for': TokenType.FOR,
             'fun': TokenType.FUN,
             'if': TokenType.IF,
-            'nil': TokenType.NIL,
+            'null': TokenType.NULL,
             'or': TokenType.OR,
             'print': TokenType.PRINT,
             'return': TokenType.RETURN,
@@ -49,30 +50,37 @@ class Scanner:
             'public': TokenType.PUBLIC,
             'private': TokenType.PRIVATE
         }
+        self.ignore = {"to", "from", "create"}
 
     def scanTokens(self):
         while not self.isAtEnd():
             self.start = self.current
             self.scanToken()
-        self.tokens.append(Token(TokenType.EOF, '', None, self.line))
+        self.tokens.append(Token(TokenType.EOF, '', None))
         return self.tokens
-
 
     def scanToken(self):
         c = self.advance()
         if c in self.tokenStrings:
-            c = self.tokenStrings[c](c)
+            c = self.tokenStrings[c]
             if c is not None:
                 self.addToken(c)
-        elif c.isdigit():
+        elif self.isDigit(c):
             self.number()
-        elif c.isalpha():
+        elif c.isalpha() and c not in self.ignore:
             self.identifier()
-        elif c == "/":
-            self.slash()
-        elif c == "\"":
-            self.string()
 
+
+    def number(self):
+        if self.isDigit(self.source[self.current-1]):
+            if "." in self.source[self.current-1]:
+                self.addToken(TokenType.NUM, float(self.source[self.current-1]))
+            else:
+                self.addToken(TokenType.NUM, self.source[self.current-1])
+
+    def identifier(self):
+        if self.peek().isalpha():
+            self.addToken(TokenType.IDENTIFIER)
 
     def peek(self):
         if self.isAtEnd():
@@ -92,8 +100,8 @@ class Scanner:
         return self.source[self.current-1]
 
     def addToken(self, tokenType, literal=None):
-        text = self.source[self.start:self.current]
-        self.tokens.append(Token(tokenType, text, literal, self.line))
+        text = self.source[self.current-1]
+        self.tokens.append(Token(tokenType, text, literal))
 
     def match(self, expected):
         if self.isAtEnd():
@@ -110,3 +118,13 @@ class Scanner:
             return False
         self.current += 1
         return True
+
+    def isDigit(self, x):
+        try:
+            float(x)
+            return True
+        except ValueError:
+            return False
+
+for i in Scanner("assign int x to 3").scanTokens():
+    print(i)

@@ -2,15 +2,16 @@ from TokenTypes import TokenType
 from Token import Token
 
 class Scanner:
-    def __init__(self, source):
+    def __init__(self, source, language):
         self.source = source.split(" ")
+        self.language = language
         self.tokens = []
         self.start = 0
         self.current = 0
         self.tokenStrings = {
             'subtract': TokenType.MINUS,
             'add': TokenType.PLUS,
-            'mutliply': TokenType.STAR,
+            'times': TokenType.STAR,
             'divide': TokenType.SLASH,
             'not equals': TokenType.BANG_EQUAL,
             'equals': TokenType.EQUAL_EQUAL,
@@ -23,7 +24,7 @@ class Scanner:
             'else': TokenType.ELSE,
             'false': TokenType.FALSE,
             'for': TokenType.FOR,
-            'fun': TokenType.FUN,
+            'function': TokenType.FUN,
             'if': TokenType.IF,
             'null': TokenType.NULL,
             'or': TokenType.OR,
@@ -43,14 +44,33 @@ class Scanner:
             'short': TokenType.SHORT,
             'long': TokenType.LONG,
             'byte': TokenType.BYTE,
+            'boolean': TokenType.BOOLEAN,
             'char': TokenType.CHAR,
             'string': TokenType.STRING,
             'array': TokenType.ARRAY,
             'void': TokenType.VOID,
             'public': TokenType.PUBLIC,
-            'private': TokenType.PRIVATE
+            'private': TokenType.PRIVATE,
+            'increment': TokenType.PLUS,
+            'decrement': TokenType.MINUS,
+            'plus': TokenType.PLUS,
+            'mod': TokenType.MOD,
+            'call': TokenType.CALL
         }
-        self.ignore = {"to", "from", "create"}
+        self.ignore = {"to", "from", "create", "a", "loop", "with", 'than', 'condition', 'of', 'returning', 'parameters', 'parameter'}
+        self.remap = {
+            "decrement": '-',
+            'increment': '+',
+            "lesser": "<",
+            "greater": ">",
+            "greater equals": ">=",
+            "lesser equals": "<=",
+            "mod": "%",
+            "equals": "==",
+            "and": '&&' if self.language == 'java' else 'and',
+            "or": '||' if self.language == 'java' else 'or',
+            "times": "*"
+        }
 
     def scanTokens(self):
         while not self.isAtEnd():
@@ -76,11 +96,16 @@ class Scanner:
             if "." in self.source[self.current-1]:
                 self.addToken(TokenType.NUM, float(self.source[self.current-1]))
             else:
-                self.addToken(TokenType.NUM, self.source[self.current-1])
+                self.addToken(TokenType.NUM, int(self.source[self.current-1]))
 
     def identifier(self):
-        if self.peek().isalpha():
+        if self.source[self.current-1].isalpha():
             self.addToken(TokenType.IDENTIFIER)
+
+    def peekPrevious(self):
+        if self.isAtEnd():
+            return '\0'
+        return self.source[self.current-1]
 
     def peek(self):
         if self.isAtEnd():
@@ -101,6 +126,8 @@ class Scanner:
 
     def addToken(self, tokenType, literal=None):
         text = self.source[self.current-1]
+        if text in self.remap:
+            text = self.remap[text]
         self.tokens.append(Token(tokenType, text, literal))
 
     def match(self, expected):
@@ -126,5 +153,4 @@ class Scanner:
         except ValueError:
             return False
 
-for i in Scanner("assign int x to 3").scanTokens():
-    print(i)
+

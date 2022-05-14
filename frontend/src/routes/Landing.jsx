@@ -27,7 +27,7 @@ export default function Landing() {
     <div>
       <div id='bg'>
         {/*<img src='bgimg.jpeg'></img>*/}
-        <ParticlesBg type="circle" bg={true} />
+        <ParticlesBg type="" bg={true} />
       </div>
 
         <div className="topnav">
@@ -76,7 +76,6 @@ export default function Landing() {
         <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
         <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
         <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>*/}
-
 
       </div>
   );

@@ -1,4 +1,6 @@
 import "../css/main.css";
+import "../css/react-toggle.css";
+
 import MonacoEditor from "react-monaco-editor";
 import { monaco } from "react-monaco-editor";
 import React, { useEffect } from "react";
@@ -7,6 +9,9 @@ import TranscriptionHolder from "./TranscriptionHolder";
 import { Form } from "react-bootstrap";
 import Select from "react-select";
 import CodeEditor from "@uiw/react-textarea-code-editor";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { a11yDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import Toggle from "react-toggle";
 
 /**
  * Main page (where our record button and text editor will show up)
@@ -17,6 +22,9 @@ export default function Main() {
     `function add(a, b) {\n  return a + b;\n}`
   );
   const [language, setLanguage] = React.useState(null);
+  const [activeLine, setActiveLine] = React.useState(-1);
+  const [editing, setEditing] = React.useState(false);
+
   const languageOptions = [
     { value: "js", label: "JavaScript" },
     { value: "py", label: "Python" },
@@ -179,16 +187,60 @@ export default function Main() {
       </div>
 
       <div className="editor">
-        {/* <MonacoEditor
-          width="650"
-          height="450"
-          language={language}
-          theme="vs-dark"
-          onChange={(evn) => setCode(evn.target.value)}
-          value={code}
-          options={options}
-        /> */}
-        <CodeEditor
+        {editing ? (
+          <MonacoEditor
+            height={240}
+            language={language}
+            theme="vs-dark"
+            onChange={(evn) => {
+              setCode(evn);
+            }}
+            value={code}
+            options={options}
+          />
+        ) : (
+          <SyntaxHighlighter
+            language="javascript"
+            style={a11yDark}
+            wrapLines={true}
+            showLineNumbers={true}
+            lineNumberStyle={(lineNumber) => {
+              if (lineNumber == activeLine) {
+                return {
+                  backgroundColor: "#877574",
+                };
+              }
+            }}
+            lineProps={(lineNumber) => {
+              if (lineNumber == activeLine) {
+                return {
+                  style: {
+                    display: "block",
+                    cursor: "pointer",
+                    backgroundColor: "#877574",
+                  },
+                  onClick() {
+                    console.log("HERE");
+                    // alert(`Line Number Clicked: ${lineNumber}`);
+                    setActiveLine(lineNumber);
+                  },
+                };
+              } else {
+                return {
+                  style: { display: "block", cursor: "pointer" },
+                  onClick() {
+                    console.log("HERE");
+                    // alert(`Line Number Clicked: ${lineNumber}`);
+                    setActiveLine(lineNumber);
+                  },
+                };
+              }
+            }}
+          >
+            {code}
+          </SyntaxHighlighter>
+        )}
+        {/* <CodeEditor
           value={code}
           language="js"
           placeholder="Please enter JS code."
@@ -199,6 +251,17 @@ export default function Main() {
             backgroundColor: "black",
             fontFamily:
               "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
+          }}
+        /> */}
+      </div>
+
+      <div id="toggle">
+        <h3>Edit Code</h3>
+        <Toggle
+          id="editing"
+          defaultChecked={false}
+          onChange={(val) => {
+            setEditing(!editing);
           }}
         />
       </div>

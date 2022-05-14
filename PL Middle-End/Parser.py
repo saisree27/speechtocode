@@ -9,6 +9,7 @@ class Parser:
         self.current = 0
         self.tokenList = tokenList
         self.typedef = {TokenType.INT, TokenType.FLOAT, TokenType.DOUBLE, TokenType.SHORT, TokenType.LONG, TokenType.BYTE, TokenType.CHAR, TokenType.STRING, TokenType.ARRAY, TokenType.VOID, TokenType.PUBLIC, TokenType.STATIC, TokenType.PRIVATE, TokenType.BOOLEAN}
+        self.error = ""
 
     def expression(self):
         return self.assignment()
@@ -26,26 +27,46 @@ class Parser:
             if self.match(TokenType.VAR): return self.varDeclaration()
             return self.statement()
         except Exception as e:
-            traceback.print_exc()
+            # traceback.print_exc()
             self.synchronize()
             return None
 
 
     def function(self, kind):
-        name = self.consume(TokenType.IDENTIFIER, "Expect " + kind + " name.")
-        self.consume(TokenType.LEFT_PAREN, "Expect '(' after " + kind + " name.")
+        if self.previous().type == TokenType.CALL:
+            print("here")
+            return self.call()
+        visibility = self.tokenList[self.current - 2]
+        name = self.advance()
+        retn = self.advance()
+        numParam = int(self.advance().literal)
         parameters = []
-        if not self.check(TokenType.RIGHT_PAREN):
-            start = True
-            while start or self.match(TokenType.COMMA):
-                start = False
-                if len(parameters) >= 255:
-                    self.error(self.peek(), "Can't have more than 255 parameters")
-                parameters.append(self.consume(TokenType.IDENTIFIER, "Expect parameter name."))
-        self.consume(TokenType.RIGHT_PAREN, "Expect ')' after parameters.")
-        self.consume(TokenType.LEFT_BRACE, "Expect '{' before " + kind + " body.")
-        body = self.block()
-        return Stmt.Function(name, parameters, body)
+        for i in range(numParam):
+            typeVar = self.advance()
+            parameters.append(Expr.Variable(self.advance(), typeVar))
+        body = []
+        return Stmt.Function(name, parameters, body, retn, visibility)
+
+    # def call(self):
+    #     expr = self.primary()
+    #     while True:
+    #         if self.match(TokenType.LEFT_PAREN):
+    #             expr = self.finishCall(expr)
+    #         elif self.match(TokenType.DOT):
+    #             name = self.consume(TokenType.IDENTIFIER, "Expect property name after '.'.")
+    #             expr = Expr.Get(expr, name)
+    #         else:
+    #             break
+    #     return expr
+
+
+    def returnStatement(self):
+        keyword = self.previous()
+        value = None
+        if not self.check(TokenType.EOF):
+            value = self.expression()
+        return Stmt.Return(keyword, value)
+
 
     def classDeclaration(self):
         name = self.consume(TokenType.IDENTIFIER, "Expect class name.")
@@ -207,10 +228,9 @@ class Parser:
 
         if self.match(TokenType.LEFT_PAREN):
             expr = self.expression()
-            self.consume(TokenType.RIGHT_PAREN, "Expect ')' after expression.")
+            self.consume(TokenType.RIGHT_PAREN)
             return Expr.Grouping(expr)
-
-        raise self.error(self.peek(), "Expect expression.")
+        raise self.error(self.peek())
 
     def consume(self, tokenType, message):
         if self.check(tokenType):

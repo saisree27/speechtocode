@@ -58,6 +58,18 @@ class Interpreter:
     def visitWhile(self, expr):
         print(expr,"{}")
 
+    def visitFunction(self, expr):
+        if self.lang == "java":
+            string = "{} {} {}(".format(expr.visibility, expr.retn, expr.name)
+            for i in expr.params:
+                string += i.type.__str__() + " " + i.name.__str__() + ", "
+            string = string[:-2]
+            string += ") {}"
+            print(string)
+
+    def visitReturn(self,expr):
+        if self.lang == "java":
+            print(expr,";",sep="")
 
 
 

@@ -11,7 +11,7 @@ class Scanner:
         self.tokenStrings = {
             'subtract': TokenType.MINUS,
             'add': TokenType.PLUS,
-            'mutliply': TokenType.STAR,
+            'times': TokenType.STAR,
             'divide': TokenType.SLASH,
             'not equals': TokenType.BANG_EQUAL,
             'equals': TokenType.EQUAL_EQUAL,
@@ -54,7 +54,8 @@ class Scanner:
             'increment': TokenType.PLUS,
             'decrement': TokenType.MINUS,
             'plus': TokenType.PLUS,
-            'mod': TokenType.MOD
+            'mod': TokenType.MOD,
+            'call': TokenType.CALL
         }
         self.ignore = {"to", "from", "create", "a", "loop", "with", 'than', 'condition', 'of', 'returning', 'parameters', 'parameter'}
         self.remap = {
@@ -68,6 +69,7 @@ class Scanner:
             "equals": "==",
             "and": '&&' if self.language == 'java' else 'and',
             "or": '||' if self.language == 'java' else 'or',
+            "times": "*"
         }
 
     def scanTokens(self):

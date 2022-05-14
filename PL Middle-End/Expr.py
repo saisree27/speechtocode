@@ -127,18 +127,16 @@ class Variable(Expr):
 
 
 class Call(Expr):
-    def __init__(self, callee, parent, arguments):
-        assert isinstance(callee, Expr)
-        assert isinstance(parent, Token.Token)
+    def __init__(self, name, arguments):
+        assert isinstance(name, Token.Token)
         assert isinstance(arguments, list)
 
-        self.callee = callee
-        self.parent = parent
+        self.name = name
         self.arguments = arguments
 
     def accept(self, visitor):
         return visitor.visitCall(self)
 
     def __str__(self):
-        return str(self.callee) + " " + str(self.parent) + " " + str(self.arguments)
+        return str(self.name) + "(" + str(self.arguments)[1:-1] + ")"
 

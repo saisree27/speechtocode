@@ -54,7 +54,6 @@ export default function Landing() {
         </center>
         <br />
         <br />
-        <br />
 
         <h2 className='title'>Purpose</h2>
         <div><center><p  className='abouttext'>This website is intended to help beginner coders learn the fundemental syntax 
@@ -64,11 +63,6 @@ export default function Landing() {
         <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
         <h2 className='title'>Creators</h2>
         <div><center><p  className='abouttext'>This project was created by Saigautam Bonam, Nicholas Cai, Kinshuk Phalke, and Dhruv Sharma.</p></center></div>
-        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
-        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
-        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
-        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
-        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
         <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
         <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
 

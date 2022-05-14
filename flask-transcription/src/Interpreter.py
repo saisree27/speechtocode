@@ -49,7 +49,7 @@ class Interpreter:
 
     def visitAssign(self, expr):
         if self.lang == "python":
-            return expr.__str__()
+            return expr.variable.name.__str__() + " = " + str(expr.value)
         elif self.lang == "java":
             return expr.__str__() + "; "
 

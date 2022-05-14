@@ -46,7 +46,7 @@ export default function Landing() {
           </Link>
         </div>
         <center>
-        <h1 className='title'>Welcome to Speech-To-Code!</h1>
+        <h1 className='title'>Welcome to Speech2Code!</h1>
         <br />
         <Link to="/learn"><button id = 'startButton'> Use the Tool</button></Link>
 

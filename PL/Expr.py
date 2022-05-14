@@ -6,18 +6,18 @@ class Expr:
 
 
 class Assign(Expr):
-    def __init__(self, name, value):
-        assert isinstance(name, Token.Token)
+    def __init__(self, variable, value):
+        assert isinstance(variable, Expr)
         assert isinstance(value, Expr)
 
-        self.name = name
+        self.variable = variable
         self.value = value
 
     def accept(self, visitor):
         return visitor.visitAssign(self)
 
     def __str__(self):
-        return str(self.name) + " " + str(self.value)
+        return str(self.variable) + " = " + str(self.value)
 
 
 class Chain(Expr):
@@ -111,31 +111,32 @@ class Literal(Expr):
 
 
 class Variable(Expr):
-    def __init__(self, name):
-        assert isinstance(name, Token.Token)
+    def __init__(self, name, type = None):
 
         self.name = name
+        self.type = type
 
     def accept(self, visitor):
         return visitor.visitVariable(self)
 
     def __str__(self):
-        return str(self.name)
+        if self.type != None:
+            return str(self.type) + " " + str(self.name)
+        else:
+            return str(self.name)
 
 
 class Call(Expr):
-    def __init__(self, callee, parent, arguments):
-        assert isinstance(callee, Expr)
-        assert isinstance(parent, Token.Token)
+    def __init__(self, name, arguments):
+        assert isinstance(name, Token.Token)
         assert isinstance(arguments, list)
 
-        self.callee = callee
-        self.parent = parent
+        self.name = name
         self.arguments = arguments
 
     def accept(self, visitor):
         return visitor.visitCall(self)
 
     def __str__(self):
-        return str(self.callee) + " " + str(self.parent) + " " + str(self.arguments)
+        return str(self.name) + "(" + str(self.arguments)[1:-1] + ")"
 

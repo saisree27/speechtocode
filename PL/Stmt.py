@@ -33,14 +33,19 @@ class Expression(Stmt):
 
 
 class Function(Stmt):
-    def __init__(self, name, params, body):
+    def __init__(self, name, params, body, retn, visibility):
         assert isinstance(name, Token.Token)
         assert isinstance(params, list)
         assert isinstance(body, list)
+        assert isinstance(retn, object)
+        assert isinstance(visibility, Token.Token)
 
         self.name = name
         self.params = params
         self.body = body
+        self.retn = retn
+        self.visibility = visibility
+
 
     def accept(self, visitor):
         return visitor.visitFunction(self)
@@ -63,7 +68,7 @@ class If(Stmt):
         return visitor.visitIf(self)
 
     def __str__(self):
-        return str(self.condition) + " " + str(self.thenBranch) + " " + str(self.elseBranch)
+        return "if (" + str(self.condition) + ")"
 
 
 class Print(Stmt):
@@ -121,20 +126,20 @@ class While(Stmt):
         return visitor.visitWhile(self)
 
     def __str__(self):
-        return str(self.condition) + " " + str(self.body)
+        return "while (" + str(self.condition) + ")"
 
 
 class For(Stmt):
-    def __init__(self, condition, body):
-        assert isinstance(condition, Expr.Expr)
+    def __init__(self, setup, body):
+        assert isinstance(setup, Stmt)
         assert isinstance(body, Stmt)
 
-        self.condition = condition
+        self.setup = setup
         self.body = body
 
     def accept(self, visitor):
         return visitor.visitFor(self)
 
     def __str__(self):
-        return str(self.condition) + " " + str(self.body)
+        return str(self.setup) + " " + str(self.body)
 

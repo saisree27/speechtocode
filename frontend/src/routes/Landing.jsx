@@ -2,6 +2,8 @@ import "../css/landing.css";
 import { Link } from "react-router-dom";
 import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom'
+import GithubCorner from 'react-github-corner';
+
 
 /**
  * Landing page of application
@@ -30,7 +32,10 @@ export default function Landing() {
           <a className="active" href="/learn">Speech-To-Code</a>
           <a className="active" href="/tutorial">Tutorial</a>
         </div>
-
+        
+        <div>
+          <GithubCorner href="https://github.com/saisree27/speechtocode" bannerColor='#70B7FD'/>
+        </div>
 
         <div>
             <Link to="/" id='tohome'>
@@ -40,17 +45,20 @@ export default function Landing() {
         </div>
         <center>
         <h1 className='title'>Welcome to Speech-To-Code!</h1>
+        <br />
         <Link to="/learn"><button id = 'startButton'> Use the Tool</button></Link>
         <br />
         <br />
         <Link to="/tutorial"><button id = 'tutorialButton'>Follow Tutorial</button></Link>
         </center>
         <br />
+        <br />
+        <br />
 
         <h2 className='title'>Purpose</h2>
         <div><center><p  className='abouttext'>This website is intended to help beginner coders learn the fundemental syntax 
         of programming languages. It translated English phrases spoken by the user into functional code. The user has the option 
-        to translate their English phrases into</p></center></div>
+        to translate their English phrases into Java, Python, or JavaScript.</p></center></div>
         <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
         <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
         <h2 className='title'>Creators</h2>

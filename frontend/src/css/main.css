@@ -61,10 +61,14 @@
     margin-top: 5x;
     position: relative;
     text-align: center;
+    padding-bottom: 50px;
 }
 
-#editor {
-    position: fixed;
+.editor {
+    margin: auto;
+    width: 37.5%;
+    padding: 10px;
+    height: 40px;
 }
 
 /* Add a black background color to the top navigation */

@@ -1,5 +1,6 @@
 import "../css/main.css";
-import CodeEditor from '@uiw/react-textarea-code-editor';
+import MonacoEditor from 'react-monaco-editor';
+import { monaco } from 'react-monaco-editor';
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
@@ -11,6 +12,10 @@ export default function Main() {
   const [code, setCode] = React.useState(
     `function add(a, b) {\n  return a + b;\n}`
   )
+
+  const options = {
+    selectOnLineNumbers: true
+  };
 
   useEffect(() => {
     document.title = "This is a title"
@@ -53,6 +58,18 @@ export default function Main() {
             python
           </option>
         </select>
+      </div>
+
+      <div className='editor'>
+        <MonacoEditor
+          width="650"
+          height="450"
+          language="javascript"
+          theme="vs-dark"
+          onChange={(evn) => setCode(evn.target.value)}
+          value={code}
+          options={options}
+        />
       </div>
 
     </div>

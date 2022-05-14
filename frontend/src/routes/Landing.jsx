@@ -23,10 +23,10 @@ export default function Landing() {
       </div>
       <center>
       <h1 className='title'>Welcome to Speech-To-Code!</h1>
-      <Link to="/learn"><button> Use the Tool</button></Link>
+      <Link to="/learn"><button id = 'startButton'> Use the Tool</button></Link>
       <br />
       <br />
-      <Link to="/tutorial"><button>Follow Tutorial</button></Link>
+      <Link to="/tutorial"><button id = 'startButton'>Follow Tutorial</button></Link>
       </center>
       <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
     </div>

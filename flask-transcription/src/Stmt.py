@@ -68,7 +68,7 @@ class If(Stmt):
         return visitor.visitIf(self)
 
     def __str__(self):
-        return "if (" + str(self.condition) + ")"
+        return str(self.condition)
 
 
 class Print(Stmt):
@@ -126,7 +126,7 @@ class While(Stmt):
         return visitor.visitWhile(self)
 
     def __str__(self):
-        return "while (" + str(self.condition) + ")"
+        return str(self.condition)
 
 
 class For(Stmt):

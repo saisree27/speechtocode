@@ -23,7 +23,7 @@ export default function Main() {
     `\t` + `return a + b;`,
     `}`,
   ]);
-  const [language, setLanguage] = React.useState("");
+  const [language, setLanguage] = React.useState("java");
   const [activeLine, setActiveLine] = React.useState(1);
   const [editing, setEditing] = React.useState(false);
 

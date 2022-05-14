@@ -36,15 +36,16 @@ class Interpreter:
         elif self.lang == "java":
             string = 'for (int i = {}; {}; {}) {{}} '.format(stmt.setup.statements[0].value, stmt.setup.statements[1], stmt.setup.statements[2])
         self.done = True
+        print(string)
         return string
 
     def visitIf(self, stmt):
         if self.lang == "python":
-            string = stmt.__str__() + ": "
+            string = "if " + stmt.__str__() + ": "
             print(string)
             return string
         else:
-            string = stmt.__str__() + "{} "
+            string = "if (" + stmt.__str__() + ") {} "
             print(string)
             return string
 
@@ -62,8 +63,13 @@ class Interpreter:
         string = expr.__str__()
         return string
 
-    def visitWhile(self, expr):
-        string = expr.__str__() + "{} "
+    def visitWhile(self, stmt):
+        string = None
+        if self.lang == "java":
+            string ="while (" + stmt.__str__() + ") {} "
+        if self.lang == "python":
+            string = "while " + stmt.__str__() + ": "
+        print(string)
         return string
 
     def visitFunction(self, expr):
@@ -109,9 +115,10 @@ class Interpreter:
         if self.lang == "java":
             if str(value)[-1] == ";":
                 value = str(value)[:-1]
-            print("System.out.Println({})".format(value) + ";")
-            return "System.out.Println({})".format(value) + ";"
+            print("System.out.println({})".format(value) + ";")
+            return "System.out.println({})".format(value) + ";"
         else:
+            print("print({})".format(value))
             return "print({})".format(value)
 
 

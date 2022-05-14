@@ -44,6 +44,8 @@ class Parser:
         numParam = int(self.advance().literal)
         parameters = []
         for i in range(numParam):
+            if self.check(TokenType.AND):
+                self.advance()
             typeVar = self.advance()
             parameters.append(Expr.Variable(self.advance(), typeVar))
         body = []

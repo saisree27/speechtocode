@@ -9,58 +9,61 @@ class Scanner:
         self.start = 0
         self.current = 0
         self.tokenStrings = {
-            'subtract': TokenType.MINUS,
-            'add': TokenType.PLUS,
-            'times': TokenType.STAR,
-            'divide': TokenType.SLASH,
-            'not equals': TokenType.BANG_EQUAL,
-            'equals': TokenType.EQUAL_EQUAL,
-            'lesser': TokenType.LESS,
-            'lesser equals': TokenType.LESS_EQUAL,
-            'greater': TokenType.GREATER,
-            'greater equals': TokenType.GREATER_EQUAL,
-            'and': TokenType.AND,
-            'class': TokenType.CLASS,
-            'else': TokenType.ELSE,
-            'false': TokenType.FALSE,
-            'for': TokenType.FOR,
-            'function': TokenType.FUN,
-            'if': TokenType.IF,
-            'null': TokenType.NULL,
-            'or': TokenType.OR,
-            'print': TokenType.PRINT,
-            'return': TokenType.RETURN,
-            'super': TokenType.SUPER,
-            'this': TokenType.THIS,
-            'true': TokenType.TRUE,
-            'var': TokenType.VAR,
-            'while': TokenType.WHILE,
-            'assign': TokenType.EQUAL,
-            'this': TokenType.THIS,
-            'else if': TokenType.ELSE_IF,
-            'int': TokenType.INT,
-            'float': TokenType.FLOAT,
-            'double': TokenType.DOUBLE,
-            'short': TokenType.SHORT,
-            'long': TokenType.LONG,
-            'byte': TokenType.BYTE,
-            'boolean': TokenType.BOOLEAN,
-            'char': TokenType.CHAR,
-            'string': TokenType.STRING,
-            'array': TokenType.ARRAY,
-            'void': TokenType.VOID,
-            'public': TokenType.PUBLIC,
-            'private': TokenType.PRIVATE,
-            'increment': TokenType.PLUS,
-            'decrement': TokenType.MINUS,
-            'plus': TokenType.PLUS,
-            'mod': TokenType.MOD,
-            'call': TokenType.CALL
+            'subtract': lambda c: TokenType.MINUS,
+            'add': lambda c: TokenType.PLUS,
+            'times': lambda c: TokenType.STAR,
+            'divide': lambda c: TokenType.SLASH,
+            'not equals': lambda c: TokenType.BANG_EQUAL,
+            'equals': lambda c: TokenType.EQUAL_EQUAL,
+            'lesser': lambda c: TokenType.LESS_EQUAL if self.peek() == "equals" else TokenType.LESS,
+            'greater': lambda c: TokenType.GREATER_EQUAL if self.peek() == "equals" else TokenType.GREATER,
+            'and': lambda c: TokenType.AND,
+            'class': lambda c: TokenType.CLASS,
+            'else': lambda c: TokenType.ELSE,
+            'false': lambda c: TokenType.FALSE,
+            'for': lambda c: TokenType.FOR,
+            'function': lambda c: TokenType.FUN,
+            'if': lambda c: TokenType.IF,
+            'null': lambda c: TokenType.NULL,
+            'or': lambda c: TokenType.OR,
+            'print': lambda c: TokenType.PRINT,
+            'return': lambda c: TokenType.RETURN,
+            'super': lambda c: TokenType.SUPER,
+            'this': lambda c: TokenType.THIS,
+            'true': lambda c: TokenType.TRUE,
+            'var': lambda c: TokenType.VAR,
+            'while': lambda c: TokenType.WHILE,
+            'assign': lambda c: TokenType.EQUAL,
+            'this': lambda c: TokenType.THIS,
+            'else if': lambda c: TokenType.ELSE_IF,
+            'int': lambda c: TokenType.INT,
+            'float': lambda c: TokenType.FLOAT,
+            'double': lambda c: TokenType.DOUBLE,
+            'short': lambda c: TokenType.SHORT,
+            'long': lambda c: TokenType.LONG,
+            'byte': lambda c: TokenType.BYTE,
+            'boolean': lambda c: TokenType.BOOLEAN,
+            'char': lambda c: TokenType.CHAR,
+            'string': lambda c: TokenType.STRING,
+            'array': lambda c: TokenType.ARRAY,
+            'void': lambda c: TokenType.VOID,
+            'public': lambda c: TokenType.PUBLIC,
+            'private': lambda c: TokenType.PRIVATE,
+            'increment': lambda c: TokenType.PLUS,
+            'decrement': lambda c: TokenType.MINUS,
+            'plus': lambda c: TokenType.PLUS,
+            'mod': lambda c: TokenType.MOD,
+            'call': lambda c: TokenType.CALL,
+            'multiply': lambda c: TokenType.STAR,
+            'incrementing': lambda c: TokenType.PLUS,
+            'integer': lambda c: TokenType.INT,
+            'boolean': lambda c: TokenType.BOOLEAN
         }
-        self.ignore = {"to", "from", "create", "a", "loop", "with", 'than', 'condition', 'of', 'returning', 'parameters', 'parameter'}
+        self.ignore = {"to", "from", "create", "a", "loop", "with", 'than', 'condition', 'of', 'returning', 'parameters', 'parameter', 'named', 'type', 'called', 'an', 'by', 'that', 'is', 'always', 'value'}
         self.remap = {
             "decrement": '-',
             'increment': '+',
+            'incrementing': '+',
             "lesser": "<",
             "greater": ">",
             "greater equals": ">=",
@@ -73,6 +76,13 @@ class Scanner:
         }
 
     def scanTokens(self):
+        listCopy = []
+        for i in range(len(self.source)):
+            if self.source[i] not in self.ignore:
+                listCopy.append(self.source[i])
+        self.source = listCopy
+
+
         while not self.isAtEnd():
             self.start = self.current
             self.scanToken()
@@ -82,7 +92,9 @@ class Scanner:
     def scanToken(self):
         c = self.advance()
         if c in self.tokenStrings:
-            c = self.tokenStrings[c]
+            c = self.tokenStrings[c](c)
+            if c == TokenType.GREATER_EQUAL or c == TokenType.LESS_EQUAL:
+                self.advance()
             if c is not None:
                 self.addToken(c)
         elif self.isDigit(c):
@@ -125,7 +137,10 @@ class Scanner:
         return self.source[self.current-1]
 
     def addToken(self, tokenType, literal=None):
-        text = self.source[self.current-1]
+        if tokenType == TokenType.GREATER_EQUAL or tokenType == TokenType.LESS_EQUAL:
+            text = " ".join(self.source[self.current-2:self.current])
+        else:
+            text = self.source[self.current-1]
         if text in self.remap:
             text = self.remap[text]
         self.tokens.append(Token(tokenType, text, literal))

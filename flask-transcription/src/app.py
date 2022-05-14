@@ -75,12 +75,11 @@ def submit_for_transcription():
 def getCode():
   global TEXT
   process_ints()
-  
   print(TEXT)
 
   if request.method == 'POST':
     textSet = False
-    language = request.json["language"]
+    language = request.form["language"]
     scanned = Scanner.Scanner(TEXT, language).scanTokens()
     parsed = Parser.Parser(scanned, language).parse()
 

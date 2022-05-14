@@ -38,29 +38,6 @@ export default function Main() {
   const [userOutput, setUserOutput] = React.useState("");
   const [loading, setLoading] = React.useState(false);
 
-  // Function to call the compile endpoint
-  function compile() {
-    setLoading(true);
-    if (code === ``) {
-      return
-    }
- 
-    // Post request to compile endpoint
-    Axios.post(`http://localhost:8000/compile`, {
-      code: code,
-      language: language,
-      input: userInput }).then((res) => {
-      setUserOutput(res.data.output);
-    }).then(() => {
-      setLoading(false);
-    })
-  }
-
-  // Function to clear the output screen
-  function clearOutput() {
-    setUserOutput("");
-  }
-
   const languageOptions = [
     { value: "javascript", label: "Javascript" },
     { value: "python", label: "Python" },
@@ -97,6 +74,31 @@ export default function Main() {
     selectOnLineNumbers: true,
     semanticHighlighting: true,
   };
+
+  // Function to call the compile endpoint
+  function compile() {
+    setLoading(true);
+    if (code === ``) {
+      return
+    }
+ 
+    // Post request to compile endpoint
+    Axios.post(`http://localhost:8000/compile`, {
+      code: code,
+      language: language,
+      input: userInput }).then((res) => {
+      setUserOutput(res.data.output);
+    }).then(() => {
+      setLoading(false);
+    })
+    console.log("Code: %s", code);
+    console.log("Language: ", language);
+  }
+
+  // Function to clear the output screen
+  function clearOutput() {
+    setUserOutput("");
+  }  
 
   var addLine = (newline, updater) => {
     var codeCopy = [...code];

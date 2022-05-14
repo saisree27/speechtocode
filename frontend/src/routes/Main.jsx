@@ -22,6 +22,11 @@ export default function Main() {
         <img src='bgimg.jpeg'></img>
       </div>
       
+      <div className="topnav">
+          <a className="active" href="/">Home</a>
+          <a className="active" href="/learn">Speech-To-Text</a>
+          <a className="active" href="/tutorial">Tutorial</a>
+      </div>
       <div>
         <div> 
           <Link to="/" id='tohome'>
@@ -48,20 +53,8 @@ export default function Main() {
             python
           </option>
         </select>
-      </div>     
-      {/* <CodeEditor
-        id='editor'
-        value={code}
-        language="js"
-        placeholder="Please enter JS code."
-        onChange={(evn) => setCode(evn.target.value)}
-        padding={15}
-        style={{
-          fontSize: 12,
-          backgroundColor: "#f5f5f5",
-          fontFamily: 'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
-        }}
-      /> */}
+      </div>
+           
     </div>
   );
 }

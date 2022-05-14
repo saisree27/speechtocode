@@ -1,5 +1,6 @@
 import "../css/main.css";
-import CodeEditor from '@uiw/react-textarea-code-editor';
+import MonacoEditor from 'react-monaco-editor';
+import { monaco } from 'react-monaco-editor';
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import TranscriptionHolder from "./TranscriptionHolder";
@@ -13,6 +14,10 @@ export default function Main() {
     `function add(a, b) {\n  return a + b;\n}`
   )
 
+  const options = {
+    selectOnLineNumbers: true
+  };
+
   useEffect(() => {
     document.title = "This is a title"
   }, [])
@@ -23,6 +28,11 @@ export default function Main() {
         <img src='bgimg.jpeg'></img>
       </div>
       
+      <div className="topnav">
+          <a className="active" href="/">Home</a>
+          <a className="active" href="/learn">Speech-To-Code</a>
+          <a className="active" href="/tutorial">Tutorial</a>
+      </div>
       <div>
         <div> 
           <Link to="/" id='tohome'>
@@ -53,20 +63,20 @@ export default function Main() {
             python
           </option>
         </select>
-      </div>     
-      {/* <CodeEditor
-        id='editor'
-        value={code}
-        language="js"
-        placeholder="Please enter JS code."
-        onChange={(evn) => setCode(evn.target.value)}
-        padding={15}
-        style={{
-          fontSize: 12,
-          backgroundColor: "#f5f5f5",
-          fontFamily: 'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
-        }}
-      /> */}
+      </div>
+
+      <div className='editor'>
+        <MonacoEditor
+          width="650"
+          height="450"
+          language="javascript"
+          theme="vs-dark"
+          onChange={(evn) => setCode(evn.target.value)}
+          value={code}
+          options={options}
+        />
+      </div>
+
     </div>
   );
 }

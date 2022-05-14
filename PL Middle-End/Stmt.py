@@ -63,7 +63,7 @@ class If(Stmt):
         return visitor.visitIf(self)
 
     def __str__(self):
-        return str(self.condition) + " " + str(self.thenBranch) + " " + str(self.elseBranch)
+        return "if (" + str(self.condition) + ")"
 
 
 class Print(Stmt):
@@ -121,20 +121,20 @@ class While(Stmt):
         return visitor.visitWhile(self)
 
     def __str__(self):
-        return str(self.condition) + " " + str(self.body)
+        return "while (" + str(self.condition) + ")"
 
 
 class For(Stmt):
-    def __init__(self, condition, body):
-        assert isinstance(condition, Expr.Expr)
+    def __init__(self, setup, body):
+        assert isinstance(setup, Stmt)
         assert isinstance(body, Stmt)
 
-        self.condition = condition
+        self.setup = setup
         self.body = body
 
     def accept(self, visitor):
         return visitor.visitFor(self)
 
     def __str__(self):
-        return str(self.condition) + " " + str(self.body)
+        return str(self.setup) + " " + str(self.body)
 

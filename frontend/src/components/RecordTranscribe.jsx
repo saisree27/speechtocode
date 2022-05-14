@@ -2,12 +2,20 @@ import Recorder from "react-mp3-recorder";
 import React, { useState } from "react";
 import axios from "axios";
 import Spinner from "react-bootstrap/Spinner";
+import MicRecorder from "mic-recorder-to-mp3";
+import { Button } from "react-bootstrap";
+import MicIcon from "@material-ui/icons/Mic";
 
-export default function RecordTranscribe() {
-  var [recorded, setRecorded] = useState(false);
-  var [recording, setRecording] = useState(null);
+const Mp3Recorder = new MicRecorder({
+  bitRate: 64,
+  prefix: "data:audio/wav;base64,",
+});
+
+export default function RecordTranscribe(props) {
+  var [recording, setRecording] = useState(false);
   var [transcription, setTranscription] = useState("");
   var [processing, setProcessing] = useState(false);
+  var [received, setReceived] = useState(false);
 
   var id = "";
 
@@ -27,22 +35,37 @@ export default function RecordTranscribe() {
         .then((res) => {
           console.log(res);
           setTranscription(res.data);
+          setReceived(true);
           setProcessing(false);
         });
     }, 20000);
   };
 
+  var start = () => {
+    Mp3Recorder.start()
+      .then(() => {
+        setRecording(true);
+      })
+      .catch((e) => console.error(e));
+  };
+
+  var stop = () => {
+    Mp3Recorder.stop()
+      .getMp3()
+      .then(([buffer, blob]) => {
+        const audioURL = URL.createObjectURL(blob);
+        setRecording(false);
+        const player = new Audio(audioURL);
+        player.play();
+
+        _onComplete(blob);
+      })
+      .catch((e) => console.log(e));
+  };
+
   var _onComplete = (blob) => {
     setProcessing(true);
     console.log("Recording", blob);
-    setRecorded(true);
-    setRecording(blob);
-
-    var audioURL = URL.createObjectURL(blob);
-
-    const player = new Audio(audioURL);
-    player.play();
-
     let data = new FormData();
     data.append("file", blob);
     return axios
@@ -59,29 +82,63 @@ export default function RecordTranscribe() {
       });
   };
 
-  var _onError = (error) => {
-    console.log("Error", error);
-    setRecorded(false);
-    setRecording(null);
+  var submit = () => {
+    var line = props.line;
+    var language = props.language;
+
+    axios
+      .post(
+        `http://localhost:5000/code`,
+        { line, language },
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((res) => {
+        props.setcode(res.data);
+        setReceived(false);
+      });
   };
 
   return (
     <div>
       {!processing ? (
         <div>
-          <Recorder
-            onRecordingComplete={_onComplete}
-            onRecordingError={_onError}
-          />
-          <p>{transcription}</p>
+          <div id="buttonHolder">
+            {!recording ? (
+              <Button onClick={start} variant="success">
+                <MicIcon />
+                Press to Record
+              </Button>
+            ) : (
+              <Button onClick={stop} variant="danger">
+                <MicIcon />
+                Stop Recording
+              </Button>
+            )}
+          </div>
+
+          {received ? (
+            <div id="transcription">
+              <p>Transcribed text: {transcription}</p>
+              <Button onClick={submit} variant="secondary">
+                Generate Code
+              </Button>
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
       ) : (
-        <div>          
+        <div id="spinner">
           <Spinner
-          as="span"
-          animation="border"
-          role="status"
-          aria-hidden="true"
+            as="span"
+            animation="border"
+            role="status"
+            aria-hidden="true"
           />
         </div>
       )}

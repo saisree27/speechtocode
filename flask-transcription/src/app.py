@@ -4,7 +4,9 @@ import os
 import requests
 import config
 import re
-
+import sys
+sys.path.append("../../")
+from PL import Scanner, Interpreter, Parser
 
 app = Flask(__name__)
 KEY = config.API_KEY
@@ -36,8 +38,9 @@ def check():
     print(response.json())
 
     TEXT = re.sub(r'[^\w\s]', '', response.json()["text"]).lower()
-    print(TEXT)
-
+    scanned = Scanner.Scanner(TEXT, language).scanTokens()
+    parsed = Parser.Parser(scanned, language).parse()
+    TEXT = Interpreter.Interpreter(language).interpret(parsed)
     return response.json()["text"]
 
 

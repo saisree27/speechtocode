@@ -34,30 +34,39 @@ class Interpreter:
 
     def visitFor(self, stmt):
         if self.lang == "python":
-            print('for i in range({}, {}, {}): '.format(stmt.setup.statements[0].value, stmt.setup.statements[1].right, stmt.setup.statements[2].value.right))
+            string = 'for i in range({}, {}, {}): '.format(stmt.setup.statements[0].value, stmt.setup.statements[1].right, stmt.setup.statements[2].value.right)
         elif self.lang == "java":
-            print('for (int i = {}; {}; {}) {{}}'.format(stmt.setup.statements[0].value, stmt.setup.statements[1], stmt.setup.statements[2]))
+            string = 'for (int i = {}; {}; {}) {{}} '.format(stmt.setup.statements[0].value, stmt.setup.statements[1], stmt.setup.statements[2])
+        print(string)
+        return string
 
     def visitIf(self, stmt):
         if self.lang == "python":
-            print(stmt, ":", sep="")
+            string = stmt.__str__() + ": "
+            print(string)
+            return string
         else:
-            print(stmt, "{}", sep="")
+            string = stmt.__str__() + "{} "
+            print(string)
+            return string
 
     def visitAssign(self, expr):
         if self.lang == "python":
-            print(expr)
+            return expr.__str__() + ""
         elif self.lang == "java":
-            print(expr, ";", sep = "")
+            return expr.__str__() + "; "
 
     def visitVariable(self, expr):
-        print(expr, end = "")
+        string = expr.__str__() + ""
+        return string
 
     def visitBinary(self, expr):
-        print(expr)
+        string = expr.__str__() + ""
+        return string
 
     def visitWhile(self, expr):
-        print(expr,"{}")
+        string = expr.__str__() + "{} "
+        return string
 
     def visitFunction(self, expr):
         if self.lang == "java":
@@ -68,6 +77,7 @@ class Interpreter:
                 string = string[:-2]
             string += ") {}"
             print(string)
+            return string
         if self.lang == "python":
             string = "def {}(".format(expr.name)
             for i in expr.params:
@@ -76,12 +86,15 @@ class Interpreter:
                 string = string[:-2]
             string += "):"
             print(string)
+            return string
 
     def visitReturn(self,expr):
         if self.lang == "java":
-            print(expr,";",sep="")
+            print(expr.__str__() + "; ")
+            return expr.__str__() + "; "
         elif self.lang == "python":
-            print(expr)
+            print(expr.__str__() + "")
+            return expr.__str__() + ""
 
     def visitCall(self, expr):
         string = expr.name.__str__() + "("
@@ -98,9 +111,9 @@ class Interpreter:
         if self.lang == "java":
             if str(value)[-1] == ";":
                 value = str(value)[:-1]
-            print("System.out.Println({})".format(value))
+            return "System.out.Println({})".format(value) + ""
         else:
-            print("print({})".format(value))
+            return "print({})".format(value) + "\n"
 
 
 

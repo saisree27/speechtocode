@@ -121,7 +121,7 @@ class While(Stmt):
         return visitor.visitWhile(self)
 
     def __str__(self):
-        return str(self.condition) + " " + str(self.body)
+        return "while (" + str(self.condition) + ")"
 
 
 class For(Stmt):

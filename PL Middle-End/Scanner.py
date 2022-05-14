@@ -2,8 +2,9 @@ from TokenTypes import TokenType
 from Token import Token
 
 class Scanner:
-    def __init__(self, source):
+    def __init__(self, source, language):
         self.source = source.split(" ")
+        self.language = language
         self.tokens = []
         self.start = 0
         self.current = 0
@@ -23,7 +24,7 @@ class Scanner:
             'else': TokenType.ELSE,
             'false': TokenType.FALSE,
             'for': TokenType.FOR,
-            'fun': TokenType.FUN,
+            'function': TokenType.FUN,
             'if': TokenType.IF,
             'null': TokenType.NULL,
             'or': TokenType.OR,
@@ -43,7 +44,7 @@ class Scanner:
             'short': TokenType.SHORT,
             'long': TokenType.LONG,
             'byte': TokenType.BYTE,
-            'bool': TokenType.BOOL,
+            'boolean': TokenType.BOOLEAN,
             'char': TokenType.CHAR,
             'string': TokenType.STRING,
             'array': TokenType.ARRAY,
@@ -55,7 +56,7 @@ class Scanner:
             'plus': TokenType.PLUS,
             'mod': TokenType.MOD
         }
-        self.ignore = {"to", "from", "create", "a", "loop", "with", 'than'}
+        self.ignore = {"to", "from", "create", "a", "loop", "with", 'than', 'condition', 'of', 'returning', 'params'}
         self.remap = {
             "decrement": '-',
             'increment': '+',
@@ -64,7 +65,9 @@ class Scanner:
             "greater equals": ">=",
             "lesser equals": "<=",
             "mod": "%",
-            "equals": "=="
+            "equals": "==",
+            "and": '&&' if self.language == 'java' else 'and',
+            "or": '||' if self.language == 'java' else 'or',
         }
 
     def scanTokens(self):

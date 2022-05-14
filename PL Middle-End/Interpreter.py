@@ -28,6 +28,7 @@ class Interpreter:
     def visitLiteral(self, expr):
         return expr.value
 
+
     def visitFor(self, stmt):
         if self.lang == "python":
             print('for i in range({}, {}, {})'.format(stmt.setup.statements[0].value, stmt.setup.statements[1].right, stmt.setup.statements[2].value.right))
@@ -44,6 +45,8 @@ class Interpreter:
         if self.lang == "python":
             print(expr)
         elif self.lang == "java":
+            if type(expr.value) == bool:
+                print(expr.variable, ";", sep = "")
             print(expr, ";", sep = "")
 
     def visitVariable(self, expr):
@@ -51,6 +54,9 @@ class Interpreter:
 
     def visitBinary(self, expr):
         print(expr)
+
+    def visitWhile(self, expr):
+        print(expr,"{}")
 
 
 

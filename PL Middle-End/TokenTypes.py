@@ -9,5 +9,5 @@ TokenType = Enum('TokenType', [
     # Keywords
     "AND","CLASS","ELSE","FALSE","FUN","FOR","IF","NULL","OR","PRINT","RETURN","SUPER","THIS","TRUE","VAR","WHILE","EOF", "ELSE_IF",
     #TypeDefs
-    "INT", "FLOAT", "DOUBLE", "SHORT", "LONG", "BYTE", "CHAR", "STRING", "ARRAY", "VOID", "PUBLIC", "STATIC", "PRIVATE", "BOOL"
+    "INT", "FLOAT", "DOUBLE", "SHORT", "LONG", "BYTE", "CHAR", "STRING", "ARRAY", "VOID", "PUBLIC", "STATIC", "PRIVATE", "BOOLEAN"
 ])

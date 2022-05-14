@@ -8,7 +8,7 @@ class Parser:
     def __init__(self, tokenList):
         self.current = 0
         self.tokenList = tokenList
-        self.typedef = {TokenType.INT, TokenType.FLOAT, TokenType.DOUBLE, TokenType.SHORT, TokenType.LONG, TokenType.BYTE, TokenType.CHAR, TokenType.STRING, TokenType.ARRAY, TokenType.VOID, TokenType.PUBLIC, TokenType.STATIC, TokenType.PRIVATE, TokenType.BOOL}
+        self.typedef = {TokenType.INT, TokenType.FLOAT, TokenType.DOUBLE, TokenType.SHORT, TokenType.LONG, TokenType.BYTE, TokenType.CHAR, TokenType.STRING, TokenType.ARRAY, TokenType.VOID, TokenType.PUBLIC, TokenType.STATIC, TokenType.PRIVATE, TokenType.BOOLEAN}
 
     def expression(self):
         return self.assignment()
@@ -96,6 +96,12 @@ class Parser:
         body = Stmt.Block([])
         forLoop = Stmt.For(block, body)
         return forLoop
+
+
+    def whileStatement(self):
+        condition = self.expression()
+        body = Stmt.Block([])
+        return Stmt.While(condition, body)
 
     def andOperator(self):
         expr = self.equality()

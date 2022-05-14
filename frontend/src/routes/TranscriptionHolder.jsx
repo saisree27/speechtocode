@@ -5,10 +5,14 @@ import React from "react";
  * Temporary page to hold mp3 recorder
  * Associated with route "/record"
  */
-export default function TranscriptionHolder() {
+export default function TranscriptionHolder(props) {
   return (
     <div>
-      <RecordTranscribe />
+      <RecordTranscribe
+        line={props.line}
+        language={props.language}
+        setcode={props.setcode}
+      />
     </div>
   );
 }

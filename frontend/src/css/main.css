@@ -40,6 +40,13 @@
     width: 75px;
 }
 
+#recording {
+    text-align: center;
+    color:rgb(213, 253, 251);
+    position: relative;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
 .title {
     position: relative;
     text-align: center;

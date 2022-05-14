@@ -9,6 +9,7 @@ import TranscriptionHolder from "./routes/TranscriptionHolder";
 import reportWebVitals from "./reportWebVitals";
 
 import "./css/index.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

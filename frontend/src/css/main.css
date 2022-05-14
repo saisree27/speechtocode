@@ -1,75 +1,132 @@
 #bg {
-    position: fixed; 
-    top: -50%; 
-    left: -50%; 
-    width: 200%; 
-    height: 200%;
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background-color: rgb(20, 15, 15);
 }
 
 #bg img {
-    position: absolute; 
-    top: 0; 
-    left: 0; 
-    right: 0; 
-    bottom: 0; 
-    margin: auto; 
-    min-width: 50%;
-    min-height: 50%;
+  position: absolute;
+  opacity: 20%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  min-width: 50%;
+  min-height: 50%;
 }
 
 #icontext {
-    position: absolute;
-    padding-left: 100px;
-    padding-top: 0px;
-    color:rgb(213, 253, 251);
-    font-size: xx-large;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  position: absolute;
+  padding-left: 100px;
+  padding-top: 25px;
+  color: rgb(213, 253, 251);
+  font-size: xx-large;
+  font-family: "Poppins-Bold", "Trebuchet MS", "Lucida Sans Unicode",
+    "Lucida Grande", "Lucida Sans", Arial, sans-serif;
 }
 
 #tohome {
-    position: relative;
-    text-align: center;
-    color:rgb(213, 253, 251);
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  position: relative;
+  text-align: center;
+  color: rgb(213, 253, 251);
+  font-family: "Poppins-Regular", "Trebuchet MS", "Lucida Sans Unicode",
+    "Lucida Grande", "Lucida Sans", Arial, sans-serif;
 }
 
 #tohome img {
-    padding-left: 20px;
-    padding-top: 20px;
-    height: 75px;
-    width: 75px;
+  padding-left: 20px;
+  padding-top: 20px;
+  height: 75px;
+  width: 75px;
 }
 
 #recording {
-    text-align: center;
-    color:rgb(213, 253, 251);
-    position: relative;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  text-align: center;
+  color: rgb(213, 253, 251);
+  position: relative;
+  font-family: "Poppins-Regular", "Trebuchet MS", "Lucida Sans Unicode",
+    "Lucida Grande", "Lucida Sans", Arial, sans-serif;
 }
 
 .title {
-    position: relative;
-    text-align: center;
-    height: 75px;
-    color:rgb(213, 253, 251);
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  position: relative;
+  text-align: center;
+  height: 75px;
+  color: rgb(213, 253, 251);
+  font-family: "Poppins-Bold", "Trebuchet MS", "Lucida Sans Unicode",
+    "Lucida Grande", "Lucida Sans", Arial, sans-serif;
 }
 
 .subtitle {
-    position: relative;
-    text-align: center;
-    height: 50px;
-    color:rgb(213, 253, 251);
-    font-size: large;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  position: relative;
+  text-align: center;
+  height: 50px;
+  color: rgb(213, 253, 251);
+  font-size: large;
+  font-family: "Poppins-SemiBold", "Trebuchet MS", "Lucida Sans Unicode",
+    "Lucida Grande", "Lucida Sans", Arial, sans-serif;
 }
 
 .langs {
-    margin-top: 5x;
-    position: relative;
-    text-align: center;
+  margin-top: 5x;
+  position: relative;
+  text-align: center;
+  padding-bottom: 50px;
 }
 
-#editor {
-    position: fixed;
+#select {
+  margin-top: 5x;
+  position: relative;
+  text-align: center;
+  padding-bottom: 50px;
+  padding-left: 40%;
+  padding-right: 40%;
+}
+
+.editor {
+  position: relative;
+  margin: auto;
+  width: 30%;
+  padding: 10px;
+  height: 300px;
+}
+
+#toggle {
+  position: relative;
+  text-align: center;
+  color: #f2f2f2;
+  font-family: "Poppins-SemiBold", "Trebuchet MS", "Lucida Sans Unicode",
+    "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+}
+
+/* Add a black background color to the top navigation */
+.topnav {
+  position: relative;
+  background-color: #333;
+  overflow: hidden;
+  font-family: "Poppins-SemiBold", "Trebuchet MS", "Lucida Sans Unicode",
+    "Lucida Grande", "Lucida Sans";
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  text-decoration: none;
+  padding: 14px 16px;
+  font-size: 17px;
+  font-family: "Poppins-SemiBold", "Trebuchet MS", "Lucida Sans Unicode",
+    "Lucida Grande", "Lucida Sans", sans-serif;
+  transition: 0.5s;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  /* background-color: #322c2c; */
+  color: #f0a3a3;
 }

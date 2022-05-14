@@ -27,7 +27,7 @@ export default function Landing() {
     <div>
       <div id='bg'>
         {/*<img src='bgimg.jpeg'></img>*/}
-        <ParticlesBg type="" bg={true} />
+        <ParticlesBg type="lines" bg={true} />
       </div>
 
         <div className="topnav">
@@ -42,16 +42,16 @@ export default function Landing() {
 
         <div>
             <Link to="/" id='tohome'>
-            <h4 id='icontext'>Speech2Code</h4>
-            <img src='mic.png'></img>
+            {/*<h4 id='icontext'>Speech2Code</h4>*/}
+            {/*<img src='mic.png'></img>*/}
           </Link>
         </div>
         <center>
-        <p className='position-relative fs-1 text-white fw-light font-monospace title'>Welcome to Speech-To-Code!</p>
+        <p className='position-relative fs-1 text-white fw-light font-monospace title mt-5 mb-5'>Welcome to Speech-To-Code!</p>
         </center>
 
         {/*<h2 className='title'>Purpose</h2>*/}
-        <div><center><p className='position-relative text-justify text-white fw-light font-monospace abouttext'>This website is intended to help beginner coders learn the fundemental syntax
+        <div><center><p className='position-relative text-justify text-white fw-light font-monospace mb-5 abouttext'>This website is intended to help beginner coders learn the fundemental syntax
         of programming languages. It translated English phrases spoken by the user into functional code. The user has the option
         to translate their English phrases into Java, Python, or JavaScript.</p></center></div>
         <center className="mt-2">
@@ -65,7 +65,7 @@ export default function Landing() {
         <footer className="footer">
             <div className="text-center">
               <p className="fw-light font-monospace">
-                <strong>Speech2Code</strong> by Saigautam Bonam, Nicholas Cai, Kinshuk Phalke, and Dhruv Sharma.
+                <strong>Speech2Code</strong> by Saigautam Bonam, Nicolas Cai, Kinshuk Phalke, and Dhruv Sharma.
                </p>
             </div>
           </footer>

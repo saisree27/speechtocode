@@ -18,9 +18,11 @@ import Toggle from "react-toggle";
  * Associated with route "/learn" (change in index.js)
  */
 export default function Main() {
-  const [code, setCode] = React.useState(
-    `function add(a, b) {\n  return a + b;\n}`
-  );
+  const [code, setCode] = React.useState([
+    `function add(a, b) {`,
+    `\t` + `return a + b;`,
+    `}`,
+  ]);
   const [language, setLanguage] = React.useState(null);
   const [activeLine, setActiveLine] = React.useState(-1);
   const [editing, setEditing] = React.useState(false);
@@ -192,9 +194,9 @@ export default function Main() {
             language={language}
             theme="vs-dark"
             onChange={(evn) => {
-              setCode(evn);
+              setCode(evn.split("\n"));
             }}
-            value={code}
+            value={code.join("\r\n")}
             options={options}
           />
         ) : (
@@ -237,7 +239,7 @@ export default function Main() {
               }
             }}
           >
-            {code}
+            {code.join("\r\n")}
           </SyntaxHighlighter>
         )}
       </div>

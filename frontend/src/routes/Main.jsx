@@ -1,9 +1,11 @@
 import "../css/main.css";
-import MonacoEditor from 'react-monaco-editor';
-import { monaco } from 'react-monaco-editor';
+import MonacoEditor from "react-monaco-editor";
+import { monaco } from "react-monaco-editor";
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import TranscriptionHolder from "./TranscriptionHolder";
+import { Form } from "react-bootstrap";
+import Select from "react-select";
 
 /**
  * Main page (where our record button and text editor will show up)
@@ -12,60 +14,66 @@ import TranscriptionHolder from "./TranscriptionHolder";
 export default function Main() {
   const [code, setCode] = React.useState(
     `function add(a, b) {\n  return a + b;\n}`
-  )
+  );
+  const [language, setLanguage] = React.useState(null);
+  const languageOptions = [
+    { value: "js", label: "JavaScript" },
+    { value: "py", label: "Python" },
+    { value: "java", label: "Java" },
+  ];
 
   const options = {
-    selectOnLineNumbers: true
+    selectOnLineNumbers: true,
   };
 
+  const customSelect = {};
+
   useEffect(() => {
-    document.title = "This is a title"
-  }, [])
+    document.title = "This is a title";
+  }, []);
 
   return (
     <div>
-      <div id='bg'>
-        <img src='bgimg.jpeg'></img>
+      <div id="bg">
+        <img src="bgimg.jpeg"></img>
       </div>
-      
+
       <div className="topnav">
-          <a className="active" href="/">Home</a>
-          <a className="active" href="/learn">Speech-To-Code</a>
-          <a className="active" href="/tutorial">Tutorial</a>
+        <a className="active" href="/">
+          Home
+        </a>
+        <a className="active" href="/learn">
+          Speech-To-Code
+        </a>
+        <a className="active" href="/tutorial">
+          Tutorial
+        </a>
       </div>
       <div>
-        <div> 
-          <Link to="/" id='tohome'>
-            <h4 id='icontext'>Speech2Code</h4>
-            <img src='mic.png'></img>
+        <div>
+          <Link to="/" id="tohome">
+            <h4 id="icontext">Speech2Code</h4>
+            <img src="mic.png"></img>
           </Link>
         </div>
-        <h1 className='title'>Speech-To-Code</h1>
-        <p className='subtitle'>Start speaking to start coding!</p>
+        <h1 className="title">Speech-To-Code</h1>
+        <p className="subtitle">Start speaking to start coding!</p>
       </div>
-      
-      <div id='recording'>
+
+      <div id="recording">
         <TranscriptionHolder />
       </div>
 
-      <div className="langs">
-        <select>
-          {/* <option>
-            Language:
-            javascript
-          </option> */}
-          <option>
-            Language:
-            java
-          </option>
-          <option>
-            Language:
-            python
-          </option>
-        </select>
+      <div id="select">
+        <Select
+          value={language}
+          onChange={setLanguage}
+          options={languageOptions}
+          styles={customSelect}
+        />
       </div>
 
-      <div className='editor'>
+      <div className="editor">
         <MonacoEditor
           width="650"
           height="450"
@@ -76,7 +84,6 @@ export default function Main() {
           options={options}
         />
       </div>
-
     </div>
   );
 }

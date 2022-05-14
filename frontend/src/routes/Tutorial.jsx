@@ -127,7 +127,7 @@ export default function Main() {
           To start speaking your command, click the microphone icon below. Make
           sure you're in a quiet environment so your code is accurate!
         </p>
-        <h4 className="subtitle">Variables</h4>
+        <h2 className="subtitle">Variables</h2>
 
         <p>
           To create a variable, simply say: "

@@ -5,8 +5,7 @@ import requests
 import config
 import re
 import sys
-sys.path.append("../../")
-from PL import Scanner, Interpreter, Parser
+import Scanner, Interpreter, Parser
 
 app = Flask(__name__)
 KEY = config.API_KEY

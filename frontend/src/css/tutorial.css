@@ -1,0 +1,72 @@
+#bg {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+}
+
+#bg img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  min-width: 50%;
+  min-height: 50%;
+}
+
+#icontext {
+  position: absolute;
+  padding-left: 100px;
+  padding-top: 25px;
+  color: rgb(213, 253, 251);
+  font-size: xx-large;
+  font-family: "Poppins-SemiBold", "Trebuchet MS", "Lucida Sans Unicode",
+    "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+}
+
+#tohome {
+  position: relative;
+  text-align: center;
+  color: rgb(213, 253, 251);
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+#tohome img {
+  padding-left: 20px;
+  padding-top: 20px;
+  height: 75px;
+  width: 75px;
+}
+
+#recording {
+  text-align: center;
+  color: rgb(213, 253, 251);
+  position: relative;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+.header {
+  position: relative;
+  text-align: center;
+  color: rgb(213, 253, 251);
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  height: 250px;
+}
+
+.header title {
+  height: 80px;
+}
+
+.tutorialblock {
+  display: inline-block;
+  position: relative;
+  color: rgb(213, 253, 251);
+  margin-left: 17%;
+  width: 70%;
+}

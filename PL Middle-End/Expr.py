@@ -17,7 +17,7 @@ class Assign(Expr):
         return visitor.visitAssign(self)
 
     def __str__(self):
-        return str(self.name) + " " + str(self.value)
+        return str(self.name) + " = " + str(self.value)
 
 
 class Chain(Expr):

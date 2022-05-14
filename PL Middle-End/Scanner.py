@@ -48,9 +48,15 @@ class Scanner:
             'array': TokenType.ARRAY,
             'void': TokenType.VOID,
             'public': TokenType.PUBLIC,
-            'private': TokenType.PRIVATE
+            'private': TokenType.PRIVATE,
+            'increment': TokenType.PLUS,
+            'decrement': TokenType.MINUS
         }
-        self.ignore = {"to", "from", "create"}
+        self.ignore = {"to", "from", "create", "a", "loop", "with"}
+        self.remap = {
+            "decrement": '-',
+            'increment': '+'
+        }
 
     def scanTokens(self):
         while not self.isAtEnd():
@@ -76,7 +82,7 @@ class Scanner:
             if "." in self.source[self.current-1]:
                 self.addToken(TokenType.NUM, float(self.source[self.current-1]))
             else:
-                self.addToken(TokenType.NUM, self.source[self.current-1])
+                self.addToken(TokenType.NUM, int(self.source[self.current-1]))
 
     def identifier(self):
         if self.peek().isalpha():
@@ -101,6 +107,8 @@ class Scanner:
 
     def addToken(self, tokenType, literal=None):
         text = self.source[self.current-1]
+        if text in self.remap:
+            text = self.remap[text]
         self.tokens.append(Token(tokenType, text, literal))
 
     def match(self, expected):
@@ -126,5 +134,4 @@ class Scanner:
         except ValueError:
             return False
 
-for i in Scanner("assign int x to 3").scanTokens():
-    print(i)
+

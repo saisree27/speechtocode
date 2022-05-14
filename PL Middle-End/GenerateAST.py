@@ -23,7 +23,7 @@ base_desc = {
         "Return" : [["Token.Token","keyword"], ["Expr.Expr","value"]],
         "Var" : [["Token.Token", "name"], ["Expr.Expr", "initializer"]],
         "While" : [["Expr.Expr","condition"], ["Stmt", "body"]],
-        "For" : [["Expr.Expr","condition"], ["Stmt", "body"]]
+        "For" : [["Stmt", "setup"], ["Stmt", "body"]]
     }
 }
 

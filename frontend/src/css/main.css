@@ -4,8 +4,9 @@
     left: -50%; 
     width: 200%; 
     height: 200%;
-  }
-  #bg img {
+}
+
+#bg img {
     position: absolute; 
     top: 0; 
     left: 0; 
@@ -14,19 +15,44 @@
     margin: auto; 
     min-width: 50%;
     min-height: 50%;
-  }
+}
+
+#icontext {
+    position: absolute;
+    padding-left: 100px;
+    padding-top: 0px;
+    color:rgb(213, 253, 251);
+    font-size: xx-large;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#tohome {
+    position: relative;
+    text-align: center;
+    color:rgb(213, 253, 251);
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#tohome img {
+    padding-left: 20px;
+    padding-top: 20px;
+    height: 75px;
+    width: 75px;
+}
 
 .title {
     position: relative;
     text-align: center;
     height: 100px;
-    color: white;
+    color:rgb(213, 253, 251);
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .subtitle {
     position: relative;
     text-align: center;
-    height: 100px;
-    color: white;
+    height: 25px;
+    color:rgb(213, 253, 251);
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 

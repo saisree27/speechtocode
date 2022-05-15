@@ -12,25 +12,25 @@ class Parser:
         self.typedef = {TokenType.INT, TokenType.FLOAT, TokenType.DOUBLE, TokenType.SHORT, TokenType.LONG, TokenType.BYTE, TokenType.CHAR, TokenType.STRING, TokenType.ARRAY, TokenType.VOID, TokenType.PUBLIC, TokenType.STATIC, TokenType.PRIVATE, TokenType.BOOLEAN}
         self.error = ""
         self.lang = language
+        self.statements = []
 
     def expression(self):
         return self.assignment()
 
     def parse(self) -> list:
-        statements = []
         while not self.isAtEnd():
-            statements.append(self.declaration())
-        return statements
+            self.statements.append(self.declaration())
+        return self.statements
 
     def declaration(self):
         try:
+            if self.match(TokenType.CALL): return self.callFunc()
             if self.match(TokenType.CLASS): return self.classDeclaration()
             if self.match(TokenType.FUN): return self.function("function")
             if self.match(TokenType.VAR): return self.varDeclaration()
-            if self.match(TokenType.CALL): return self.callFunc()
             return self.statement()
         except Exception as e:
-            traceback.print_exc()
+            # traceback.print_exc()
             self.synchronize()
             return None
 
@@ -57,8 +57,9 @@ class Parser:
         self.advance()
         name = self.advance()
         arguments = []
-        while not self.isAtEnd():
-            arguments.append(self.expression())
+        while not self.match(TokenType.FINISH) and not self.isAtEnd():
+            expr = self.expression()
+            arguments.append(expr)
         return Expr.Call(name, arguments)
 
 
@@ -183,7 +184,6 @@ class Parser:
 
     def term(self):
         expr = self.factor()
-
         while self.match(TokenType.MINUS, TokenType.PLUS, TokenType.MOD):
             operator = self.previous()
             right = self.factor()
@@ -200,13 +200,16 @@ class Parser:
         return expr
 
     def unary(self):
-        if self.match(TokenType.BANG, TokenType.MINUS):
+        if self.match(TokenType.BANG):
             operator = self.previous()
             right = self.unary()
             return Expr.Unary(operator, right)
+        if self.match(TokenType.CALL):
+            return self.callFunc()
         return self.call()
 
     def call(self):
+
         expr = self.primary()
         while True:
             if self.match(TokenType.LEFT_PAREN):

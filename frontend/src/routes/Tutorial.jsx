@@ -141,6 +141,7 @@ export default function Main() {
 
         <div id="recording">
           <TranscriptionHolder />
+          <br/>
         </div>
 
         <div className="editor">
@@ -212,7 +213,7 @@ export default function Main() {
       </div>
 
       <div className="tutorialblock">
-        <h4 className="subtitle">Conditionals</h4>
+        <h3 className="subtitle">Conditionals</h3>
         <p>
           To create an if statement, say: "
           <strong>
@@ -228,6 +229,7 @@ export default function Main() {
 
         <div id="recording">
           <TranscriptionHolder />
+          <br/>
         </div>
         <div className="editor">
           {editingSecond ? (
@@ -298,7 +300,7 @@ export default function Main() {
       </div>
 
       <div className="tutorialblock">
-        <h4 className="subtitle">Control Flow</h4>
+        <h2 className="subtitle">Control Flow</h2>
 
         <p>
           To create a for loop, say: "
@@ -319,6 +321,7 @@ export default function Main() {
 
         <div id="recording">
           <TranscriptionHolder />
+          <br/>
         </div>
 
         <div className="editor">

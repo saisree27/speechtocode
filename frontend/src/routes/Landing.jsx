@@ -101,13 +101,6 @@ export default function Landing() {
           </p>
         </div>
       </footer>
-      {/*<div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
-        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
-        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
-        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
-        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
-        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>
-        <div><center><p  className='abouttext'>*insert stuff and developed by here*</p></center></div>*/}
     </div>
   );
 }

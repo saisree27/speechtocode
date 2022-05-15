@@ -59,7 +59,7 @@ export default function Landing() {
       {/*<h2 className='title'>Purpose</h2>*/}
       <div>
         <center>
-          <p className="position-relative text-justify text-white fw-light font-monospace mb-5 mt-4 abouttext">
+          <p className="position-relative text-justify text-white fw-light font-monospace  mb-5 mt-4 abouttext">
             This website is intended to help beginner coders learn the
             fundemental syntax of programming languages. It translated English
             phrases spoken by the user into functional code. The user has the

@@ -13,15 +13,15 @@ app.post("/compile", (req, res) => {
   let language = req.body.language;
   let input = req.body.input;
 
-  if (language === "python") {
-      language="py"
-  } else if (language === "javascript") {
-      language="js"
+  if (language.value === "python") {
+      language.value="py"
+  } else if (language.value === "javascript") {
+      language.value="js"
   }
 
   let data = ({
       "code": code,
-      "language": language,
+      "language": language.value,
       "input": input
   });
   let config = {
@@ -32,6 +32,7 @@ app.post("/compile", (req, res) => {
       },
       data: data
   };
+
   //calling the code compilation API
   Axios(config)
       .then((response)=>{
@@ -45,3 +46,4 @@ app.post("/compile", (req, res) => {
 app.listen(process.env.PORT || PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
+

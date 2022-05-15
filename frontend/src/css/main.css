@@ -168,17 +168,33 @@
   transform: translateZ(0) scale(1.2); /* Enlarges Button */
 }
 
-footer {
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: #000;
-  height: auto;
-  width: 100vw;
-  padding-top: 10px;
-  color: #fff;
+.clear-btn{
   position: absolute;
+  bottom: 14px;
+  right: 18px;
+  width: 80px;
+  height: 40px;
+  font-size: 22px;
+  font-weight: bold;
+  color: white;
+  background-color: #1f65e6;
+  border: none;
+  border-radius: 4px;
+  transition: 0.3s;
+  cursor: pointer;
 }
+
+footer{
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #000;
+    height: auto;
+    width: 100vw;
+    padding-top: 10px;
+    color: #fff;
+    position: absolute;
+  }
 
 .output-container {
   flex: 40%;

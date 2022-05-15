@@ -11,6 +11,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { a11yDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import Toggle from "react-toggle";
 import Axios from "axios";
+import ParticlesBg from "particles-bg";
 
 /**
  * Tutorial page
@@ -133,7 +134,8 @@ export default function Main() {
   return (
     <div>
       <div id="bg">
-        <img src="bgimg.jpeg"></img>
+        {/*<img src="bgimg.jpeg"></img>*/}
+        <ParticlesBg type="Square" bg={true} />
       </div>
 
       <div>

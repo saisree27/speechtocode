@@ -30,7 +30,7 @@ class Parser:
             if self.match(TokenType.CALL): return self.callFunc()
             return self.statement()
         except Exception as e:
-            # traceback.print_exc()
+            traceback.print_exc()
             self.synchronize()
             return None
 

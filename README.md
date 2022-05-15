@@ -1,6 +1,6 @@
 ![Logo](GithubImages/Logo.png)
 
-## Inspiration
+## Contributors
 
 - Saigautam Bonam
 - Kinshuk Phalke

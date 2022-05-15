@@ -1,4 +1,7 @@
-# Getting Started with Create React App
+![Logo](GithubImages/Logo.png)
+
+
+# Running the Speech2Code Website Using React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -13,6 +16,11 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
+
+### Images
+![Landing Page](GithubImages/Landing.png)
+![Speech2Code Tool Page](GithubImages/Speech2CodeTool.png)
+![Tutorial Page](GithubImages/Tutorial.png)
 
 ### `npm test`
 

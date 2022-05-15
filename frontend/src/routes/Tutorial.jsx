@@ -15,7 +15,13 @@ import Toggle from "react-toggle";
  * Associated with route "/tutorial" (change in index.js)
  */
 export default function Main() {
-  const [code, setCode] = React.useState(`def add(a, b): {\n  return a + b\n}`);
+  const [code, setCode] = React.useState([
+    ``,
+    `def main():`,
+    `\t` + `return None`,
+    `if __name__ == '__main__':`,
+    `\t` + `main()`,
+  ]);
 
   const [language, setLanguage] = React.useState(null);
   const [activeLine, setActiveLine] = React.useState(-1);
@@ -26,6 +32,59 @@ export default function Main() {
   const options = {
     selectOnLineNumbers: true,
     semanticHighlighting: true,
+  };
+
+  var addLine = (newline, updater) => {
+    var codeCopy = [...code];
+    var line = newline;
+    var moreTabs = false;
+
+    var prevLineLastChar =
+      codeCopy[activeLine - 1][codeCopy[activeLine - 1].length - 1];
+
+    console.log(prevLineLastChar);
+
+    var tabCountPrevLine = codeCopy[activeLine - 1].split("\t").length - 1;
+    console.log(tabCountPrevLine);
+
+    if (prevLineLastChar == ":") {
+      moreTabs = true;
+      for (var i = 0; i < tabCountPrevLine + 1; i++) {
+        line = "\t" + line;
+      }
+    } else if (prevLineLastChar == "{") {
+      moreTabs = true;
+      for (var i = 0; i < tabCountPrevLine + 1; i++) {
+        line = "\t" + line;
+      }
+    } else {
+      for (var i = 0; i < tabCountPrevLine; i++) {
+        line = "\t" + line;
+      }
+    }
+
+    console.log(line);
+
+    if (line.includes("{}")) {
+      var lines = [line.substring(0, line.length - 1), `}`];
+
+      if (moreTabs) {
+        for (var i = 0; i < tabCountPrevLine + 1; i++) {
+          lines[1] = "\t" + lines[1];
+        }
+      } else {
+        for (var i = 0; i < tabCountPrevLine; i++) {
+          lines[1] = "\t" + lines[1];
+        }
+      }
+
+      codeCopy.splice(activeLine, 0, lines[0]);
+      codeCopy.splice(activeLine + 1, 0, lines[1]);
+    } else {
+      codeCopy.splice(activeLine, 0, line);
+    }
+
+    updater(codeCopy);
   };
 
   useEffect(() => {
@@ -140,25 +199,30 @@ export default function Main() {
           </p>
 
           <div id="recording">
-            <TranscriptionHolder />
+            <TranscriptionHolder
+              line={activeLine}
+              language="python"
+              setcode={setCode}
+              addline={addLine}
+            />
             <br />
           </div>
 
           <div className="editor">
             {editingFirst ? (
               <MonacoEditor
-                height={240}
-                language={language}
+                language="python"
                 theme="vs-dark"
                 onChange={(evn) => {
-                  setCode(evn);
+                  setCode(evn.split("\n"));
+                  console.log(language);
                 }}
-                value={code}
+                value={code.join("\n")}
                 options={options}
               />
             ) : (
               <SyntaxHighlighter
-                language="javascript"
+                language="python"
                 style={a11yDark}
                 wrapLines={true}
                 showLineNumbers={true}
@@ -178,14 +242,15 @@ export default function Main() {
                         backgroundColor: "#877574",
                       },
                       onClick() {
-                        console.log("HERE");
-                        // alert(`Line Number Clicked: ${lineNumber}`);
                         setActiveLine(lineNumber);
                       },
                     };
                   } else {
                     return {
-                      style: { display: "block", cursor: "pointer" },
+                      style: {
+                        display: "block",
+                        cursor: "pointer",
+                      },
                       onClick() {
                         console.log("HERE");
                         // alert(`Line Number Clicked: ${lineNumber}`);
@@ -195,7 +260,7 @@ export default function Main() {
                   }
                 }}
               >
-                {code}
+                {code.join("\r\n")}
               </SyntaxHighlighter>
             )}
           </div>
@@ -228,24 +293,29 @@ export default function Main() {
           </p>
 
           <div id="recording">
-            <TranscriptionHolder />
+            <TranscriptionHolder
+              line={activeLine}
+              language="python"
+              setcode={setCode}
+              addline={addLine}
+            />
             <br />
           </div>
           <div className="editor">
             {editingSecond ? (
               <MonacoEditor
-                height={240}
-                language={language}
+                language="python"
                 theme="vs-dark"
                 onChange={(evn) => {
-                  setCode(evn);
+                  setCode(evn.split("\n"));
+                  console.log(language);
                 }}
-                value={code}
+                value={code.join("\n")}
                 options={options}
               />
             ) : (
               <SyntaxHighlighter
-                language="javascript"
+                language="python"
                 style={a11yDark}
                 wrapLines={true}
                 showLineNumbers={true}
@@ -265,14 +335,15 @@ export default function Main() {
                         backgroundColor: "#877574",
                       },
                       onClick() {
-                        console.log("HERE");
-                        // alert(`Line Number Clicked: ${lineNumber}`);
                         setActiveLine(lineNumber);
                       },
                     };
                   } else {
                     return {
-                      style: { display: "block", cursor: "pointer" },
+                      style: {
+                        display: "block",
+                        cursor: "pointer",
+                      },
                       onClick() {
                         console.log("HERE");
                         // alert(`Line Number Clicked: ${lineNumber}`);
@@ -282,7 +353,7 @@ export default function Main() {
                   }
                 }}
               >
-                {code}
+                {code.join("\r\n")}
               </SyntaxHighlighter>
             )}
           </div>
@@ -320,25 +391,30 @@ export default function Main() {
           </p>
 
           <div id="recording">
-            <TranscriptionHolder />
+            <TranscriptionHolder
+              line={activeLine}
+              language="python"
+              setcode={setCode}
+              addline={addLine}
+            />
             <br />
           </div>
 
           <div className="editor">
             {editingThird ? (
               <MonacoEditor
-                height={240}
-                language={language}
+                language="python"
                 theme="vs-dark"
                 onChange={(evn) => {
-                  setCode(evn);
+                  setCode(evn.split("\n"));
+                  console.log(language);
                 }}
-                value={code}
+                value={code.join("\n")}
                 options={options}
               />
             ) : (
               <SyntaxHighlighter
-                language="javascript"
+                language="python"
                 style={a11yDark}
                 wrapLines={true}
                 showLineNumbers={true}
@@ -358,14 +434,15 @@ export default function Main() {
                         backgroundColor: "#877574",
                       },
                       onClick() {
-                        console.log("HERE");
-                        // alert(`Line Number Clicked: ${lineNumber}`);
                         setActiveLine(lineNumber);
                       },
                     };
                   } else {
                     return {
-                      style: { display: "block", cursor: "pointer" },
+                      style: {
+                        display: "block",
+                        cursor: "pointer",
+                      },
                       onClick() {
                         console.log("HERE");
                         // alert(`Line Number Clicked: ${lineNumber}`);
@@ -375,7 +452,7 @@ export default function Main() {
                   }
                 }}
               >
-                {code}
+                {code.join("\r\n")}
               </SyntaxHighlighter>
             )}
           </div>

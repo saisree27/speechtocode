@@ -112,7 +112,11 @@ export default function RecordTranscribe(props) {
         <div id="buttonsTranscription">
           <div id="buttonHolder">
             {!recording ? (
-              <Button onClick={start} variant="success" className="button1 mt-2">
+              <Button
+                onClick={start}
+                variant="success"
+                className="button1 mt-2"
+              >
                 <MicIcon />
                 Press to Record
               </Button>
@@ -136,13 +140,13 @@ export default function RecordTranscribe(props) {
           <span className="divider" />
 
           {received ? (
-            <div id="transcription" className="fw-light font-monospace">
+            <div id="transcription" className="fw-light ">
               <p>
                 Transcribed text: <strong>{transcription}</strong>
               </p>
             </div>
           ) : (
-            <div id="transcription" className="fw-light font-monospace">
+            <div id="transcription" className="fw-light ">
               <p>
                 <strong>No text transcribed.</strong>
               </p>

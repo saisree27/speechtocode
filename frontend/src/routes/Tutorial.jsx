@@ -96,7 +96,6 @@ export default function Main() {
     document.title = "Tutorial";
   }, []);
 
-
   // Function to call the compile endpoint
   function compile() {
     setLoading(true);
@@ -131,8 +130,6 @@ export default function Main() {
   const [userOutput, setUserOutput] = React.useState("");
   const [loading, setLoading] = React.useState(false);
 
-  
-
   return (
     <div>
       <div id="bg">
@@ -158,9 +155,13 @@ export default function Main() {
       </div>
       <div>
         <div className="header">
-          <p className='position-relative fs-1 fw-light font-monospace'>Tutorial</p>
-          <p className='position-relative fw-light font-monospace'>Get started with Speech2Code!</p>
-          <p className='position-relative fw-light font-monospace'>Note: this is all written in Python</p>
+          <p className="position-relative fs-1 fw-light ">Tutorial</p>
+          <p className="position-relative fw-light ">
+            Get started with Speech2Code!
+          </p>
+          <p className="position-relative fw-light ">
+            Note: this is all written in Python
+          </p>
         </div>
       </div>
       <div id="tutorialHolder">

@@ -284,8 +284,10 @@ export default function Main() {
         </a>
       </div>
       <div className="header">
-        <p className='position-relative fs-1 fw-light font-monospace'>Speech2Code</p>
-        <p className="position-relative fw-light font-monospace">Start speaking to start coding!</p>
+        <p className="position-relative fs-1 fw-light ">Speech2Code</p>
+        <p className="position-relative fw-light ">
+          Start speaking to start coding!
+        </p>
       </div>
 
       <div id="recording">

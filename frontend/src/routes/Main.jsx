@@ -273,19 +273,19 @@ export default function Main() {
       </div>
 
       <div className="topnav">
-        <a className="active" href="/">
-          Home
+        <a className="active fw-light font-monospace" href="/">
+          HOME
         </a>
-        <a className="active" href="/learn">
-          Speech2Code
+        <a className="active fw-light font-monospace" href="/learn">
+          SPEECH2CODE
         </a>
-        <a className="active" href="/tutorial">
-          Tutorial
+        <a className="active fw-light font-monospace" href="/tutorial">
+          TUTORIAL
         </a>
       </div>
       <div className="header">
-        <h1 id="title">Speech2Code</h1>
-        <p id="subtitle">Start speaking to start coding!</p>
+        <p className='position-relative fs-1 fw-light font-monospace'>Speech2Code</p>
+        <p className="position-relative fw-light font-monospace">Start speaking to start coding!</p>
       </div>
 
       <div id="recording">
@@ -313,7 +313,6 @@ export default function Main() {
           })}
         />
       </div>
-
       <div className="editor">
         {editing ? (
           <MonacoEditor

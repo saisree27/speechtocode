@@ -130,7 +130,8 @@ class Interpreter:
     def visitCall(self, expr):
         string = expr.name.__str__() + "("
         for i in expr.arguments:
-            string += i.__str__()
+            string += i.__str__() + ", "
+        string = string[:-2]
         string += ")"
         if self.lang == "python":
             return string 

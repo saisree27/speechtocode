@@ -76,7 +76,8 @@ class Scanner:
             "equals": "===" if self.language == 'javascript' else "==",
             "and": '&&' if self.language == 'java' else 'and',
             "or": '||' if self.language == 'java' else 'or',
-            "times": "*"
+            "times": "*",
+            "integer": "int"
         }
 
     def scanTokens(self):

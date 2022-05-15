@@ -282,6 +282,7 @@ export default function Main() {
                         display: "block",
                         cursor: "pointer",
                         backgroundColor: "#877574",
+                        width:510,
                       },
                       onClick() {
                         setActiveLine(lineNumber);
@@ -410,6 +411,7 @@ export default function Main() {
                         display: "block",
                         cursor: "pointer",
                         backgroundColor: "#877574",
+                        width:510,
                       },
                       onClick() {
                         setActiveLine(lineNumber);
@@ -544,6 +546,7 @@ export default function Main() {
                         display: "block",
                         cursor: "pointer",
                         backgroundColor: "#877574",
+                        width:510,
                       },
                       onClick() {
                         setActiveLine(lineNumber);

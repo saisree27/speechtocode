@@ -6,7 +6,7 @@ import { monaco } from "react-monaco-editor";
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import TranscriptionHolder from "./TranscriptionHolder";
-import { Form, Spinner, Button } from "react-bootstrap";
+import { Form, Spinner, Button, Dropdown } from "react-bootstrap";
 import Select from "react-select";
 import CodeEditor from "@uiw/react-textarea-code-editor";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -22,13 +22,14 @@ import Axios from "axios";
 export default function Main() {
   const [code, setCode] = React.useState([
     ``,
-    `function main() {`,
-    `\t` + `return;`,
-    `}`,
+    `def main():`,
+    `\t` + `return None`,
+    `if __name__ == '__main__':`,
+    `\t` + `main()`,
   ]);
   const [language, setLanguage] = React.useState({
-    value: "javascript",
-    label: "Javascript",
+    value: "python",
+    label: "Python",
   });
   const [activeLine, setActiveLine] = React.useState(1);
   const [editing, setEditing] = React.useState(false);
@@ -39,7 +40,7 @@ export default function Main() {
   const [loading, setLoading] = React.useState(false);
 
   const languageOptions = [
-    { value: "javascript", label: "Javascript" },
+    { value: "javascript", label: "JavaScript" },
     { value: "python", label: "Python" },
     { value: "java", label: "Java" },
   ];
@@ -157,104 +158,35 @@ export default function Main() {
     updater(codeCopy);
   };
 
-  const colors = {
-    /*
-     * multiValue(remove)/color:hover
-     */
-    danger: "purple",
-
-    /*
-     * multiValue(remove)/backgroundColor(focused)
-     * multiValue(remove)/backgroundColor:hover
-     */
-    dangerLight: "grey",
-
-    /*
-     * control/backgroundColor
-     * menu/backgroundColor
-     * option/color(selected)
-     */
-    neutral0: "grey",
-
-    /*
-     * control/backgroundColor(disabled)
-     */
-    neutral5: "orange",
-
-    /*
-     * control/borderColor(disabled)
-     * multiValue/backgroundColor
-     * indicators(separator)/backgroundColor(disabled)
-     */
-    neutral10: "pink",
-
-    /*
-     * control/borderColor
-     * option/color(disabled)
-     * indicators/color
-     * indicators(separator)/backgroundColor
-     * indicators(loading)/color
-     */
-    neutral20: "white",
-
-    /*
-     * control/borderColor(focused)
-     * control/borderColor:hover
-     */
-    // this should be the white, that's normally selected
-    neutral30: "grey",
-
-    /*
-     * menu(notice)/color
-     * singleValue/color(disabled)
-     * indicators/color:hover
-     */
-    neutral40: "green",
-
-    /*
-     * placeholder/color
-     */
-    // seen in placeholder text
-    neutral50: "white",
-
-    /*
-     * indicators/color(focused)
-     * indicators(loading)/color(focused)
-     */
-    neutral60: "purple",
-    neutral70: "purple",
-
-    /*
-     * input/color
-     * multiValue(label)/color
-     * singleValue/color
-     * indicators/color(focused)
-     * indicators/color:hover(focused)
-     */
-    neutral80: "white",
-
-    // no idea
-    neutral90: "pink",
-
-    /*
-     * control/boxShadow(focused)
-     * control/borderColor(focused)
-     * control/borderColor:hover(focused)
-     * option/backgroundColor(selected)
-     * option/backgroundColor:active(selected)
-     */
-    primary: "white",
-
-    /*
-     * option/backgroundColor(focused)
-     */
-    primary25: "purple",
-
-    /*
-     * option/backgroundColor:active
-     */
-    primary50: "brown",
-    primary75: "grey",
+  const customStyles = {
+    control: (base, state) => ({
+      ...base,
+      background: "#000000",
+      color: "#white",
+      // match with the menu
+      borderRadius: state.isFocused ? "3px 3px 0 0" : 3,
+      // Overwrittes the different states of border
+      borderColor: "white",
+      // Removes weird border around container
+      boxShadow: state.isFocused ? null : null,
+      "&:hover": {
+        // Overwrittes the different states of border
+        borderColor: "grey",
+      },
+    }),
+    menu: (base) => ({
+      ...base,
+      // override border radius to match the box
+      borderRadius: 0,
+      // kill the gap
+      marginTop: 0,
+    }),
+    menuList: (base) => ({
+      ...base,
+      // kill the white space on first and last option
+      padding: 0,
+      backgroundColor: "#2f2f2f",
+    }),
   };
 
   useEffect(() => {
@@ -299,21 +231,61 @@ export default function Main() {
         />
       </div>
 
-      <div id="select">
-        <Select
+      <div>
+        {/* <Select
           value={language}
           onChange={(v) => {
             setLanguage(v);
             updateLang(v);
           }}
           options={languageOptions}
-          theme={(theme) => ({
-            ...theme,
-            colors: {
-              ...colors,
-            },
-          })}
-        />
+          styles={customStyles}
+        /> */}
+        <Dropdown className="select">
+          <Dropdown.Toggle
+            id="dropdown-button-dark-example1"
+            variant="secondary"
+          >
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {language.label}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu variant="dark">
+            <Dropdown.Item
+              onClick={() => {
+                updateLang({ value: "python", label: "Python" });
+                setLanguage({ value: "python", label: "Python" });
+              }}
+            >
+              Python
+            </Dropdown.Item>
+            <Dropdown.Item
+              onClick={() => {
+                updateLang({
+                  value: "javascript",
+                  label: "JavaScript",
+                });
+                setLanguage({
+                  value: "javascript",
+                  label: "JavaScript",
+                });
+              }}
+            >
+              JavaScript
+            </Dropdown.Item>
+            <Dropdown.Item
+              onClick={() => {
+                updateLang({
+                  value: "java",
+                  label: "Java",
+                });
+                setLanguage({ value: "java", label: "Java" });
+              }}
+            >
+              Java
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
       </div>
       <div className="editor">
         {editing ? (

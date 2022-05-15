@@ -4,11 +4,13 @@ import CodeEditor from "@uiw/react-textarea-code-editor";
 import MonacoEditor from "react-monaco-editor";
 import { monaco } from "react-monaco-editor";
 import React, { useEffect } from "react";
+import { Form, Spinner, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import TranscriptionHolder from "./TranscriptionHolder";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { a11yDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import Toggle from "react-toggle";
+import Axios from "axios";
 
 /**
  * Tutorial page
@@ -23,7 +25,7 @@ export default function Main() {
     `\t` + `main()`,
   ]);
 
-  const [language, setLanguage] = React.useState(null);
+  const [language, setLanguage] = React.useState("python");
   const [activeLine, setActiveLine] = React.useState(-1);
   const [editingFirst, setEditingFirst] = React.useState(false);
   const [editingSecond, setEditingSecond] = React.useState(false);
@@ -90,6 +92,43 @@ export default function Main() {
   useEffect(() => {
     document.title = "Tutorial";
   }, []);
+
+
+  // Function to call the compile endpoint
+  function compile() {
+    setLoading(true);
+    if (code === ``) {
+      return;
+    }
+    const temp_code = code.join("\r\n");
+    // Post request to compile endpoint
+    Axios.post(`http://localhost:8000/compile`, {
+      code: temp_code,
+      language: language,
+      input: userInput,
+    })
+      .then((res) => {
+        console.log("Res:", res);
+        setUserOutput(res.data.output);
+      })
+      .then(() => {
+        setLoading(false);
+      });
+    console.log("Code: %s", temp_code);
+    console.log("Language: ", language);
+  }
+
+  // Function to clear the output screen
+  function clearOutput() {
+    setUserOutput("");
+  }
+
+  const [userInput, setUserInput] = React.useState("");
+  // State variable to set users output
+  const [userOutput, setUserOutput] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
+
+  
 
   return (
     <div>
@@ -277,6 +316,42 @@ export default function Main() {
           </div>
         </div>
 
+        <hr class="dashed" />
+
+        <div className="output-container">
+          <h4>Output:</h4>
+          {loading ? (
+            <div id="spinner-box">
+              <Spinner
+                as="span"
+                animation="border"
+                role="status"
+                aria-hidden="true"
+                style={{ color: "white", marginTop: 10, marginLeft: 10 }}
+              />
+            </div>
+          ) : (
+            <div className="output-box">
+              <pre>{userOutput}</pre>
+              <Button
+                onClick={() => {
+                  clearOutput();
+                }}
+                className="clear-btn"
+              >
+                Clear
+              </Button>
+              <Button
+                variant="success"
+                className="run-btn"
+                onClick={() => compile()}
+              >
+                Run
+              </Button>
+            </div>
+          )}
+        </div>
+
         <div className="tutorialblock">
           <h3 className="subtitle">Conditionals</h3>
           <p>
@@ -367,6 +442,42 @@ export default function Main() {
               }}
             />
           </div>
+        </div>
+
+        <hr class="dashed" />
+
+        <div className="output-container">
+          <h4>Output:</h4>
+          {loading ? (
+            <div id="spinner-box">
+              <Spinner
+                as="span"
+                animation="border"
+                role="status"
+                aria-hidden="true"
+                style={{ color: "white", marginTop: 10, marginLeft: 10 }}
+              />
+            </div>
+          ) : (
+            <div className="output-box">
+              <pre>{userOutput}</pre>
+              <Button
+                onClick={() => {
+                  clearOutput();
+                }}
+                className="clear-btn"
+              >
+                Clear
+              </Button>
+              <Button
+                variant="success"
+                className="run-btn"
+                onClick={() => compile()}
+              >
+                Run
+              </Button>
+            </div>
+          )}
         </div>
 
         <div className="tutorialblock">
@@ -465,6 +576,42 @@ export default function Main() {
               }}
             />
           </div>
+        </div>
+
+        <hr class="dashed" />
+
+        <div className="output-container">
+          <h4>Output:</h4>
+          {loading ? (
+            <div id="spinner-box">
+              <Spinner
+                as="span"
+                animation="border"
+                role="status"
+                aria-hidden="true"
+                style={{ color: "white", marginTop: 10, marginLeft: 10 }}
+              />
+            </div>
+          ) : (
+            <div className="output-box">
+              <pre>{userOutput}</pre>
+              <Button
+                onClick={() => {
+                  clearOutput();
+                }}
+                className="clear-btn"
+              >
+                Clear
+              </Button>
+              <Button
+                variant="success"
+                className="run-btn"
+                onClick={() => compile()}
+              >
+                Run
+              </Button>
+            </div>
+          )}
         </div>
       </div>
     </div>

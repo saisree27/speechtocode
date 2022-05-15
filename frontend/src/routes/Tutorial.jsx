@@ -25,7 +25,10 @@ export default function Main() {
     `\t` + `main()`,
   ]);
 
-  const [language, setLanguage] = React.useState("python");
+  const [language, setLanguage] = React.useState({
+    value: "python",
+    label: "Python",
+  });
   const [activeLine, setActiveLine] = React.useState(-1);
   const [editingFirst, setEditingFirst] = React.useState(false);
   const [editingSecond, setEditingSecond] = React.useState(false);

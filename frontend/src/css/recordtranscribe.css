@@ -19,6 +19,9 @@
 
 #buttonsTranscription {
   display: flex;
+  /*text-align: center;*/
+  /*justify-content: center;*/
+  /*align-self: center;*/
 }
 
 #buttonHolder {
@@ -43,6 +46,7 @@
 
 .button1 {
   margin-bottom: 8px;
+  /*background-color: rgb(213, 253, 251);*/
 }
 
 .divider {

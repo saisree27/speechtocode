@@ -81,7 +81,7 @@ class Interpreter:
 
     def visitFunction(self, expr):
         if self.lang == "java":
-            string = "{} {} {}(".format(expr.visibility, expr.retn, expr.name)
+            string = "{} static {} {}(".format(expr.visibility, expr.retn, expr.name)
             for i in expr.params:
                 string += i.type.__str__() + " " + i.name.__str__() + ", "
             if len(expr.params) > 0:

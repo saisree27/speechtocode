@@ -37,24 +37,15 @@
     "Lucida Grande", "Lucida Sans", Arial, sans-serif;
 }
 
-#title {
-  position: relative;
-  text-align: center;
-  height: 75px;
-  color: rgb(213, 253, 251);
-  margin-bottom: 0px;
-  font-family: "Poppins-Bold", "Trebuchet MS", "Lucida Sans Unicode",
-    "Lucida Grande", "Lucida Sans", Arial, sans-serif;
-}
 
 #subtitle {
-  position: relative;
-  text-align: center;
-  height: 50px;
-  color: rgb(213, 253, 251);
-  font-size: large;
-  font-family: "Poppins-SemiBold", "Trebuchet MS", "Lucida Sans Unicode",
-    "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  /*position: relative;*/
+  /*text-align: center;*/
+  /*height: 50px;*/
+  /*color: rgb(213, 253, 251);*/
+  /*font-size: large;*/
+/*  font-family: "Poppins-SemiBold", "Trebuchet MS", "Lucida Sans Unicode",
+    "Lucida Grande", "Lucida Sans", Arial, sans-serif;*/
 }
 
 #buttonHolder {
@@ -264,6 +255,16 @@ hr.dashed {
   display: block;
 }
 
+.langSelect {
+  text-align: center;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+  position: absolute;
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+}
 /*.creators {
   position: fixed;
   z-index: 100;

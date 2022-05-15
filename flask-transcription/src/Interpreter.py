@@ -67,7 +67,10 @@ class Interpreter:
         return string
 
     def visitBinary(self, expr):
-        string = expr.__str__()
+        string = self.evaluate(expr.left)
+        if string[-1] == ";":
+            string = string[:-1]
+        string += expr.operator.__str__() + self.evaluate(expr.right)
         return string
 
     def visitWhile(self, stmt):
@@ -108,13 +111,21 @@ class Interpreter:
             print(string)
             return string
 
-    def visitReturn(self,expr):
+    def visitReturn(self, stmt):
+        string = None
         if self.lang == "java" or self.lang == "javascript":
-            print(expr.__str__() + ";")
-            return expr.__str__() + ";"
+            value = self.evaluate(stmt.value)
+            if value.__str__()[-1]==";":
+                string = "return " + value.__str__()[:-1] + ";"
+            else:
+                string = "return " + value.__str__() + ";"
+            print(string)
+            return string
         elif self.lang == "python":
-            print(expr.__str__())
-            return expr.__str__()
+            value = self.evaluate(stmt.value)
+            string = "return " + value.__str__()
+            print(string)
+            return string
 
     def visitCall(self, expr):
         string = expr.name.__str__() + "("

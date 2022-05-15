@@ -10,6 +10,7 @@ class Scanner:
         self.current = 0
         self.tokenStrings = {
             'subtract': lambda c: TokenType.MINUS,
+            'minus': lambda c: TokenType.MINUS,
             'add': lambda c: TokenType.PLUS,
             'times': lambda c: TokenType.STAR,
             'divide': lambda c: TokenType.SLASH,
@@ -57,12 +58,15 @@ class Scanner:
             'multiply': lambda c: TokenType.STAR,
             'incrementing': lambda c: TokenType.PLUS,
             'integer': lambda c: TokenType.INT,
-            'boolean': lambda c: TokenType.BOOLEAN
+            'boolean': lambda c: TokenType.BOOLEAN,
+            'finish': lambda c: TokenType.FINISH
         }
         self.ignore = {"to", "from", "create", "a", "loop", "with", 'than', 'condition', 'of', 'returning', 'parameters', 'parameter', 'named', 'type', 'called', 'an', 'by', 'that', 'is', 'always', 'value', "line", "the"}
         self.remap = {
             "decrement": '-',
             'increment': '+',
+            'plus': '+',
+            'minus': '-',
             'incrementing': '+',
             "lesser": "<",
             "greater": ">",

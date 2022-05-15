@@ -59,7 +59,7 @@ class Scanner:
             'integer': lambda c: TokenType.INT,
             'boolean': lambda c: TokenType.BOOLEAN
         }
-        self.ignore = {"to", "from", "create", "a", "loop", "with", 'than', 'condition', 'of', 'returning', 'parameters', 'parameter', 'named', 'type', 'called', 'an', 'by', 'that', 'is', 'always', 'value', "line"}
+        self.ignore = {"to", "from", "create", "a", "loop", "with", 'than', 'condition', 'of', 'returning', 'parameters', 'parameter', 'named', 'type', 'called', 'an', 'by', 'that', 'is', 'always', 'value', "line", "the"}
         self.remap = {
             "decrement": '-',
             'increment': '+',
@@ -69,7 +69,7 @@ class Scanner:
             "greater equals": ">=",
             "lesser equals": "<=",
             "mod": "%",
-            "equals": "==",
+            "equals": "===" if self.language == 'javascript' else "==",
             "and": '&&' if self.language == 'java' else 'and',
             "or": '||' if self.language == 'java' else 'or',
             "times": "*"

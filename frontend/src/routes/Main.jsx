@@ -6,13 +6,15 @@ import { monaco } from "react-monaco-editor";
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import TranscriptionHolder from "./TranscriptionHolder";
-import { Form, Spinner, Button } from "react-bootstrap";
+import { Form, Spinner, Button, Dropdown } from "react-bootstrap";
 import Select from "react-select";
 import CodeEditor from "@uiw/react-textarea-code-editor";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { a11yDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import Toggle from "react-toggle";
 import Axios from "axios";
+import ParticlesBg from "particles-bg";
+
 // import spinner from './spinner.svg';
 
 /**
@@ -22,13 +24,14 @@ import Axios from "axios";
 export default function Main() {
   const [code, setCode] = React.useState([
     ``,
-    `function main() {`,
-    `\t` + `return;`,
-    `}`,
+    `def main():`,
+    `\t` + `return None`,
+    `if __name__ == '__main__':`,
+    `\t` + `main()`,
   ]);
   const [language, setLanguage] = React.useState({
-    value: "javascript",
-    label: "Javascript",
+    value: "python",
+    label: "Python",
   });
   const [activeLine, setActiveLine] = React.useState(1);
   const [editing, setEditing] = React.useState(false);
@@ -39,7 +42,7 @@ export default function Main() {
   const [loading, setLoading] = React.useState(false);
 
   const languageOptions = [
-    { value: "javascript", label: "Javascript" },
+    { value: "javascript", label: "JavaScript" },
     { value: "python", label: "Python" },
     { value: "java", label: "Java" },
   ];
@@ -150,6 +153,21 @@ export default function Main() {
 
       codeCopy.splice(activeLine, 0, lines[0]);
       codeCopy.splice(activeLine + 1, 0, lines[1]);
+    } else if (line.includes(":")) {
+      var lines = [line, ``];
+
+      if (moreTabs) {
+        for (var i = 0; i < tabCountPrevLine + 1; i++) {
+          lines[1] = "\t" + lines[1];
+        }
+      } else {
+        for (var i = 0; i < tabCountPrevLine; i++) {
+          lines[1] = "\t" + lines[1];
+        }
+      }
+
+      codeCopy.splice(activeLine, 0, lines[0]);
+      codeCopy.splice(activeLine + 1, 0, lines[1]);
     } else {
       codeCopy.splice(activeLine, 0, line);
     }
@@ -157,104 +175,35 @@ export default function Main() {
     updater(codeCopy);
   };
 
-  const colors = {
-    /*
-     * multiValue(remove)/color:hover
-     */
-    danger: "purple",
-
-    /*
-     * multiValue(remove)/backgroundColor(focused)
-     * multiValue(remove)/backgroundColor:hover
-     */
-    dangerLight: "grey",
-
-    /*
-     * control/backgroundColor
-     * menu/backgroundColor
-     * option/color(selected)
-     */
-    neutral0: "grey",
-
-    /*
-     * control/backgroundColor(disabled)
-     */
-    neutral5: "orange",
-
-    /*
-     * control/borderColor(disabled)
-     * multiValue/backgroundColor
-     * indicators(separator)/backgroundColor(disabled)
-     */
-    neutral10: "pink",
-
-    /*
-     * control/borderColor
-     * option/color(disabled)
-     * indicators/color
-     * indicators(separator)/backgroundColor
-     * indicators(loading)/color
-     */
-    neutral20: "white",
-
-    /*
-     * control/borderColor(focused)
-     * control/borderColor:hover
-     */
-    // this should be the white, that's normally selected
-    neutral30: "grey",
-
-    /*
-     * menu(notice)/color
-     * singleValue/color(disabled)
-     * indicators/color:hover
-     */
-    neutral40: "green",
-
-    /*
-     * placeholder/color
-     */
-    // seen in placeholder text
-    neutral50: "white",
-
-    /*
-     * indicators/color(focused)
-     * indicators(loading)/color(focused)
-     */
-    neutral60: "purple",
-    neutral70: "purple",
-
-    /*
-     * input/color
-     * multiValue(label)/color
-     * singleValue/color
-     * indicators/color(focused)
-     * indicators/color:hover(focused)
-     */
-    neutral80: "white",
-
-    // no idea
-    neutral90: "pink",
-
-    /*
-     * control/boxShadow(focused)
-     * control/borderColor(focused)
-     * control/borderColor:hover(focused)
-     * option/backgroundColor(selected)
-     * option/backgroundColor:active(selected)
-     */
-    primary: "white",
-
-    /*
-     * option/backgroundColor(focused)
-     */
-    primary25: "purple",
-
-    /*
-     * option/backgroundColor:active
-     */
-    primary50: "brown",
-    primary75: "grey",
+  const customStyles = {
+    control: (base, state) => ({
+      ...base,
+      background: "#000000",
+      color: "#white",
+      // match with the menu
+      borderRadius: state.isFocused ? "3px 3px 0 0" : 3,
+      // Overwrittes the different states of border
+      borderColor: "white",
+      // Removes weird border around container
+      boxShadow: state.isFocused ? null : null,
+      "&:hover": {
+        // Overwrittes the different states of border
+        borderColor: "grey",
+      },
+    }),
+    menu: (base) => ({
+      ...base,
+      // override border radius to match the box
+      borderRadius: 0,
+      // kill the gap
+      marginTop: 0,
+    }),
+    menuList: (base) => ({
+      ...base,
+      // kill the white space on first and last option
+      padding: 0,
+      backgroundColor: "#2f2f2f",
+    }),
   };
 
   useEffect(() => {
@@ -265,6 +214,7 @@ export default function Main() {
     <div>
       <div id="bg">
         <img src="newbgimg.jpg"></img>
+        <ParticlesBg type="square" bg={true} num={5} />
       </div>
       <div>
         <Link to="/" id="tohome">
@@ -273,19 +223,21 @@ export default function Main() {
       </div>
 
       <div className="topnav">
-        <a className="active" href="/">
-          Home
+        <a className="active fw-light font-monospace" href="/">
+          HOME
         </a>
-        <a className="active" href="/learn">
-          Speech2Code
+        <a className="active fw-light font-monospace" href="/learn">
+          SPEECH2CODE
         </a>
-        <a className="active" href="/tutorial">
-          Tutorial
+        <a className="active fw-light font-monospace" href="/tutorial">
+          TUTORIAL
         </a>
       </div>
       <div className="header">
-        <h1 id="title">Speech2Code</h1>
-        <p id="subtitle">Start speaking to start coding!</p>
+        <p className="position-relative fs-1 fw-light ">Speech2Code</p>
+        <p className="position-relative fw-light ">
+          Start speaking to start coding!
+        </p>
       </div>
 
       <div id="recording">
@@ -297,23 +249,62 @@ export default function Main() {
         />
       </div>
 
-      <div id="select">
-        <Select
+      <div>
+        {/* <Select
           value={language}
           onChange={(v) => {
             setLanguage(v);
             updateLang(v);
           }}
           options={languageOptions}
-          theme={(theme) => ({
-            ...theme,
-            colors: {
-              ...colors,
-            },
-          })}
-        />
-      </div>
+          styles={customStyles}
+        /> */}
+        <Dropdown className="select">
+          <Dropdown.Toggle
+            id="dropdown-button-dark-example1"
+            variant="secondary"
+          >
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {language.label}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </Dropdown.Toggle>
 
+          <Dropdown.Menu variant="dark">
+            <Dropdown.Item
+              onClick={() => {
+                updateLang({ value: "python", label: "Python" });
+                setLanguage({ value: "python", label: "Python" });
+              }}
+            >
+              Python
+            </Dropdown.Item>
+            <Dropdown.Item
+              onClick={() => {
+                updateLang({
+                  value: "javascript",
+                  label: "JavaScript",
+                });
+                setLanguage({
+                  value: "javascript",
+                  label: "JavaScript",
+                });
+              }}
+            >
+              JavaScript
+            </Dropdown.Item>
+            <Dropdown.Item
+              onClick={() => {
+                updateLang({
+                  value: "java",
+                  label: "Java",
+                });
+                setLanguage({ value: "java", label: "Java" });
+              }}
+            >
+              Java
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+      </div>
       <div className="editor">
         {editing ? (
           <MonacoEditor

@@ -49,10 +49,19 @@
   /*  height: 200px;*/
   /*width: 90%;*/
   /*color:rgb(213, 253, 251);*/
-  padding-top: 5vh;
+  /*padding-top: 5vh;*/
   padding-left: 50vh;
   padding-right: 50vh;
   /*font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;*/
+}
+
+.title {
+  /*position: relative;*/
+  /*text-align: center;*/
+  /*height: 100px;*/
+  /*color:rgb(213, 253, 251);*/
+  /*font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;*/
+  padding-top:  20vh;
 }
 
 #startButton {

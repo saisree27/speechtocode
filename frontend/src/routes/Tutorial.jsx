@@ -4,11 +4,14 @@ import CodeEditor from "@uiw/react-textarea-code-editor";
 import MonacoEditor from "react-monaco-editor";
 import { monaco } from "react-monaco-editor";
 import React, { useEffect } from "react";
+import { Form, Spinner, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import TranscriptionHolder from "./TranscriptionHolder";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { a11yDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import Toggle from "react-toggle";
+import Axios from "axios";
+import ParticlesBg from "particles-bg";
 
 /**
  * Tutorial page
@@ -23,7 +26,10 @@ export default function Main() {
     `\t` + `main()`,
   ]);
 
-  const [language, setLanguage] = React.useState(null);
+  const [language, setLanguage] = React.useState({
+    value: "python",
+    label: "Python",
+  });
   const [activeLine, setActiveLine] = React.useState(-1);
   const [editingFirst, setEditingFirst] = React.useState(false);
   const [editingSecond, setEditingSecond] = React.useState(false);
@@ -91,10 +97,45 @@ export default function Main() {
     document.title = "Tutorial";
   }, []);
 
+  // Function to call the compile endpoint
+  function compile() {
+    setLoading(true);
+    if (code === ``) {
+      return;
+    }
+    const temp_code = code.join("\r\n");
+    // Post request to compile endpoint
+    Axios.post(`http://localhost:8000/compile`, {
+      code: temp_code,
+      language: language,
+      input: userInput,
+    })
+      .then((res) => {
+        console.log("Res:", res);
+        setUserOutput(res.data.output);
+      })
+      .then(() => {
+        setLoading(false);
+      });
+    console.log("Code: %s", temp_code);
+    console.log("Language: ", language);
+  }
+
+  // Function to clear the output screen
+  function clearOutput() {
+    setUserOutput("");
+  }
+
+  const [userInput, setUserInput] = React.useState("");
+  // State variable to set users output
+  const [userOutput, setUserOutput] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
+
   return (
     <div>
       <div id="bg">
-        <img src="bgimg.jpeg"></img>
+        {/* <img src="bgimg.jpeg"></img> */}
+        <ParticlesBg type="thick" bg={true} num={30} />
       </div>
 
       <div>
@@ -104,95 +145,108 @@ export default function Main() {
       </div>
 
       <div className="topnav">
-        <a className="active" href="/">
-          Home
+        <a className="active fw-light font-monospace" href="/">
+          HOME
         </a>
-        <a className="active" href="/learn">
-          Speech2Code
+        <a className="active fw-light font-monospace" href="/learn">
+          SPEECH2CODE
         </a>
-        <a className="active" href="/tutorial">
-          Tutorial
+        <a className="active fw-light font-monospace" href="/tutorial">
+          TUTORIAL
         </a>
       </div>
       <div>
         <div className="header">
-          <h1 id="title">Tutorial</h1>
-          <p>Get started with Speech2Code!</p>
-          <p>Note: this is all written in Python</p>
+          <p className="position-relative fs-1 fw-light ">Tutorial</p>
+          <p className="position-relative fw-light ">
+            Get started with Speech2Code!
+          </p>
+          <p className="position-relative fw-light ">
+            Note: this is all written in Python
+          </p>
         </div>
       </div>
       <div id="tutorialHolder">
         <div className="tutorialblock">
-          <h2 className="subtitle">Intro</h2>
-          <p>
+          <p className="fs-2 fw-light lead display-6 subtitle">Intro</p>
+          <p className="text-info text-white-50 fw-light">
             Speech2Code uses several basic commands to write your program. Like
             traditional programming, these keywords align with actual code.
           </p>
-          <p>
+          <p className="text-info text-white-50 fw-light">
             In this tutorial, we'll cover how to create variables, control flow,
             and conditionals. Let's start with some of the basics!
           </p>
           <br />
-          <h2 className="subtitle">Background Info</h2>
-          <p>
+        </div>
+      </div>
+      <div id="tutorialHolder">
+        <div className="tutorialblock">
+          <h2 className="fs-2 fw-light lead display-6 subtitle">
+            Background Info
+          </h2>
+          <p className="text-info text-white-50 fw-light">
             <strong>Variables </strong>in programming help us store values that
             can be reused and called whenever the variable name itself is called
             by the program.
           </p>
-          <p>
+          <p className="text-info text-white-50 fw-light">
             Variables can be created as different data types, including int for
             integers, float for floating point numbers, or char for characters.
           </p>
           <br />
-          <p>
+          <p className="text-info text-white-50 fw-light">
             <strong>Conditionals</strong> help programmers make decisions with
             their program's logic. In most languages, they're often described
             with 'if' or 'else'.
           </p>
-          <p>
+          <p className="text-info text-white-50 fw-light">
             The 'if' statement takes in a boolean (or true/false) expression
             that is evaluated, and if the result is true, then the program runs
             inside the statement.
           </p>
-          <p>
+          <p className="text-info text-white-50 fw-light">
             The 'else' statement always comes after an 'if' statement, executing
             only if that boolean expression results in false and running
             whatever is inside it instead.
           </p>
           <br />
-          <p>
+          <p className="text-info text-white-50 fw-light">
             <strong>Control flow</strong> allows programmers to direct the flow
             of their program to repeat certain instructions for set conditions
             or limits. A classic example of this is
           </p>
-          <p>
+          <p className="text-info text-white-50 fw-light">
             the 'while' loop, which takes in a boolean expression that is
             evaluated, and if the result is true, then the program runs inside
             the statement until it's false.
           </p>
-          <p>
+          <p className="text-info text-white-50 fw-light">
             Alternatively, the 'for' loop initializes a counter and increments
             it by a set number until its boolean expression for this counter
             returns false.
           </p>
-          <p>
+          <p className="text-info text-white-50 fw-light">
             While the counter is still within the limit, though, the code inside
             the for loop is executed for as long as intended.
           </p>
-
           <br />
+        </div>
+      </div>
+      <div id="tutorialHolder">
+        <div className="tutorialblock">
           <h2 className="subtitle">Commands</h2>
-          <p>
+          <p className="text-info text-white-50 fw-light">
             To start speaking your command, click the microphone icon below.
             Make sure you're in a quiet environment so your code is accurate!
           </p>
           <h2 className="subtitle">Variables</h2>
 
-          <p>
+          <p className="text-info text-white-50 fw-light">
             To create a variable, simply say: "
             <strong>assign [datatype] [variable] to [value]</strong>."
           </p>
-          <p>
+          <p className="text-info text-white-50 fw-light">
             For example, if you want to declare an integer x equal to zero, you
             might say: "<strong>assign int x to 10</strong>. Go ahead and try it
             below!"
@@ -240,6 +294,7 @@ export default function Main() {
                         display: "block",
                         cursor: "pointer",
                         backgroundColor: "#877574",
+                        width: 510,
                       },
                       onClick() {
                         setActiveLine(lineNumber);
@@ -277,19 +332,55 @@ export default function Main() {
           </div>
         </div>
 
+        <hr class="dashed" />
+
+        <div className="output-container">
+          <h4>Output:</h4>
+          {loading ? (
+            <div id="spinner-box">
+              <Spinner
+                as="span"
+                animation="border"
+                role="status"
+                aria-hidden="true"
+                style={{ color: "white", marginTop: 10, marginLeft: 10 }}
+              />
+            </div>
+          ) : (
+            <div className="output-box">
+              <pre>{userOutput}</pre>
+              <Button
+                onClick={() => {
+                  clearOutput();
+                }}
+                className="clear-btn"
+              >
+                Clear
+              </Button>
+              <Button
+                variant="success"
+                className="run-btn"
+                onClick={() => compile()}
+              >
+                Run
+              </Button>
+            </div>
+          )}
+        </div>
+      </div>
+      <div id="tutorialHolder">
         <div className="tutorialblock">
           <h3 className="subtitle">Conditionals</h3>
-          <p>
+          <p className="text-info text-white-50 fw-light">
             To create an if statement, say: "
-            <strong>
-              if [boolean expression], [additional program instruction]
-            </strong>
-            ."
+            <strong>if [boolean expression]</strong>" and then, after this is
+            added, say "<strong>[additional program instruction]</strong>"
           </p>
-          <p>
+          <p className="text-info text-white-50 fw-light">
             For example, if you want to see if an integer x is divisible by 10
             and return true, you'd say: "
-            <strong>if x mod 10 equals to 0, return true</strong>. Demo below!"
+            <strong>if x mod 10 equals to 0,"</strong> followed by "
+            <strong>return true</strong>." Demo below!
           </p>
 
           <div id="recording">
@@ -333,6 +424,7 @@ export default function Main() {
                         display: "block",
                         cursor: "pointer",
                         backgroundColor: "#877574",
+                        width: 510,
                       },
                       onClick() {
                         setActiveLine(lineNumber);
@@ -370,10 +462,47 @@ export default function Main() {
           </div>
         </div>
 
+        <hr class="dashed" />
+
+        <div className="output-container">
+          <h4>Output:</h4>
+          {loading ? (
+            <div id="spinner-box">
+              <Spinner
+                as="span"
+                animation="border"
+                role="status"
+                aria-hidden="true"
+                style={{ color: "white", marginTop: 10, marginLeft: 10 }}
+              />
+            </div>
+          ) : (
+            <div className="output-box">
+              <pre>{userOutput}</pre>
+              <Button
+                onClick={() => {
+                  clearOutput();
+                }}
+                className="clear-btn"
+              >
+                Clear
+              </Button>
+              <Button
+                variant="success"
+                className="run-btn"
+                onClick={() => compile()}
+              >
+                Run
+              </Button>
+            </div>
+          )}
+        </div>
+      </div>
+      <div id="tutorialHolder">
         <div className="tutorialblock">
           <h2 className="subtitle">Control Flow</h2>
 
-          <p>
+          <p className="text-info text-white-50 fw-light">
             To create a for loop, say: "
             <strong>
               create a for loop from [counter's start number] to [end number]
@@ -381,13 +510,12 @@ export default function Main() {
             </strong>
             ."
           </p>
-          <p>
+          <p className="text-info text-white-50 fw-light">
             For example, if you want to print the number 10 five times, you'd
             say: "
-            <strong>
-              create a for loop from 0 to 5 with increment 1, print 10
-            </strong>
-            . Demo below!"
+            <strong>create a for loop from 0 to 5 with increment 1,</strong>"
+            followed by "<strong>print 10</strong>
+            ." Demo below!
           </p>
 
           <div id="recording">
@@ -432,6 +560,7 @@ export default function Main() {
                         display: "block",
                         cursor: "pointer",
                         backgroundColor: "#877574",
+                        width: 510,
                       },
                       onClick() {
                         setActiveLine(lineNumber);
@@ -467,6 +596,42 @@ export default function Main() {
               }}
             />
           </div>
+        </div>
+
+        <hr class="dashed" />
+
+        <div className="output-container">
+          <h4>Output:</h4>
+          {loading ? (
+            <div id="spinner-box">
+              <Spinner
+                as="span"
+                animation="border"
+                role="status"
+                aria-hidden="true"
+                style={{ color: "white", marginTop: 10, marginLeft: 10 }}
+              />
+            </div>
+          ) : (
+            <div className="output-box">
+              <pre>{userOutput}</pre>
+              <Button
+                onClick={() => {
+                  clearOutput();
+                }}
+                className="clear-btn"
+              >
+                Clear
+              </Button>
+              <Button
+                variant="success"
+                className="run-btn"
+                onClick={() => compile()}
+              >
+                Run
+              </Button>
+            </div>
+          )}
         </div>
       </div>
     </div>

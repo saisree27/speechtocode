@@ -255,7 +255,7 @@ export default function Main() {
   };
 
   useEffect(() => {
-    document.title = "Main";
+    document.title = "Speech2Code";
   }, []);
 
   return (

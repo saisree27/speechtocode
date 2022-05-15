@@ -50,7 +50,7 @@ export default function Main() {
         ``,
         `def main():`,
         `\t` + `return None`,
-        `if __name__ == 'main':`,
+        `if __name__ == '__main__':`,
         `\t` + `main()`,
       ]);
       setActiveLine(2);

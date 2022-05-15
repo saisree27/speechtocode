@@ -133,7 +133,7 @@ export default function RecordTranscribe(props) {
             )}
           </div>
 
-          <span class="divider" />
+          <span className="divider" />
 
           {received ? (
             <div id="transcription">

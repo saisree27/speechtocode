@@ -15,7 +15,7 @@ app.post("/compile", (req, res) => {
 
   if (language.value === "python") {
       language.value="py"
-      code = code.substr(start[15, length-45])
+    //   code = code.substr(15, code.length - 45)
   } else if (language.value === "javascript") {
       language.value="js"
   }

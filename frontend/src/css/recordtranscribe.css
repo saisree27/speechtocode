@@ -36,17 +36,23 @@
 #transcription {
   margin-left: 10px;
   margin-right: 10px;
-
-  /*height: 90px;*/
+  width: 200px;
+  /* max-height: 90px; */
   display: flex;
   justify-content: center;
   align-content: center;
   flex-direction: column;
+  text-align: left;
+  padding-left: 15px;
 }
 
 .button1 {
   margin-bottom: 8px;
   /*background-color: rgb(213, 253, 251);*/
+}
+
+#transcription p {
+  margin: 0;
 }
 
 .divider {

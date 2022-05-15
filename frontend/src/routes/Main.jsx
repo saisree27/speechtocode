@@ -13,6 +13,8 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { a11yDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import Toggle from "react-toggle";
 import Axios from "axios";
+import ParticlesBg from "particles-bg";
+
 // import spinner from './spinner.svg';
 
 /**
@@ -151,6 +153,21 @@ export default function Main() {
 
       codeCopy.splice(activeLine, 0, lines[0]);
       codeCopy.splice(activeLine + 1, 0, lines[1]);
+    } else if (line.includes(":")) {
+      var lines = [line, ``];
+
+      if (moreTabs) {
+        for (var i = 0; i < tabCountPrevLine + 1; i++) {
+          lines[1] = "\t" + lines[1];
+        }
+      } else {
+        for (var i = 0; i < tabCountPrevLine; i++) {
+          lines[1] = "\t" + lines[1];
+        }
+      }
+
+      codeCopy.splice(activeLine, 0, lines[0]);
+      codeCopy.splice(activeLine + 1, 0, lines[1]);
     } else {
       codeCopy.splice(activeLine, 0, line);
     }
@@ -197,6 +214,7 @@ export default function Main() {
     <div>
       <div id="bg">
         <img src="newbgimg.jpg"></img>
+        <ParticlesBg type="square" bg={true} num={5} />
       </div>
       <div>
         <Link to="/" id="tohome">

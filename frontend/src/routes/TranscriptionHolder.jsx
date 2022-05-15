@@ -1,5 +1,6 @@
 import RecordTranscribe from "../components/RecordTranscribe";
 import React from "react";
+import "../css/recordtranscribe.css";
 
 /**
  * Temporary page to hold mp3 recorder
@@ -7,7 +8,7 @@ import React from "react";
  */
 export default function TranscriptionHolder(props) {
   return (
-    <div>
+    <div id="transcriptionHolder">
       <RecordTranscribe
         line={props.line}
         language={props.language}

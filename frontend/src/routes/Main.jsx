@@ -12,7 +12,7 @@ import CodeEditor from "@uiw/react-textarea-code-editor";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { a11yDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import Toggle from "react-toggle";
-import Axios from 'axios';
+import Axios from "axios";
 // import spinner from './spinner.svg';
 
 /**
@@ -79,7 +79,7 @@ export default function Main() {
   function compile() {
     setLoading(true);
     if (code === ``) {
-      return
+      return;
     }
     const temp_code = code.join("\r\n")
     // Post request to compile endpoint
@@ -99,7 +99,7 @@ export default function Main() {
   // Function to clear the output screen
   function clearOutput() {
     setUserOutput("");
-  }  
+  }
 
   var addLine = (newline, updater) => {
     var codeCopy = [...code];
@@ -261,7 +261,12 @@ export default function Main() {
   return (
     <div>
       <div id="bg">
-        <img src="bgimg.jpeg"></img>
+        <img src="newbgimg.jpg"></img>
+      </div>
+      <div>
+        <Link to="/" id="tohome">
+          <img src="logo.png"></img>
+        </Link>
       </div>
 
       <div className="topnav">
@@ -275,14 +280,8 @@ export default function Main() {
           Tutorial
         </a>
       </div>
-      <div>
-        <div>
-          <Link to="/" id="tohome">
-            <h4 id="icontext">Speech2Code</h4>
-            <img src="mic.png"></img>
-          </Link>
-        </div>
-        <h1 className="title">Speech2Code</h1>
+      <div className="header">
+        <h1 id="title">Speech2Code</h1>
         <p id="subtitle">Start speaking to start coding!</p>
       </div>
 
@@ -367,7 +366,7 @@ export default function Main() {
         )}
       </div>
 
-    <div id="toggle">
+      <div id="toggle">
         <h3>Edit Code</h3>
         <Toggle
           id="editing"
@@ -376,24 +375,30 @@ export default function Main() {
             setEditing(!editing);
           }}
         />
-    </div>
+      </div>
 
-    <button className='runBtn' onClick={() => compile()}>Run</button>
-    <div className="output-container">
-          <h4>Output:</h4>
-          {loading ? (
-            <div className="spinner-box">
-              <img /*src={spinner}*/ alt="Loading..." />
-            </div>
-          ) : (
-            <div className="output-box">
-              <pre>{userOutput}</pre>
-              <button onClick={() => { clearOutput() }}
-                 className="clear-btn">
-                 Clear
-              </button>
-            </div>
-          )}
+      <button className="runBtn" onClick={() => compile()}>
+        Run
+      </button>
+      <div className="output-container">
+        <h4>Output:</h4>
+        {loading ? (
+          <div className="spinner-box">
+            <img /*src={spinner}*/ alt="Loading..." />
+          </div>
+        ) : (
+          <div className="output-box">
+            <pre>{userOutput}</pre>
+            <button
+              onClick={() => {
+                clearOutput();
+              }}
+              className="clear-btn"
+            >
+              Clear
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

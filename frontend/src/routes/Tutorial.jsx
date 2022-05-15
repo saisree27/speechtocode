@@ -281,15 +281,14 @@ export default function Main() {
           <h3 className="subtitle">Conditionals</h3>
           <p>
             To create an if statement, say: "
-            <strong>
-              if [boolean expression], [additional program instruction]
-            </strong>
-            ."
+            <strong>if [boolean expression]</strong>" and then, after this is
+            added, say "<strong>[additional program instruction]</strong>"
           </p>
           <p>
             For example, if you want to see if an integer x is divisible by 10
             and return true, you'd say: "
-            <strong>if x mod 10 equals to 0, return true</strong>. Demo below!"
+            <strong>if x mod 10 equals to 0,"</strong> followed by "
+            <strong>return true</strong>." Demo below!
           </p>
 
           <div id="recording">
@@ -384,10 +383,9 @@ export default function Main() {
           <p>
             For example, if you want to print the number 10 five times, you'd
             say: "
-            <strong>
-              create a for loop from 0 to 5 with increment 1, print 10
-            </strong>
-            . Demo below!"
+            <strong>create a for loop from 0 to 5 with increment 1,</strong>"
+            followed by "<strong>print 10</strong>
+            ." Demo below!
           </p>
 
           <div id="recording">

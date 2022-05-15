@@ -74,9 +74,8 @@ def submit_for_transcription():
 @app.route('/code', methods=['post'])
 def getCode():
   global TEXT
-  # process_ints()
-
-  TEXT = "if x mod i equals to 0"
+  
+  process_ints()
   
   print(TEXT)
 

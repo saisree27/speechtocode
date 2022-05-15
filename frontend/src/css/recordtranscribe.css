@@ -1,0 +1,54 @@
+#transcriptionHolder {
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.657);
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 500px;
+  margin: 0 auto;
+  text-align: center;
+  justify-content: center;
+  align-self: center;
+
+  border-radius: 10px;
+  border: 3px solid white;
+}
+
+#buttonsTranscription {
+  display: flex;
+}
+
+#buttonHolder {
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-content: flex-end;
+}
+
+#transcription {
+  margin-left: 10px;
+  margin-right: 10px;
+
+  height: 90px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+}
+
+.button1 {
+  margin-bottom: 8px;
+}
+
+.divider {
+  position: relative;
+  width: 2px;
+  background-color: rgb(255, 255, 255);
+  height: 90px;
+  align-self: center;
+}

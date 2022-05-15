@@ -29,21 +29,6 @@
     "Lucida Grande", "Lucida Sans", Arial, sans-serif;
 }
 
-#tohome {
-  position: relative;
-  text-align: center;
-  color: rgb(213, 253, 251);
-  font-family: "Poppins-Regular", "Trebuchet MS", "Lucida Sans Unicode",
-    "Lucida Grande", "Lucida Sans", Arial, sans-serif;
-}
-
-#tohome img {
-  padding-left: 20px;
-  padding-top: 20px;
-  height: 75px;
-  width: 75px;
-}
-
 #recording {
   text-align: center;
   color: rgb(213, 253, 251);
@@ -52,11 +37,12 @@
     "Lucida Grande", "Lucida Sans", Arial, sans-serif;
 }
 
-.title {
+#title {
   position: relative;
   text-align: center;
   height: 75px;
   color: rgb(213, 253, 251);
+  margin-bottom: 0px;
   font-family: "Poppins-Bold", "Trebuchet MS", "Lucida Sans Unicode",
     "Lucida Grande", "Lucida Sans", Arial, sans-serif;
 }
@@ -85,7 +71,7 @@
 }
 
 #select {
-  margin-top: 5x;
+  margin-top: 15px;
   position: relative;
   text-align: center;
   padding-bottom: 50px;
@@ -129,18 +115,26 @@
 /* Add a black background color to the top navigation */
 .topnav {
   position: relative;
-  background-color: #333;
+  /*background-color: #333;*/
+  /*opacity:  0.0;*/
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   overflow: hidden;
+  margin-top: 10px;
   font-family: "Poppins-SemiBold", "Trebuchet MS", "Lucida Sans Unicode",
     "Lucida Grande", "Lucida Sans";
 }
 
 /* Style the links inside the navigation bar */
 .topnav a {
-  float: left;
+  /*float: left;*/
   color: #f2f2f2;
   text-align: center;
   text-decoration: none;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   padding: 14px 16px;
   font-size: 17px;
   font-family: "Poppins-SemiBold", "Trebuchet MS", "Lucida Sans Unicode",
@@ -153,3 +147,125 @@
   /* background-color: #322c2c; */
   color: #f0a3a3;
 }
+
+.run-btn {
+  position: absolute;
+  bottom: 14px;
+  right: 110px;
+  width: 80px;
+  height: 40px;
+  padding: 10px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+}
+
+.clear-btn {
+  position: absolute;
+  bottom: 14px;
+  right: 18px;
+  width: 80px;
+  height: 40px;
+  font-size: 22px;
+  font-weight: bold;
+  color: white;
+  background-color: #1f65e6;
+  border: none;
+  border-radius: 4px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+footer {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #000;
+  height: auto;
+  width: 100vw;
+  padding-top: 10px;
+  color: #fff;
+  position: absolute;
+}
+
+.output-container {
+  /* flex: 40%; */
+  position: relative;
+  height: calc(50vh - 100px);
+
+  width: 50%;
+  margin: 0 auto;
+  display: inline-block;
+  background-color: #242424;
+  border: 6px solid white;
+  border-radius: 10px;
+  padding: 5px;
+  margin-bottom: 20px;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  display: block;
+}
+
+.spinner-box {
+  padding-top: 10px;
+  padding-left: 10px;
+  flex: 50%;
+  background-color: #242424;
+}
+.spinner-box img {
+  width: 200px;
+  height: 150px;
+}
+
+.output-box {
+  margin: auto;
+  height: 85%;
+  width: 85%;
+  background-color: #242424;
+  overflow-y: auto;
+  color: white;
+  position: relative;
+}
+
+h4 {
+  padding-top: 10px;
+  padding-left: 10px;
+  position: relative;
+  font-size: 20px;
+  color: #f2f2f2;
+  font-family: "Poppins-SemiBold", "Trebuchet MS", "Lucida Sans Unicode",
+    "Lucida Grande", "Lucida Sans";
+}
+
+hr.dashed {
+  border-top: 3px dashed rgb(216, 214, 214);
+  width: 55%;
+  margin-bottom: 60px;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  display: block;
+}
+
+/*.creators {
+  position: fixed;
+  z-index: 100;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #2c1d82;
+  overflow: hidden;
+  opacity: 70%;
+  font-family: "Poppins-SemiBold", "Trebuchet MS", "Lucida Sans Unicode",
+    "Lucida Grande", "Lucida Sans";
+}
+.creatortext {
+  color: rgb(213, 253, 251);
+  position: relative;
+  text-align: center;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}*/

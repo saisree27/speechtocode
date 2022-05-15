@@ -27,27 +27,25 @@
     "Lucida Grande", "Lucida Sans", Arial, sans-serif;
 }
 
-#tohome {
-  position: relative;
-  text-align: center;
-  color: rgb(213, 253, 251);
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
-}
-
-#tohome img {
-  padding-left: 20px;
-  padding-top: 20px;
-  height: 75px;
-  width: 75px;
-}
-
 #recording {
   text-align: center;
   color: rgb(213, 253, 251);
   position: relative;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
+}
+
+#tutorialHolder {
+  position: relative;
+  background-color: #0000009e;
+  width: 67%;
+
+  border: 2px solid white;
+  border-radius: 5px;
+
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
 }
 
 .header {
@@ -57,12 +55,7 @@
   font-size: large;
   font-family: "Poppins-SemiBold", "Trebuchet MS", "Lucida Sans Unicode",
     "Lucida Grande", "Lucida Sans", Arial, sans-serif;
-  height: 250px;
   margin-top: 30px;
-}
-
-#title {
-  margin-bottom: 50px;
 }
 
 .subtitle {
@@ -79,10 +72,11 @@
   display: inline-block;
   position: relative;
   font-family: "Poppins-Regular", "Trebuchet MS", "Lucida Sans Unicode",
-  "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+    "Lucida Grande", "Lucida Sans", Arial, sans-serif;
   color: rgb(213, 253, 251);
-  margin-left: 17%;
-  width: 70%;
+  margin-left: 0.9%;
+  margin-top: 10px;
+  width: 100%;
 }
 
 .editor {

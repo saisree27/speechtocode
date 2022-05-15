@@ -6,6 +6,8 @@ import MicRecorder from "mic-recorder-to-mp3";
 import { Button } from "react-bootstrap";
 import MicIcon from "@material-ui/icons/Mic";
 
+import "../css/recordtranscribe.css";
+
 const Mp3Recorder = new MicRecorder({
   bitRate: 64,
   prefix: "data:audio/wav;base64,",
@@ -15,7 +17,7 @@ export default function RecordTranscribe(props) {
   var [recording, setRecording] = useState(false);
   var [transcription, setTranscription] = useState("");
   var [processing, setProcessing] = useState(false);
-  var [received, setReceived] = useState(true);
+  var [received, setReceived] = useState(false);
 
   var id = "";
 
@@ -100,17 +102,17 @@ export default function RecordTranscribe(props) {
       .then((res) => {
         console.log(res.data);
         props.addline(res.data, props.setcode);
-        // setReceived(false);
+        setReceived(false);
       });
   };
 
   return (
     <div>
       {!processing ? (
-        <div>
+        <div id="buttonsTranscription">
           <div id="buttonHolder">
             {!recording ? (
-              <Button onClick={start} variant="success">
+              <Button onClick={start} variant="success" className="button1">
                 <MicIcon />
                 Press to Record
               </Button>
@@ -120,17 +122,31 @@ export default function RecordTranscribe(props) {
                 Stop Recording
               </Button>
             )}
-          </div>
-
-          {received ? (
-            <div id="transcription">
-              <p>Transcribed text: {transcription}</p>
+            {received ? (
               <Button onClick={submit} variant="secondary">
                 Generate Code
               </Button>
+            ) : (
+              <Button onClick={submit} variant="secondary" disabled>
+                Generate Code
+              </Button>
+            )}
+          </div>
+
+          <span className="divider" />
+
+          {received ? (
+            <div id="transcription">
+              <p>
+                Transcribed text: <strong>{transcription}</strong>
+              </p>
             </div>
           ) : (
-            <></>
+            <div id="transcription">
+              <p>
+                <strong>No text transcribed.</strong>
+              </p>
+            </div>
           )}
         </div>
       ) : (

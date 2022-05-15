@@ -6,12 +6,14 @@ import { monaco } from "react-monaco-editor";
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import TranscriptionHolder from "./TranscriptionHolder";
-import { Form } from "react-bootstrap";
+import { Form, Spinner, Button } from "react-bootstrap";
 import Select from "react-select";
 import CodeEditor from "@uiw/react-textarea-code-editor";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { a11yDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import Toggle from "react-toggle";
+import Axios from "axios";
+// import spinner from './spinner.svg';
 
 /**
  * Main page (where our record button and text editor will show up)
@@ -30,6 +32,11 @@ export default function Main() {
   });
   const [activeLine, setActiveLine] = React.useState(1);
   const [editing, setEditing] = React.useState(false);
+  // State variable to set users input
+  const [userInput, setUserInput] = React.useState("");
+  // State variable to set users output
+  const [userOutput, setUserOutput] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
 
   const languageOptions = [
     { value: "javascript", label: "Javascript" },
@@ -43,7 +50,7 @@ export default function Main() {
         ``,
         `def main():`,
         `\t` + `return None`,
-        `if __name__ == 'main':`,
+        `if __name__ == '__main__':`,
         `\t` + `main()`,
       ]);
       setActiveLine(2);
@@ -67,6 +74,35 @@ export default function Main() {
     selectOnLineNumbers: true,
     semanticHighlighting: true,
   };
+
+  // Function to call the compile endpoint
+  function compile() {
+    setLoading(true);
+    if (code === ``) {
+      return;
+    }
+    const temp_code = code.join("\r\n");
+    // Post request to compile endpoint
+    Axios.post(`http://localhost:8000/compile`, {
+      code: temp_code,
+      language: language,
+      input: userInput,
+    })
+      .then((res) => {
+        console.log("Res:", res);
+        setUserOutput(res.data.output);
+      })
+      .then(() => {
+        setLoading(false);
+      });
+    console.log("Code: %s", temp_code);
+    console.log("Language: ", language);
+  }
+
+  // Function to clear the output screen
+  function clearOutput() {
+    setUserOutput("");
+  }
 
   var addLine = (newline, updater) => {
     var codeCopy = [...code];
@@ -222,13 +258,18 @@ export default function Main() {
   };
 
   useEffect(() => {
-    document.title = "Main";
+    document.title = "Speech2Code";
   }, []);
 
   return (
     <div>
       <div id="bg">
-        <img src="bgimg.jpeg"></img>
+        <img src="newbgimg.jpg"></img>
+      </div>
+      <div>
+        <Link to="/" id="tohome">
+          <img src="logo.png"></img>
+        </Link>
       </div>
 
       <div className="topnav">
@@ -242,14 +283,8 @@ export default function Main() {
           Tutorial
         </a>
       </div>
-      <div>
-        <div>
-          <Link to="/" id="tohome">
-            <h4 id="icontext">Speech2Code</h4>
-            <img src="mic.png"></img>
-          </Link>
-        </div>
-        <h1 className="title">Speech2Code</h1>
+      <div className="header">
+        <h1 id="title">Speech2Code</h1>
         <p id="subtitle">Start speaking to start coding!</p>
       </div>
 
@@ -343,6 +378,42 @@ export default function Main() {
             setEditing(!editing);
           }}
         />
+      </div>
+
+      <hr class="dashed" />
+
+      <div className="output-container">
+        <h4>Output:</h4>
+        {loading ? (
+          <div id="spinner-box">
+            <Spinner
+              as="span"
+              animation="border"
+              role="status"
+              aria-hidden="true"
+              style={{ color: "white", marginTop: 10, marginLeft: 10 }}
+            />
+          </div>
+        ) : (
+          <div className="output-box">
+            <pre>{userOutput}</pre>
+            <Button
+              onClick={() => {
+                clearOutput();
+              }}
+              className="clear-btn"
+            >
+              Clear
+            </Button>
+            <Button
+              variant="success"
+              className="run-btn"
+              onClick={() => compile()}
+            >
+              Run
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );

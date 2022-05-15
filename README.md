@@ -1,5 +1,11 @@
 ![Logo](GithubImages/Logo.png)
 
+## Inspiration
+
+- Saigautam Bonam
+- Kinshuk Phalke
+- Nicolas Cai
+- Dhruv Sharma
 
 ## Inspiration
 

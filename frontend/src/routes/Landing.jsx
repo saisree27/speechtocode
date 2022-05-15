@@ -53,7 +53,9 @@ export default function Landing() {
       </div>
 
       <center>
-        <p className='position-relative display-2 text-white fw-light font-monospace title mt-5'>Welcome to Speech-To-Code!</p>
+        <p className="position-relative display-2 text-white fw-light font-monospace title mt-5">
+          Welcome to Speech-To-Code!
+        </p>
       </center>
 
       {/*<h2 className='title'>Purpose</h2>*/}
@@ -61,7 +63,7 @@ export default function Landing() {
         <center>
           <p className="position-relative text-justify text-white fw-light font-monospace  mb-5 mt-4 abouttext">
             This website is intended to help beginner coders learn the
-            fundemental syntax of programming languages. It translated English
+            fundemental syntax of programming languages. It translates English
             phrases spoken by the user into functional code. The user has the
             option to translate their English phrases into Java, Python, or
             JavaScript.

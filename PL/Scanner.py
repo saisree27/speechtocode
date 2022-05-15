@@ -57,7 +57,7 @@ class Scanner:
             'mod': TokenType.MOD,
             'call': TokenType.CALL
         }
-        self.ignore = {"to", "from", "create", "a", "loop", "with", 'than', 'condition', 'of', 'returning', 'parameters', 'parameter'}
+        self.ignore = {"to", "from", "create", "a", "loop", "with", 'than', 'condition', 'of', 'returning', 'parameters', 'parameter', 'calling'}
         self.remap = {
             "decrement": '-',
             'increment': '+',

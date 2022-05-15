@@ -40,12 +40,12 @@
   background-color: #0000009e;
   width: 67%;
 
-  border: 2px solid white;
-  border-radius: 5px;
-
+  border: 0.2px solid white;
+  border-radius: 1px;
+  margin-top: 5vh;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 20px;
+  margin-bottom: 10vh;
 }
 
 .header {
@@ -73,8 +73,14 @@
   position: relative;
   font-family: "Poppins-Regular", "Trebuchet MS", "Lucida Sans Unicode",
     "Lucida Grande", "Lucida Sans", Arial, sans-serif;
-  color: rgb(213, 253, 251);
+  /*color: rgb(213, 253, 251);*/
   margin-left: 0.9%;
+  padding-left: 2vh;
+  padding-top: 4vh;
+  padding-bottom: 4vh;
+  padding-right: 5vh;
+  text-align: justify;
+  /*text-justify: inter-word;*/
   margin-top: 10px;
   width: 100%;
 }

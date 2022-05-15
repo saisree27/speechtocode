@@ -158,83 +158,86 @@ export default function Main() {
       </div>
       <div>
         <div className="header">
-          <p className='position-relative fs-1 fw-light font-monospace'>Tutorial</p>
-          <p className='position-relative fw-light font-monospace'>Get started with Speech2Code!</p>
-          <p className='position-relative fw-light font-monospace'>Note: this is all written in Python</p>
+          <p className='position-relative fs-1 fw-light'>Tutorial</p>
+          <p className='position-relative fw-light'>Get started with Speech2Code!</p>
+          <p className='position-relative fw-light'>Note: this is all written in Python</p>
         </div>
       </div>
       <div id="tutorialHolder">
         <div className="tutorialblock">
-          <h2 className="subtitle">Intro</h2>
-          <p>
+          <p className="fs-2 fw-light lead display-6 subtitle">Intro</p>
+          <p className="text-info text-muted fw-light">
             Speech2Code uses several basic commands to write your program. Like
             traditional programming, these keywords align with actual code.
           </p>
-          <p>
+          <p className="text-info text-muted fw-light">
             In this tutorial, we'll cover how to create variables, control flow,
             and conditionals. Let's start with some of the basics!
           </p>
           <br />
-          <h2 className="subtitle">Background Info</h2>
-          <p>
+        </div></div>
+        <div id="tutorialHolder"><div className="tutorialblock">
+          <h2 className="fs-2 fw-light lead display-6 subtitle">Background Info</h2>
+          <p className="text-info text-muted fw-light">
             <strong>Variables </strong>in programming help us store values that
             can be reused and called whenever the variable name itself is called
             by the program.
           </p>
-          <p>
+          <p className="text-info text-muted fw-light">
             Variables can be created as different data types, including int for
             integers, float for floating point numbers, or char for characters.
           </p>
           <br />
-          <p>
+          <p className="text-info text-muted fw-light">
             <strong>Conditionals</strong> help programmers make decisions with
             their program's logic. In most languages, they're often described
             with 'if' or 'else'.
           </p>
-          <p>
+          <p className="text-info text-muted fw-light">
             The 'if' statement takes in a boolean (or true/false) expression
             that is evaluated, and if the result is true, then the program runs
             inside the statement.
           </p>
-          <p>
+          <p className="text-info text-muted fw-light">
             The 'else' statement always comes after an 'if' statement, executing
             only if that boolean expression results in false and running
             whatever is inside it instead.
           </p>
           <br />
-          <p>
+          <p className="text-info text-muted fw-light">
             <strong>Control flow</strong> allows programmers to direct the flow
             of their program to repeat certain instructions for set conditions
             or limits. A classic example of this is
           </p>
-          <p>
+          <p className="text-info text-muted fw-light">
             the 'while' loop, which takes in a boolean expression that is
             evaluated, and if the result is true, then the program runs inside
             the statement until it's false.
           </p>
-          <p>
+          <p className="text-info text-muted fw-light">
             Alternatively, the 'for' loop initializes a counter and increments
             it by a set number until its boolean expression for this counter
             returns false.
           </p>
-          <p>
+          <p className="text-info text-muted fw-light">
             While the counter is still within the limit, though, the code inside
             the for loop is executed for as long as intended.
           </p>
-
           <br />
+          </div></div>
+        <div id="tutorialHolder"><div className="tutorialblock">
           <h2 className="subtitle">Commands</h2>
-          <p>
+          <p className="text-info text-muted fw-light">
             To start speaking your command, click the microphone icon below.
             Make sure you're in a quiet environment so your code is accurate!
           </p>
           <h2 className="subtitle">Variables</h2>
 
-          <p>
+          <p className="text-info text-muted fw-light">
             To create a variable, simply say: "
             <strong>assign [datatype] [variable] to [value]</strong>."
           </p>
-          <p>
+          <p className="text-info text-muted fw-light">
             For example, if you want to declare an integer x equal to zero, you
             might say: "<strong>assign int x to 10</strong>. Go ahead and try it
             below!"
@@ -354,15 +357,16 @@ export default function Main() {
             </div>
           )}
         </div>
-
+        </div>
+        <div id="tutorialHolder">
         <div className="tutorialblock">
           <h3 className="subtitle">Conditionals</h3>
-          <p>
+          <p className="text-info text-muted fw-light">
             To create an if statement, say: "
             <strong>if [boolean expression]</strong>" and then, after this is
             added, say "<strong>[additional program instruction]</strong>"
           </p>
-          <p>
+          <p className="text-info text-muted fw-light">
             For example, if you want to see if an integer x is divisible by 10
             and return true, you'd say: "
             <strong>if x mod 10 equals to 0,"</strong> followed by "
@@ -482,11 +486,12 @@ export default function Main() {
             </div>
           )}
         </div>
-
+        </div>
+        <div id="tutorialHolder">
         <div className="tutorialblock">
           <h2 className="subtitle">Control Flow</h2>
 
-          <p>
+          <p className="text-info text-muted fw-light">
             To create a for loop, say: "
             <strong>
               create a for loop from [counter's start number] to [end number]
@@ -494,7 +499,7 @@ export default function Main() {
             </strong>
             ."
           </p>
-          <p>
+          <p className="text-info text-muted fw-light">
             For example, if you want to print the number 10 five times, you'd
             say: "
             <strong>create a for loop from 0 to 5 with increment 1,</strong>"

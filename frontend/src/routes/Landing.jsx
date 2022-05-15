@@ -53,7 +53,7 @@ export default function Landing() {
       </div>
 
       <center>
-        <p className='position-relative fs-1 text-white fw-light font-monospace title mt-5'>Welcome to Speech-To-Code!</p>
+        <p className='position-relative display-2 text-white fw-light font-monospace title mt-5'>Welcome to Speech-To-Code!</p>
       </center>
 
       {/*<h2 className='title'>Purpose</h2>*/}

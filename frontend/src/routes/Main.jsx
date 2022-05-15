@@ -23,17 +23,18 @@ import ParticlesBg from "particles-bg";
  */
 export default function Main() {
   const [code, setCode] = React.useState([
-    ``,
-    `def main():`,
-    `\t` + `return None`,
-    `if __name__ == '__main__':`,
-    `\t` + `main()`,
+    `// Code will appear below!`,
+    `public class Main {`,
+    `\t` + `public static void main(String[] args) {`,
+    `\t\t` + `System.out.println("Begin code");`,
+    `\t` + `}`,
+    `}`,
   ]);
   const [language, setLanguage] = React.useState({
-    value: "python",
-    label: "Python",
+    value: "java",
+    label: "Java",
   });
-  const [activeLine, setActiveLine] = React.useState(1);
+  const [activeLine, setActiveLine] = React.useState(2);
   const [editing, setEditing] = React.useState(false);
   // State variable to set users input
   const [userInput, setUserInput] = React.useState("");
@@ -50,25 +51,33 @@ export default function Main() {
   const updateLang = (v) => {
     if (v.value === "python") {
       setCode([
-        ``,
+        `# Code will appear below!`,
         `def main():`,
-        `\t` + `return None`,
+        `\t` + `print("Begin code.")`,
+        ``,
         `if __name__ == '__main__':`,
         `\t` + `main()`,
       ]);
       setActiveLine(2);
     } else if (v.value === "java") {
       setCode([
-        ``,
+        `// Code will appear below!`,
         `public class Main {`,
         `\t` + `public static void main(String[] args) {`,
-        `\t\t` + `return;`,
+        `\t\t` + `System.out.println("Begin code");`,
         `\t` + `}`,
         `}`,
       ]);
       setActiveLine(3);
     } else {
-      setCode([``, `function main() {`, `\t` + `return;`, `}`]);
+      setCode([
+        `// Code will appear below!`,
+        `function main() {`,
+        `\t` + `console.log("Begin code");`,
+        `}`,
+        ``,
+        `main();`,
+      ]);
       setActiveLine(2);
     }
   };

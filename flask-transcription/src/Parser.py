@@ -117,7 +117,7 @@ class Parser:
             right = self.andOperator()
             return Expr.Assign(variable, right)
         else:
-            return self.andOperator()
+            return self.orOperator()
 
     def forStatement(self):
         if self.check(TokenType.NUM):
@@ -142,6 +142,14 @@ class Parser:
         else:
             value = self.callFunc()
         return Stmt.Print(value)
+
+    def orOperator(self):
+        expr = self.andOperator()
+        while self.match(TokenType.OR):
+            operator = self.previous()
+            right = self.andOperator()
+            expr = Expr.Logical(expr, operator, right)
+        return expr
 
     def whileStatement(self):
         condition = self.expression()

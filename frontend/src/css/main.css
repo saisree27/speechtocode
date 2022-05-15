@@ -148,27 +148,20 @@
   color: #f0a3a3;
 }
 
-.runBtn {
-  background-color: green; /* Light Green */
-  border: none;
-  color: white;
+.run-btn {
+  position: absolute;
+  bottom: 14px;
+  right: 110px;
+  width: 80px;
+  height: 40px;
   padding: 10px 32px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 20px;
-  border-radius: 3px;
-  transition-duration: 0.3s;
-  position: relative;
-  margin-left: 47%;
 }
 
-.runBtn:hover {
-  background-color: #78c776; /* */
-  transform: translateZ(0) scale(1.2); /* Enlarges Button */
-}
-
-.clear-btn{
+.clear-btn {
   position: absolute;
   bottom: 14px;
   right: 18px;
@@ -184,38 +177,43 @@
   cursor: pointer;
 }
 
-footer{
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: #000;
-    height: auto;
-    width: 100vw;
-    padding-top: 10px;
-    color: #fff;
-    position: absolute;
-  }
+footer {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #000;
+  height: auto;
+  width: 100vw;
+  padding-top: 10px;
+  color: #fff;
+  position: absolute;
+}
 
 .output-container {
-  flex: 40%;
-  height: calc(50vh - 50px);
+  /* flex: 40%; */
+  position: relative;
+  height: calc(50vh - 100px);
+
   width: 50%;
+  margin: 0 auto;
   display: inline-block;
   background-color: #242424;
-  border-left: 3px solid #1f65e6;
-  margin-left: 450px;
+  border: 6px solid white;
+  border-radius: 10px;
   padding: 5px;
-  padding-bottom: 50px;
+  margin-bottom: 20px;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  display: block;
 }
 
 .spinner-box {
+  padding-top: 10px;
+  padding-left: 10px;
   flex: 50%;
   background-color: #242424;
-  overflow-y: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
 }
 .spinner-box img {
   width: 200px;
@@ -224,8 +222,8 @@ footer{
 
 .output-box {
   margin: auto;
-  height: 75%;
-  width: 75%;
+  height: 85%;
+  width: 85%;
   background-color: #242424;
   overflow-y: auto;
   color: white;
@@ -233,12 +231,24 @@ footer{
 }
 
 h4 {
-  padding-top: 50px;
+  padding-top: 10px;
+  padding-left: 10px;
   position: relative;
   font-size: 20px;
   color: #f2f2f2;
   font-family: "Poppins-SemiBold", "Trebuchet MS", "Lucida Sans Unicode",
     "Lucida Grande", "Lucida Sans";
+}
+
+hr.dashed {
+  border-top: 3px dashed rgb(216, 214, 214);
+  width: 55%;
+  margin-bottom: 60px;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  display: block;
 }
 
 /*.creators {

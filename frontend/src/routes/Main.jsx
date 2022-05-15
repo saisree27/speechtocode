@@ -6,7 +6,7 @@ import { monaco } from "react-monaco-editor";
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import TranscriptionHolder from "./TranscriptionHolder";
-import { Form } from "react-bootstrap";
+import { Form, Spinner, Button } from "react-bootstrap";
 import Select from "react-select";
 import CodeEditor from "@uiw/react-textarea-code-editor";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -81,17 +81,20 @@ export default function Main() {
     if (code === ``) {
       return;
     }
-    const temp_code = code.join("\r\n")
+    const temp_code = code.join("\r\n");
     // Post request to compile endpoint
     Axios.post(`http://localhost:8000/compile`, {
       code: temp_code,
       language: language,
-      input: userInput }).then((res) => {
-      console.log("Res:", res);
-      setUserOutput(res.data.output);
-    }).then(() => {
-      setLoading(false);
+      input: userInput,
     })
+      .then((res) => {
+        console.log("Res:", res);
+        setUserOutput(res.data.output);
+      })
+      .then(() => {
+        setLoading(false);
+      });
     console.log("Code: %s", temp_code);
     console.log("Language: ", language);
   }
@@ -377,26 +380,38 @@ export default function Main() {
         />
       </div>
 
-      <button className="runBtn" onClick={() => compile()}>
-        Run
-      </button>
+      <hr class="dashed" />
+
       <div className="output-container">
         <h4>Output:</h4>
         {loading ? (
-          <div className="spinner-box">
-            <img /*src={spinner}*/ alt="Loading..." />
+          <div id="spinner-box">
+            <Spinner
+              as="span"
+              animation="border"
+              role="status"
+              aria-hidden="true"
+              style={{ color: "white", marginTop: 10, marginLeft: 10 }}
+            />
           </div>
         ) : (
           <div className="output-box">
             <pre>{userOutput}</pre>
-            <button
+            <Button
               onClick={() => {
                 clearOutput();
               }}
               className="clear-btn"
             >
               Clear
-            </button>
+            </Button>
+            <Button
+              variant="success"
+              className="run-btn"
+              onClick={() => compile()}
+            >
+              Run
+            </Button>
           </div>
         )}
       </div>
